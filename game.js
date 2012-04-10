@@ -9,7 +9,7 @@ canvas.setAttribute('height', board[1] * block_size + "px");
 
 
 function pill() {
-  this.position =  { x : Math.floor(Math.random()*board[0]) , y : Math.floor(Math.random()*board[1])};
+  this.position =  { x : Math.floor(Math.random()*board[0] - 1) , y : Math.floor(Math.random()*board[1])};
   this.colors   =  [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
   this.draw();
 }
