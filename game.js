@@ -1,6 +1,10 @@
 function Game() {
-	this.active_pill = new Pill();
 	this.setListeners();
+	this.count = 0;
+}
+
+Game.prototype.newPill = function() {
+	return this.active_pill = new Pill();
 }
 
 Game.prototype.setListeners = function() {
@@ -10,6 +14,9 @@ Game.prototype.setListeners = function() {
 			case 37:
 				_this.active_pill.moveLeft();
 			break;
+			case 40:
+				_this.active_pill.moveDown();
+			break;
 			case 39:
 				_this.active_pill.moveRight();
 			break;
@@ -18,10 +25,16 @@ Game.prototype.setListeners = function() {
 }
 
 Game.prototype.tick = function() {
-	console.log("tick");
+	this.count += 1;
+	this.active_pill.moveDown();
+	if( this.count % 15 == 0 ) {
+		this.newPill();
+	}
 }
 
-Game.prototype.start = function(){
-	this.game_speed = parseInt(prompt("Game Speed?"), 10);
-	this.clock = window.setInterval(this.tick, this.game_speed);
+Game.prototype.start = function(speed){
+	var _this = this;
+	this.newPill();
+	this.game_speed = speed || parseInt(prompt("Game Speed?"), 10);
+	this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
 }
