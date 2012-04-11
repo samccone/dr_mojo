@@ -1,6 +1,7 @@
 function Pill() {
   this.position			=  { x : 0 , y : 0 };
-  this.orientation	= 2; // 2 == horizontal ... 1 == vertial
+  this.width				= 2;
+  this.height				= 1;
   this.colors				=  [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
   this.draw();
 }
@@ -13,11 +14,12 @@ Pill.prototype.draw = function(){
 }
 
 Pill.prototype.erase = function(){
-	ctx.clearRect(this.position.x * block_size, this.position.y * block_size, block_size * this.orientation, 35);
+	ctx.clearRect(this.position.x * block_size, this.position.y * block_size, block_size * this.width, block_size * this.height);
 }
 
 Pill.prototype.moveRight = function() {
-	if ( ( this.position.x + this.orientation ) < board[0] ) {
+	if ( ( this.position.x + this.width ) < board_size[0] ) {
+		this.updatePosition(this.position,this.width,this.height);
 		this.erase();
 		this.position.x += 1;
 		this.draw();
@@ -25,7 +27,8 @@ Pill.prototype.moveRight = function() {
 }
 
 Pill.prototype.moveDown = function() {
-	if ( this.position.y < board[1] - 1 ) {
+	if ( this.position.y + this.height < board_size[1] ) {
+		this.updatePosition(this.position,this.width,this.height);
 		this.erase();
 		this.position.y += 1;
 		this.draw();
@@ -35,8 +38,13 @@ Pill.prototype.moveDown = function() {
 
 Pill.prototype.moveLeft = function() {
 	if ( ( this.position.x ) > 0 ) {
+		this.updatePosition(this.position,this.width,this.height);
 		this.erase();
 		this.position.x -= 1;
 		this.draw();
 	}
+}
+
+Pill.prototype.updatePosition = function(last,lastWidth){
+
 }
