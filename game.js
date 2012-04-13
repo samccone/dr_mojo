@@ -1,11 +1,10 @@
 function Game() {
+	this.board = new Board(board_size[0],board_size[1])
 	this.setListeners();
-	this.count = 0;
 }
 
 Game.prototype.newPill = function() {
-	this.count = 0;
-	return this.active_pill = new Pill();
+	return this.active_pill = new Pill(this.board);
 }
 
 Game.prototype.setListeners = function() {
@@ -26,11 +25,8 @@ Game.prototype.setListeners = function() {
 }
 
 Game.prototype.tick = function() {
-	this.count += 1;
 	this.active_pill.moveDown();
-	if( this.count % 15 == 0 || this.checkHit() ) {
-		this.newPill();
-	}
+	this.checkHit() && this.newPill();
 }
 
 Game.prototype.start = function(speed){
@@ -41,7 +37,7 @@ Game.prototype.start = function(speed){
 }
 
 Game.prototype.checkHit = function(){
-	if (this.active_pill.position.y  == 15 ) {
+	if (this.active_pill.position.y  == this.board.height - 1 ) {
 		return true;
 	}
 	return false;

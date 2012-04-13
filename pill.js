@@ -1,8 +1,9 @@
-function Pill() {
-  this.position			=  { x : 0 , y : 0 };
+function Pill(board) {
+  this.board        = board;
+  this.position			= { x : 0 , y : 0 };
   this.width				= 2;
   this.height				= 1;
-  this.colors				=  [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
+  this.colors				= [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
   this.draw();
 }
 
@@ -18,7 +19,7 @@ Pill.prototype.erase = function(){
 }
 
 Pill.prototype.moveRight = function() {
-	if ( ( this.position.x + this.width ) < board_size[0] ) {
+	if ( ( this.position.x + this.width ) < this.board.width ) {
 		this.updatePosition(this.position,this.width,this.height);
 		this.erase();
 		this.position.x += 1;
@@ -27,7 +28,7 @@ Pill.prototype.moveRight = function() {
 }
 
 Pill.prototype.moveDown = function() {
-	if ( this.position.y + this.height < board_size[1] ) {
+	if ( this.position.y + this.height < this.board.height ) {
 		this.updatePosition(this.position,this.width,this.height);
 		this.erase();
 		this.position.y += 1;
