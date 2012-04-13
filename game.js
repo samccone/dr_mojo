@@ -1,6 +1,7 @@
 function Game() {
 	this.board = new Board(board_size[0],board_size[1])
 	this.setListeners();
+	this.paused = false;
 }
 
 Game.prototype.newPill = function() {
@@ -11,21 +12,44 @@ Game.prototype.setListeners = function() {
 	var _this = this;
 	window.addEventListener('keydown', function(e){
 		switch( e.keyCode ) {
+			case 32:
+				_this.togglePause();
+			break;
 			case 37:
-				_this.active_pill.moveLeft();
+				_this.pillAction('left');
 			break;
 			case 40:
-				_this.active_pill.moveDown();
+				_this.pillAction('down');
 			break;
 			case 39:
-				_this.active_pill.moveRight();
+				_this.pillAction('right');
 			break;
 		}
 	});
 }
 
+Game.prototype.pillAction = function(action) {
+	if( !this.paused ) {
+		switch( action ) {
+			case 'left' :
+				this.active_pill.moveLeft();
+			break;
+			case 'right' :
+				this.active_pill.moveRight();
+			break;
+			case 'down' :
+				this.active_pill.moveDown();
+			break;
+		}
+	}
+}
+
+Game.prototype.togglePause = function(){
+	this.paused = !this.paused;
+}
+
 Game.prototype.tick = function() {
-	this.active_pill.moveDown();
+	this.pillAction('down');
 	this.checkHit() && this.newPill();
 }
 
