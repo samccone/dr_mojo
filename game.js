@@ -1,11 +1,12 @@
 function Game() {
-	this.board = new Board(board_size[0],board_size[1])
+	this.board = new Board(board_size[0],board_size[1]);
+	this.detector = new CollisionDetector(this.board);
 	this.setListeners();
 	this.paused = false;
 }
 
 Game.prototype.newPill = function() {
-	return this.active_pill = new Pill(this.board);
+	return this.active_pill = new Pill(this.board, this.detector);
 }
 
 Game.prototype.setListeners = function() {
@@ -72,5 +73,5 @@ Game.prototype.start = function(speed){
 }
 
 Game.prototype.checkHit = function(){
-	return this.active_pill.colllision;
+	return this.active_pill.collision;
 }
