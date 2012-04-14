@@ -12,6 +12,11 @@ Game.prototype.setListeners = function() {
 	var _this = this;
 	window.addEventListener('keydown', function(e){
 		switch( e.keyCode ) {
+			case 65: //a
+				_this.pillAction('rotate-left');
+				break;
+			case 83: //s
+				_this.pillAction('rotate-right');
 			case 32:
 				_this.togglePause();
 			break;
@@ -31,6 +36,12 @@ Game.prototype.setListeners = function() {
 Game.prototype.pillAction = function(action) {
 	if( !this.paused ) {
 		switch( action ) {
+			case 'rotate-left' :
+				this.active_pill.rotateLeft();
+			break;
+			case 'rotate-right' :
+				this.active_pill.rotateRight();
+			break;
 			case 'left' :
 				this.active_pill.moveLeft();
 			break;
