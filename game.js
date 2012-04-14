@@ -61,8 +61,5 @@ Game.prototype.start = function(speed){
 }
 
 Game.prototype.checkHit = function(){
-	if (this.active_pill.position.y  == this.board.height - 1 ) {
-		return true;
-	}
-	return false;
+	return this.active_pill.colllision;
 }

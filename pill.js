@@ -8,6 +8,7 @@ function Pill(board) {
   this.board.board[this.position.x][this.position.y] = this.colors[0];
   this.board.board[this.position.x + 1][this.position.y] = this.colors[1];
   this.draw();
+  this.colllision = false;
 }
 
 Pill.prototype.draw = function(){
@@ -33,12 +34,14 @@ Pill.prototype.moveRight = function() {
 }
 
 Pill.prototype.moveDown = function() {
-	if ( this.position.y + this.height < this.board.height ) {
+  if(this.position.y + this.height < this.board.height && !this.board.occupied(this.position.x, this.position.y+1) && !this.board.occupied(this.position.x+1, this.position.y+1) ) {
 		this.erase();
 		this.position.y += 1;
 		this.draw();
     this.updatePosition();
-	}
+  } else {
+    this.colllision = true;
+  }
 }
 
 
