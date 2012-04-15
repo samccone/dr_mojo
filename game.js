@@ -63,7 +63,14 @@ Game.prototype.togglePause = function(){
 
 Game.prototype.tick = function() {
 	this.pillAction('down');
-	this.checkHit() && this.newPill();
+	if ( this.checkHit() ) {
+		this.findMatches();
+		this.newPill();
+	}
+}
+
+Game.prototype.findMatches = function(){
+	//match algo
 }
 
 Game.prototype.start = function(speed){
