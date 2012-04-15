@@ -3,13 +3,12 @@ function Pill(board,detector) {
   this.board        = board;
   this.position			= [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
   this.lastPosition = this.position;
-  this.width				= 2;
-  this.height				= 1;
   this.colors				= [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
   this.board.board[this.position[0].x][this.position[0].y] = this.colors[0];
   this.board.board[this.position[1].x][this.position[1].y] = this.colors[1];
   this.draw();
   this.collision = false;
+  this.rotationState = 0;
 }
 
 Pill.prototype.draw = function(){
@@ -28,25 +27,58 @@ Pill.prototype.erase = function(){
 }
 
 Pill.prototype.rotateLeft = function() {
+  this.rotate((this.rotationState + 1)%4);
 }
 
 Pill.prototype.rotateRight = function() {
+  this.rotate((this.rotationState - 1)%4);
 }
 
-Pill.prototype.move = function(position, down) {
-  this.erase();
-  var canMove = this.detector.canMove(position);
-  if(canMove) {
-    this.position[0].x = position[0].x;
-    this.position[1].x = position[1].x;
-    this.position[0].y = position[0].y;
-    this.position[1].y = position[1].y;
 
+
+Pill.prototype.rotate = function(to){
+  var pos = this.position;
+  this.erase();
+  switch(to) {
+    case -3:
+    case 1:
+      pos[1].x = pos[0].x;
+      pos[1].y = pos[0].y + 1;
+    break;
+    case -2:
+    case 2:
+      pos[1].x = pos[0].x -1;
+      pos[1].y = pos[0].y;
+    break; //HERE
+    case -1:
+    case 3:
+      pos[1].x = pos[0].x;
+      pos[1].y = pos[0].y - 1;
+    break;
+    case 0:
+      pos[1].x = pos[0].x + 1;
+      pos[1].y = pos[0].y;
+    break;
+  }
+  if(this.move(pos)) {
+    this.rotationState = to;
+  }
+}
+
+Pill.prototype.move = function(pos, down) {
+  this.erase();
+  var canMove = this.detector.canMove(pos);
+  if(canMove) {
+    this.position[0].x = pos[0].x;
+    this.position[1].x = pos[1].x;
+    this.position[0].y = pos[0].y;
+    this.position[1].y = pos[1].y;
   } else if (down){
     this.collision = true;
   }
   this.draw();
   this.updatePosition();
+  return canMove;
 }
 
 Pill.prototype.moveRight = function() {
