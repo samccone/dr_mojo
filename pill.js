@@ -34,11 +34,19 @@ Pill.prototype.rotateRight = function() {
   this.rotate((this.rotationState - 1)%4);
 }
 
-
+Pill.prototype.clonePosition = function(){
+  var clone = [];
+  for( var i = 0; i < this.position.length; ++i ){
+    clone.push({});
+    for ( var k in this.position[i] ) {
+      clone[i][k] = this.position[i][k];
+    }
+  }
+  return clone;
+}
 
 Pill.prototype.rotate = function(to){
-  var pos = this.position;
-  this.erase();
+  var pos = this.clonePosition();
   switch(to) {
     case -3:
     case 1:
