@@ -31,61 +31,53 @@ Pill.prototype.rotateLeft = function() {
 }
 
 Pill.prototype.rotateRight = function() {
-
 }
 
-Pill.prototype.moveRight = function() {
+Pill.prototype.move = function(position, down) {
   this.erase();
-  var canMove = this.detector.canMove([{
-                  x : this.position[0].x + 1,
-                  y : this.position[0].y
-                },{
-                  x : this.position[1].x + 1,
-                  y : this.position[1].y
-                }]);
-	if(canMove) {
-    this.position[0].x += 1;
-    this.position[1].x += 1;
-  }
-  this.draw();
-  this.updatePosition();
-}
-
-Pill.prototype.moveDown = function() {
-  this.erase();
-  var canMove = this.detector.canMove([{
-                  x : this.position[0].x,
-                  y : this.position[0].y + 1
-                },{
-                  x : this.position[1].x,
-                  y : this.position[1].y + 1
-                }]);
+  var canMove = this.detector.canMove(position);
   if(canMove) {
-  	this.position[0].y += 1;
-    this.position[1].y += 1;
-  } else {
+    this.position[0].x = position[0].x;
+    this.position[1].x = position[1].x;
+    this.position[0].y = position[0].y;
+    this.position[1].y = position[1].y;
+
+  } else if (down){
     this.collision = true;
   }
   this.draw();
   this.updatePosition();
 }
 
+Pill.prototype.moveRight = function() {
+  this.move([{
+              x : this.position[0].x + 1,
+              y : this.position[0].y
+            },{
+              x : this.position[1].x + 1,
+              y : this.position[1].y
+            }]);
+}
+
+Pill.prototype.moveDown = function() {
+  this.move([{
+              x : this.position[0].x,
+              y : this.position[0].y + 1
+            },{
+              x : this.position[1].x,
+              y : this.position[1].y + 1
+            }], true);
+}
+
 
 Pill.prototype.moveLeft = function() {
-  this.erase();
-  var canMove = this.detector.canMove([{
-                  x : this.position[0].x - 1,
-                  y : this.position[0].y
-                },{
-                  x : this.position[1].x - 1,
-                  y : this.position[1].y
-                }]);
-  if(canMove) {
-    this.position[0].x -= 1;
-    this.position[1].x -= 1;
-  }
-  this.draw();
-  this.updatePosition();
+  this.move([{
+              x : this.position[0].x - 1,
+              y : this.position[0].y
+            },{
+              x : this.position[1].x - 1,
+              y : this.position[1].y
+            }]);
 }
 
 Pill.prototype.updatePosition = function(last,lastWidth){
