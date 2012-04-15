@@ -18,18 +18,19 @@ Game.prototype.setListeners = function() {
 				break;
 			case 83: //s
 				_this.pillAction('rotate-right');
+				break;
 			case 32:
 				_this.togglePause();
-			break;
+				break;
 			case 37:
 				_this.pillAction('left');
-			break;
+				break;
 			case 40:
 				_this.pillAction('down');
-			break;
+				break;
 			case 39:
 				_this.pillAction('right');
-			break;
+				break;
 		}
 	});
 }
