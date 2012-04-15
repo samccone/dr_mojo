@@ -19,11 +19,9 @@ Pill.prototype.draw = function(){
 }
 
 Pill.prototype.erase = function(){
-	ctx.clearRect(this.position[0].x * block_size, this.position[0].y * block_size, block_size, block_size);
-  ctx.clearRect(this.position[1].x * block_size, this.position[1].y * block_size, block_size, block_size);
-
-  this.board.board[this.position[0].x][this.position[0].y] = undefined;
-  this.board.board[this.position[1].x][this.position[1].y] = undefined;
+  for( var i = 0; i < this.position.length; ++i) {
+    this.board.eraseSpot(this.position[i].x, this.position[i].y, block_size, block_size);
+  }
 }
 
 Pill.prototype.rotateLeft = function() {
