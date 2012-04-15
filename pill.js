@@ -57,7 +57,7 @@ Pill.prototype.rotate = function(to){
     case 2:
       pos[1].x = pos[0].x -1;
       pos[1].y = pos[0].y;
-    break; //HERE
+    break;
     case -1:
     case 3:
       pos[1].x = pos[0].x;
