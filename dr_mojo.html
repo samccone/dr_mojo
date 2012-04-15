@@ -1,5 +1,28 @@
 <html>
-  <canvas id="game" style="border:solid 2px #000"></canvas>
+  <head>
+    <style>
+      #game {
+        margin: 0px auto;
+        display: block;
+      }
+      #instructions {
+        font-family: helveticaNeue;
+        font-size: 11px;
+        color:
+        #1D1D1D;
+        text-transform: uppercase;
+      }
+      #hold {
+        max-width: 800px;
+        text-align: center;
+        margin: 0px auto;
+      }
+    </style>
+  </head>
+  <div id="hold">
+    <canvas id="game" style="border:solid 2px #000"></canvas>
+    <div id="instructions">arrow keys to move ... a and s to rotate</div>
+  </div>
   <script src="board.js"></script>
   <script src="collisionDetector.js"></script>
   <script src="pill.js"></script>
