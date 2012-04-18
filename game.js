@@ -70,17 +70,26 @@ Game.prototype.tick = function() {
 }
 
 Game.prototype.findMatches = function(){
+	var toDelete = [];
 	for( var i = 0; i < this.active_pill.position.length; ++i) {
 		var pos = this.active_pill.position[i];
 		var inRow = [];
-		// check the Y's
-		for( var j = pos.y - 3; j <= pos.y + 3; ++j ) {
-			if( this.board.inBounds(pos.x,j) && this.board.occupied(pos.x,j) ) {
-				if(this.board.board[pos.x][j] == this.active_pill.colors[i]) {
-					inRow.push({x : pos.x, y: j});
+		for( var j = 0; j < this.board.height; ++j ) {
+			if( this.board.inBounds(pos.x,j) &&
+					this.board.occupied(pos.x,j) &&
+					this.board.occupied(pos.x,j) == this.active_pill.colors[i] ) {
+					inRow.push({x: pos.x, y: j});
+				} else if (inRow.length < 4) {
+						inRow = [];
 				} else {
-					inRow = [];
+					for(var i=0; i<inRow.length; ++i){
+						this.board.eraseSpot(inRow[i].x,inRow[i].y)
+					}
 				}
+		}
+		if( inRow.length > 3 ) {
+			for(var i=0; i<inRow.length; ++i){
+				this.board.eraseSpot(inRow[i].x,inRow[i].y)
 			}
 		}
 	}
