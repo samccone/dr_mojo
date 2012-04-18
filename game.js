@@ -70,15 +70,18 @@ Game.prototype.tick = function() {
 }
 
 Game.prototype.findMatches = function(){
-	var toDelete = [];
-	for( var i = 0; i < this.active_pill.position.length; ++i) {
-		var pos = this.active_pill.position[i];
-		var inRow = [];
-		for( var j = 0; j < this.board.height; ++j ) {
-			if( this.board.inBounds(pos.x,j) &&
-					this.board.occupied(pos.x,j) &&
-					this.board.occupied(pos.x,j) == this.active_pill.colors[i] ) {
-					inRow.push({x: pos.x, y: j});
+	for( var k = 0; k < 2; ++k){
+		for( var i = 0; i < this.active_pill.position.length; ++i) {
+			var pos = this.active_pill.position[i];
+			var inRow = [];
+			var _l = k == 0 ? this.board.height: this.board.width;
+			for( var j = 0; j < _l; ++j ) {
+				var _x = k == 0 ? pos.x : j;
+				var _y = k == 0 ? j : pos.y;
+			if( this.board.inBounds(_x,_y) &&
+					this.board.occupied(_x,_y) &&
+					this.board.occupied(_x,_y) == this.active_pill.colors[i] ) {
+					inRow.push({x: _x, y: _y});
 				} else if (inRow.length < 4) {
 						inRow = [];
 				} else {
@@ -86,28 +89,11 @@ Game.prototype.findMatches = function(){
 						this.board.eraseSpot(inRow[i].x,inRow[i].y)
 					}
 				}
-		}
-		if( inRow.length > 3 ) {
-			for(var i=0; i<inRow.length; ++i){
-				this.board.eraseSpot(inRow[i].x,inRow[i].y)
 			}
-		}
-		for( var j = 0; j < this.board.width; ++j ) {
-			if( this.board.inBounds(j,pos.y) &&
-					this.board.occupied(j,pos.y) &&
-					this.board.occupied(j,pos.y) == this.active_pill.colors[i] ) {
-					inRow.push({x: j, y: pos.y});
-				} else if (inRow.length < 4) {
-						inRow = [];
-				} else {
-					for(var i=0; i<inRow.length; ++i){
-						this.board.eraseSpot(inRow[i].x,inRow[i].y)
-					}
+			if( inRow.length > 3 ) {
+				for(var i=0; i<inRow.length; ++i){
+					this.board.eraseSpot(inRow[i].x,inRow[i].y)
 				}
-		}
-		if( inRow.length > 3 ) {
-			for(var i=0; i<inRow.length; ++i){
-				this.board.eraseSpot(inRow[i].x,inRow[i].y)
 			}
 		}
 	}
