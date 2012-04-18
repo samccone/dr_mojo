@@ -12,14 +12,14 @@ Board.prototype.inBounds = function(x,y) {
 }
 
 Board.prototype.occupied = function(x,y) {
-  return this.board[x][y] != undefined
+  return this.board[x][y];
 }
 
 Board.prototype.printBoard = function() {
   console.log(this.board)
 }
 
-Board.prototype.eraseSpot = function(x, y, width, height) {
-  ctx.clearRect(x * width, y * height, width, height);
+Board.prototype.eraseSpot = function(x, y) {
+  ctx.clearRect(x * block_size, y * block_size, block_size, block_size);
   this.board[x][y] = undefined;
 }
