@@ -92,6 +92,24 @@ Game.prototype.findMatches = function(){
 				this.board.eraseSpot(inRow[i].x,inRow[i].y)
 			}
 		}
+		for( var j = 0; j < this.board.width; ++j ) {
+			if( this.board.inBounds(j,pos.y) &&
+					this.board.occupied(j,pos.y) &&
+					this.board.occupied(j,pos.y) == this.active_pill.colors[i] ) {
+					inRow.push({x: j, y: pos.y});
+				} else if (inRow.length < 4) {
+						inRow = [];
+				} else {
+					for(var i=0; i<inRow.length; ++i){
+						this.board.eraseSpot(inRow[i].x,inRow[i].y)
+					}
+				}
+		}
+		if( inRow.length > 3 ) {
+			for(var i=0; i<inRow.length; ++i){
+				this.board.eraseSpot(inRow[i].x,inRow[i].y)
+			}
+		}
 	}
 }
 
