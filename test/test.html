@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+	  <script src="../board.js"></script>
+	  <script src="../collisionDetector.js"></script>
+	  <script src="../pill.js"></script>
+	  <script src="../bug.js"></script>
+	  <script src="../game.js"></script>
+	  <script src="../main.js"></script>
+	</head>
+	<body>
+		 <h1 id="qunit-header">QUnit example</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">test markup, will be hidden</div>
+	</body>
+	<script>
+	$(function(){
+		module("Board");
+		var width = 10;
+		var height = 12;
+		var b = new Board(width,height);
+		test("Board Creation",function(){
+			notEqual(b.board,undefined, "board should be defined");
+			equal(b.width,width,"width should match");
+			equal(b.height,height,"height should match");
+		});
+		test("Board Functions",function(){
+			var in_bounds = true;
+			for(var i = 0; i<width; ++i){
+				for(var j = 0; j < height; ++j){
+					if(in_bounds){
+						in_bounds = b.inBounds(i,j);
+					}
+				}
+			}
+			equal(in_bounds,true,"board should be inbounds");
+			equal(b.inBounds(-1,0),false,"should not be inbounds");
+			equal(b.inBounds(width,height),false,"should not be inbounds");
+			var occupied = false;
+			for(var i = 0; i<width; ++i){
+				for(var j = 0; j < height; ++j){
+					if(!occupied){
+						occupied = Boolean(b.occupied(i,j));
+					}
+				}
+			}
+			equal(occupied,false,"board should not be occupied");
+		});
+	})
+	</script>
+</html>
