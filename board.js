@@ -1,8 +1,8 @@
-function Board(x,y) {
+function Board(width, height) {
   this.board = [];
-  this.width = x;
-  this.height = y;
-  for( var i = 0; i < x ; ++i) {
+  this.width = width;
+  this.height = height;
+  for( var i = 0; i < width ; ++i) {
     this.board[i] = [];
   }
 }
