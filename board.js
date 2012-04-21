@@ -23,3 +23,11 @@ Board.prototype.eraseSpot = function(x, y) {
   ctx.clearRect(x * block_size, y * block_size, block_size, block_size);
   this.board[x][y] = undefined;
 }
+
+Board.prototype.eachSpot = function(cb){
+  for(var i = 0; i < this.width; ++i){
+    for(var j = 0; j < this.height; ++j){
+      cb(this.board[i][j],{x : i, y: j},this);
+    }
+  }
+}
