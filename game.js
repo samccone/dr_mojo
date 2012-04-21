@@ -3,10 +3,16 @@ function Game() {
 	this.detector = new CollisionDetector(this.board);
 	this.setListeners();
 	this.paused = false;
+	this.done = false;
 }
 
 Game.prototype.newPill = function() {
 	return this.active_pill = new Pill(this.board, this.detector);
+}
+
+Game.prototype.gameOver = function() {
+  this.done = true;
+  this.clock = window.clearInterval(this.clock);
 }
 
 Game.prototype.setListeners = function() {
@@ -36,7 +42,7 @@ Game.prototype.setListeners = function() {
 }
 
 Game.prototype.pillAction = function(action) {
-	if( !this.paused ) {
+	if( !this.paused && !this.done) {
 		switch( action ) {
 			case 'rotate-left' :
 				this.active_pill.rotateLeft();
@@ -65,7 +71,12 @@ Game.prototype.tick = function() {
 	this.pillAction('down');
 	if ( this.checkHit() ) {
 		this.findMatches();
-		this.newPill();
+		//Change this to where the pills are created
+		if(this.board.occupied(0,0)){
+		  this.gameOver();
+		}else{
+		  this.newPill();
+		}
 	}
 }
 
