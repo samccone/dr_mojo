@@ -97,6 +97,30 @@ Game.prototype.findMatches = function(){
 			}
 		}
 	}
+	this.findDangling();
+}
+
+Game.prototype.findDangling = function(){
+	var dangling = [];
+	this.board.eachSpot(function(piece,loc, board){
+		if( board.inBounds(loc.x, loc.y + 1) &&
+				board.occupied(loc.x, loc.y) &&
+				!board.occupied(loc.x, loc.y + 1)
+				){
+					dangling.push(loc);
+			}
+	});
+	if(dangling.length){
+		for(var i = 0; i < dangling.length; ++i){
+			var color = this.board.occupied(dangling[i].x, dangling[i].y);
+			this.board.eraseSpot(dangling[i].x, dangling[i].y);
+			ctx.fillStyle = color;
+	    ctx.fillRect(dangling[i].x * block_size , ( dangling[i].y + 1 ) * block_size, block_size, block_size);
+			this.board.board[dangling[i].x][dangling[i].y + 1] = color;
+		}
+			this.findDangling();
+			this.findMatches();
+	}
 }
 
 Game.prototype.start = function(speed){
