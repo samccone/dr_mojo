@@ -12,10 +12,10 @@ function Pill(board,detector) {
 }
 
 Pill.prototype.draw = function(){
-  ctx.fillStyle = this.colors[0];
-  ctx.fillRect(this.position[0].x * block_size , this.position[0].y * block_size, block_size, block_size);
-  ctx.fillStyle = this.colors[1];
-  ctx.fillRect(this.position[1].x * block_size, this.position[1].y * block_size, block_size, block_size);
+  for( var i = 0; i < this.colors.length; ++i){
+    ctx.fillStyle = this.colors[i];
+    ctx.fillRect(this.position[i].x * block_size , this.position[i].y * block_size, block_size, block_size);
+  }
 }
 
 Pill.prototype.erase = function(){
