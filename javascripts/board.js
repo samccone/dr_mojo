@@ -43,6 +43,14 @@ Board.prototype.clearAll = function(){
   });
 }
 
+Board.prototype.dangling = function(){
+  var dangling = [];
+  this.eachSpot(function(spot,loc,b){
+    spot && loc.y < b.height - 1 && !b.occupied(loc.x, loc.y + 1) && dangling.push(loc);
+  });
+  return dangling
+}
+
 Board.prototype.matches = function(){
   var minMatchLength = 4;
   var theMatches = [];

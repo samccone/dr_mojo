@@ -147,6 +147,12 @@
 			equal(2,b.matches().length,"Should Find 2 Matches");
 		});
 
+		test("Dangling Pieces",function(){
+			var b = createBoard();
+			b.board[0][1] = {color : "red"};
+			b.board[0][b.height -1] = {color : "red"};
+			equal(b.dangling().length, 1, "Should Find 1 Dangling Piece")
+		});
 	})
 	</script>
 </html>
