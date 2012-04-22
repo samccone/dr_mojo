@@ -21,7 +21,7 @@
 	<script>
 	function createBoard(){
 		width = 10;
-		height = 12;
+		height = 16;
 		return new Board(width,height);
 	}
 	$(function(){
@@ -101,7 +101,15 @@
 			b.board[0][2] = "red";
 			b.board[0][3] = "red";
 			b.board[0][4] = "red";
-			equal(1,b.matches().length,"Should Find 1 Matches");
+			b.board[0][6] = "red";
+			b.board[0][7] = "red";
+			b.board[0][8] = "red";
+			b.board[0][9] = "red";
+			b.board[2][6] = "red";
+			b.board[2][7] = "red";
+			b.board[2][8] = "red";
+			b.board[2][9] = "red";
+			equal(3,b.matches().length,"Should Find 3 Matches");
 		});
 
 		test("Match Detection X and Y axis",function(){
@@ -114,7 +122,16 @@
 			b.board[2][0] = "teal";
 			b.board[3][0] = "teal";
 			b.board[4][0] = "teal";
-			equal(2,b.matches().length,"Should Find 2 Matches");
+			b.board[5][15] = "red";
+			b.board[5][14] = "red";
+			b.board[5][13] = "red";
+			b.board[5][12] = "red";
+			b.board[5][11] = "red";
+			b.board[5][10] = "green";
+			b.board[5][9] = "teal";
+			b.board[5][8] = "teal";
+			b.board[5][7] = "teal";
+			equal(3,b.matches().length,"Should Find 3 Matches");
 		});
 
 		test("Match Detection Overlapping Matches",function(){

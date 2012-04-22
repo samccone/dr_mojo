@@ -57,6 +57,10 @@ Board.prototype.matches = function(){
           theMatches.push(matches);
         }
           matches = [];
+        last = this.board[i][j];
+        if(this.occupied(i,j)){
+          matches = [{x: i, y: j}];
+        }
         }
       } else {
         if( matches.length >= minMatchLength ){
@@ -84,6 +88,10 @@ Board.prototype.matches = function(){
         if( matches.length >= minMatchLength ){
           theMatches.push(matches);
         }
+          last = this.board[i][j];
+          if(this.occupied(i,j)){
+            matches = [{x: i, y: j}];
+          }
           matches = [];
         }
       } else {
