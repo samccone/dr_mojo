@@ -52,16 +52,74 @@
 			equal(in_bounds,true,"board should be inbounds");
 			equal(b.inBounds(-1,0),false,"should not be inbounds");
 			equal(b.inBounds(width,height),false,"should not be inbounds");
-			var occupied = false;
-			for(var i = 0; i<width; ++i){
-				for(var j = 0; j < height; ++j){
-					if(!occupied){
-						occupied = Boolean(b.occupied(i,j));
-					}
-				}
-			}
-			equal(occupied,false,"board should not be occupied");
 		});
+		test("Clear Board",function(){
+			var b = createBoard();
+			b.board[0][0] = "red";
+			b.board[2][1] = "red";
+			b.board[0][2] = "red";
+			b.board[0][3] = "red";
+			b.board[1][0] = "red";
+			b.board[1][1] = "red";
+			b.board[5][2] = "red";
+			b.board[1][3] = "red";
+			b.board[1][5] = "red";
+			b.board[1][6] = "red";
+			b.board[6][7] = "red";
+			b.board[2][8] = "red";
+			b.clearAll();
+			var empty = true;
+			b.eachSpot(function(spot){
+				if(!_.isUndefined(spot)){
+					empty = false;
+				}
+			});
+			equal(true,empty,"Board should be empty");
+		})
+	module("game");
+		test("Match Detection X axis",function(){
+			var b = createBoard();
+			b.board[0][0] = "red";
+			b.board[1][0] = "red";
+			b.board[2][0] = "red";
+			b.board[3][0] = "red";
+			equal(1,b.matches().length,"Should Find 1 Matches");
+		});
+
+		test("Match Detection Y axis",function(){
+			var b = createBoard();
+			b.board[0][1] = "red";
+			b.board[0][2] = "red";
+			b.board[0][3] = "red";
+			b.board[0][4] = "red";
+			equal(1,b.matches().length,"Should Find 1 Matches");
+		});
+
+		test("Match Detection X and Y axis",function(){
+			var b = createBoard();
+			b.board[0][1] = "red";
+			b.board[0][2] = "red";
+			b.board[0][3] = "red";
+			b.board[0][4] = "red";
+			b.board[1][0] = "teal";
+			b.board[2][0] = "teal";
+			b.board[3][0] = "teal";
+			b.board[4][0] = "teal";
+			equal(2,b.matches().length,"Should Find 2 Matches");
+		});
+
+		test("Match Detection Overlapping Matches",function(){
+			var b = createBoard();
+			b.board[0][1] = "red";
+			b.board[0][2] = "red";
+			b.board[0][3] = "red";
+			b.board[0][4] = "red";
+			b.board[1][1] = "red";
+			b.board[2][1] = "red";
+			b.board[3][1] = "red";
+			equal(2,b.matches().length,"Should Find 2 Matches");
+		});
+
 	})
 	</script>
 </html>
