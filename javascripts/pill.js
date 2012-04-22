@@ -1,14 +1,12 @@
-function Pill(board,detector) {
-  this.detector     = detector;
-  this.board        = board;
-  this.position			= [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
-  this.lastPosition = this.position;
-  this.colors				= [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
-  this.board.board[this.position[0].x][this.position[0].y] = this.colors[0];
-  this.board.board[this.position[1].x][this.position[1].y] = this.colors[1];
+function Pill(board, detector, position, _colors) {
+  this.detector       = detector;
+  this.board          = board;
+  this.position			  = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+  this.colors         = _colors || [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
+  this.collision      = false;
+  this.rotationState  = 0;
+  this.updatePosition();
   this.draw();
-  this.collision = false;
-  this.rotationState = 0;
 }
 
 Pill.prototype.draw = function(){
@@ -119,6 +117,6 @@ Pill.prototype.moveLeft = function() {
 }
 
 Pill.prototype.updatePosition = function(last,lastWidth){
-  this.board.board[this.position[0].x][this.position[0].y] = this.colors[0];
-  this.board.board[this.position[1].x][this.position[1].y] = this.colors[1];
+  this.board.board[this.position[0].x][this.position[0].y] = {color: this.colors[0], connected: this.position[1]};
+  this.board.board[this.position[1].x][this.position[1].y] = {color: this.colors[1], connected: this.position[0]};
 }

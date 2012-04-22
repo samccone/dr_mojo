@@ -12,6 +12,9 @@ Board.prototype.inBounds = function(x,y) {
 }
 
 Board.prototype.occupied = function(x,y) {
+  if (this.board[x][y]) {
+    return this.board[x][y].color;
+  }
   return this.board[x][y];
 }
 
@@ -53,11 +56,11 @@ Board.prototype.matches = function(){
         var _i = k == 0 ? i : j;
         var _j = k == 0 ? j : i;
         if(last) {
-          reset = this.occupied(_i,_j) && last == this.board[_i][_j] && matches.push({x: _i, y: _j}) ? false : true;
+          reset = this.occupied(_i,_j) && last == this.board[_i][_j].color && matches.push({x: _i, y: _j}) ? false : true;
         }
         if (!last || reset){
           matches.length >= minMatchLength && theMatches.push(matches);
-          last = this.board[_i][_j];
+          last = this.occupied(_i,_j);
           matches = last ? [{x: _i, y: _j}] : [];
         }
       }
