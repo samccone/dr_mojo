@@ -131,7 +131,6 @@
 			b.board[5][9] = {color : "teal"};
 			b.board[5][8] = {color : "teal"};
 			b.board[5][7] = {color : "teal"};
-			console.log(b.matches());
 			equal(3,b.matches().length,"Should Find 3 Matches");
 		});
 
@@ -149,7 +148,10 @@
 
 		test("Dangling Pieces",function(){
 			var b = createBoard();
-			b.board[0][1] = {color : "red"};
+			b.board[0][1] = {color : "red", connected : {x : 1, y: 1}};
+			b.board[1][1] = {color : "red", connected : {x : 0, y: 1}};
+			b.board[1][2] = {color : "teal"};
+
 			b.board[0][b.height -1] = {color : "red"};
 			equal(b.dangling().length, 1, "Should Find 1 Dangling Piece")
 		});
