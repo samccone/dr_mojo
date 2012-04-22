@@ -117,6 +117,6 @@ Pill.prototype.moveLeft = function() {
 }
 
 Pill.prototype.updatePosition = function(last,lastWidth){
-  this.board.board[this.position[0].x][this.position[0].y] = {color: this.colors[0], connected: this.position[1]};
-  this.board.board[this.position[1].x][this.position[1].y] = {color: this.colors[1], connected: this.position[0]};
+  this.board.board[this.position[0].x][this.position[0].y] = {color: this.colors[0], position: this.position[0], connected: this.position[1]};
+  this.board.board[this.position[1].x][this.position[1].y] = {color: this.colors[1], position: this.position[1], connected: this.position[0]};
 }
