@@ -11,6 +11,6 @@ if(canvas){
 
 	window.onload = function(){
 		the_game = new Game();
-	  the_game.start(300);
+	  the_game.start(200);
 	}
 }
