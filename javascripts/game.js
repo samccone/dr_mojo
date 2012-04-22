@@ -70,45 +70,30 @@ Game.prototype.togglePause = function(){
 Game.prototype.tick = function() {
 	this.pillAction('down');
 	if ( this.checkHit() ) {
-		this.findMatches();
-		//Change this to where the pills are created
-		if(this.board.occupied(0,0)){
-		  this.gameOver();
-		}else{
-		  this.newPill();
-		}
+		this.findMatches(function(){
+			//Change this to where the pills are created
+			if(this.board.occupied(0,0)){
+			  this.gameOver();
+			}else{
+			  this.newPill();
+			}
+		});
 	}
 }
 
-Game.prototype.findMatches = function(){
-	for( var k = 0; k < 2; ++k){
-		for( var i = 0; i < this.active_pill.position.length; ++i) {
-			var pos = this.active_pill.position[i];
-			var inRow = [];
-			var _l = k == 0 ? this.board.height: this.board.width;
-			for( var j = 0; j < _l; ++j ) {
-				var _x = k == 0 ? pos.x : j;
-				var _y = k == 0 ? j : pos.y;
-			if( this.board.inBounds(_x,_y) &&
-					this.board.occupied(_x,_y) &&
-					this.board.occupied(_x,_y) == this.active_pill.colors[i] ) {
-					inRow.push({x: _x, y: _y});
-				} else if (inRow.length < 4) {
-						inRow = [];
-				} else {
-					for(var i=0; i<inRow.length; ++i){
-						this.board.eraseSpot(inRow[i].x,inRow[i].y)
-					}
-				}
-			}
-			if( inRow.length > 3 ) {
-				for(var i=0; i<inRow.length; ++i){
-					this.board.eraseSpot(inRow[i].x,inRow[i].y)
-				}
-			}
-		}
+Game.prototype.findMatches = function(cb){
+	cb = _.bind(cb,this);
+	var matches = this.board.matches();
+	if(matches.length){
+		_.each(matches,function(match_set){
+			_.each(match_set,function(spot){
+				this.eraseSpot(spot.x,spot.y)
+			},this)
+		},this.board)
+		cb();
+	} else {
+		cb();
 	}
-	this.findDangling();
 }
 
 Game.prototype.findDangling = function(){
