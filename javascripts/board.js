@@ -45,70 +45,24 @@ Board.prototype.matches = function(){
   var theMatches = [];
   var last;
   var matches = [];
+  var reset = false;
   var axis = [this.width, this.height];
-
-  for( var i = 0; i < this.width; ++i){
-    for( var j = 0; j < this.height; ++j){
-      if(last){
-        if(this.occupied(i,j) && last == this.board[i][j]){
-          matches.push({x: i, y: j});
-        } else {
-        if( matches.length >= minMatchLength ){
-          theMatches.push(matches);
+  for( var k = 0; k < 2; ++k){
+    for( var i = 0; i < axis[k]; ++i){
+      for( var j = 0, matches = [], last = undefined, reset = false; j < axis[(k+1)%2]; ++j){
+        var _i = k == 0 ? i : j;
+        var _j = k == 0 ? j : i;
+        if(last) {
+          reset = this.occupied(_i,_j) && last == this.board[_i][_j] && matches.push({x: _i, y: _j}) ? false : true;
         }
-          matches = [];
-        last = this.board[i][j];
-        if(this.occupied(i,j)){
-          matches = [{x: i, y: j}];
-        }
-        }
-      } else {
-        if( matches.length >= minMatchLength ){
-          theMatches.push(matches);
-        }
-        last = this.board[i][j];
-        if(this.occupied(i,j)){
-          matches = [{x: i, y: j}];
+        if (!last || reset){
+          matches.length >= minMatchLength && theMatches.push(matches);
+          last = this.board[_i][_j];
+          matches = last ? [{x: _i, y: _j}] : [];
         }
       }
+      matches.length >= minMatchLength && theMatches.push(matches);
     }
-    if( matches.length >= minMatchLength ){
-      theMatches.push(matches);
-    }
-    matches = [];
-    last = undefined;
-  }
-
-    for( var j = 0; j < this.height; ++j){
-    for( var i = 0; i < this.width; ++i){
-      if(last){
-        if(this.occupied(i,j) && last == this.board[i][j]){
-          matches.push({x: i, y: j});
-        } else {
-        if( matches.length >= minMatchLength ){
-          theMatches.push(matches);
-        }
-          last = this.board[i][j];
-          if(this.occupied(i,j)){
-            matches = [{x: i, y: j}];
-          }
-          matches = [];
-        }
-      } else {
-        if( matches.length >= minMatchLength ){
-          theMatches.push(matches);
-        }
-        last = this.board[i][j];
-        if(this.occupied(i,j)){
-          matches = [{x: i, y: j}];
-        }
-      }
-    }
-    if( matches.length >= minMatchLength ){
-      theMatches.push(matches);
-    }
-    matches = [];
-    last = undefined;
   }
   return theMatches;
 }
