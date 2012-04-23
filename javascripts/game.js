@@ -82,7 +82,7 @@ Game.prototype.tick = function() {
 }
 
 Game.prototype.findMatches = function(cb){
-	cb = _.bind(cb,this);
+	var cb = _.bind(cb,this);
 	var matches = this.board.matches();
 	if(matches.length){
 		_.each(matches,function(match_set){
