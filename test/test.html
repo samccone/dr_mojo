@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
 		<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
 		<script src="../javascripts/underscore.js"></script>
+	  <script src="../javascripts/PieceDrawer.js"></script>
 	  <script src="../javascripts/board.js"></script>
 	  <script src="../javascripts/collisionDetector.js"></script>
 	  <script src="../javascripts/pill.js"></script>
@@ -152,8 +153,11 @@
 			b.board[1][1] = {color : "red", connected : {x : 0, y: 1}};
 			b.board[1][2] = {color : "teal"};
 
+			b.board[3][12] = {color : "green", connected : {x : 3, y: 13}};
+			b.board[3][13] = {color : "red", connected : {x : 3, y: 12}};
+
 			b.board[0][b.height -1] = {color : "red"};
-			equal(b.dangling().length, 1, "Should Find 1 Dangling Piece")
+			equal(b.dangling().length, 2, "Should Find 2 Dangling Piece(s)")
 		});
 	})
 	</script>
