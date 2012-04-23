@@ -71,7 +71,7 @@ Board.prototype.matches = function(){
   var axis = [this.width, this.height];
   for( var k = 0; k < 2; ++k){
     for( var i = 0; i < axis[k]; ++i){
-      for( var j = 0, matches = [], last = undefined, reset = false; j < axis[(k+1)%2]; ++j){
+      for( var j = 0, matches = [], last = undefined, reset = false; j < axis[1-k]; ++j){
         var _i = k == 0 ? i : j;
         var _j = k == 0 ? j : i;
         if(last) {
