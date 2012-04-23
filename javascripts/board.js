@@ -64,27 +64,25 @@ Board.prototype.dangling = function(){
 
 Board.prototype.matches = function(){
   var minMatchLength = 4;
-  var theMatches = [];
-  var last;
-  var matches = [];
-  var reset = false;
+  var result = [];
   var axis = [this.width, this.height];
-  for( var k = 0; k < 2; ++k){
-    for( var i = 0; i < axis[k]; ++i){
-      for( var j = 0, matches = [], last = undefined, reset = false; j < axis[1-k]; ++j){
-        var _i = k == 0 ? i : j;
-        var _j = k == 0 ? j : i;
-        if(last) {
-          reset = this.occupied(_i,_j) && last == this.board[_i][_j].color && matches.push({x: _i, y: _j}) ? false : true;
-        }
-        if (!last || reset){
-          matches.length >= minMatchLength && theMatches.push(matches);
-          last = this.occupied(_i,_j);
-          matches = last ? [{x: _i, y: _j}] : [];
-        }
+
+  for (var k=0; k<2; ++k) {
+    for (var i=0; i<axis[k]; ++i) {
+      var r = [];
+      for (var j=0; j<axis[1-k]; ++j) {
+        var x = k ? j : i,
+            y = k ? i : j,
+            point = this.board[x][y],
+            color = point ? point.color : null,
+            last = _.last(r),
+            c = { x: x, y: y};
+        last && last.color == color ? last.points.push(c) : r.push({color: color, points: [c]});
       }
-      matches.length >= minMatchLength && theMatches.push(matches);
+      var selected = _.filter(r, function(p) { return p.color && p.points.length >= minMatchLength; });
+      result = _.union(result, _.pluck(selected, 'points'));
     }
   }
-  return theMatches;
-}
+
+  return result;
+};
