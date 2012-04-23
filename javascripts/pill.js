@@ -11,8 +11,7 @@ function Pill(board, detector, position, _colors) {
 
 Pill.prototype.draw = function(){
   for( var i = 0; i < this.colors.length; ++i){
-    ctx.fillStyle = this.colors[i];
-    ctx.fillRect(this.position[i].x * block_size , this.position[i].y * block_size, block_size, block_size);
+    PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i]);
   }
 }
 

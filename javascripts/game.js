@@ -110,8 +110,7 @@ Game.prototype.dropDangling = function(cb){
 			this.board.eraseSpot(piece.position.x, piece.position.y);
 			piece.position.y += 1;
 			this.board.board[piece.position.x][piece.position.y] = piece;
-		  ctx.fillStyle = piece.color;
-	    ctx.fillRect(piece.position.x * block_size , (piece.position.y) * block_size, block_size, block_size);
+			PieceDrawer.drawPiece(piece.position.x, piece.position.y, piece.color);
 		}, this);
 		this.dropDangling(cb);
 	} else {
