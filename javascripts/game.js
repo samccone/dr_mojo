@@ -87,7 +87,14 @@ Game.prototype.findMatches = function(cb){
 	if(matches.length){
 		_.each(matches,function(match_set){
 			_.each(match_set,function(spot){
-				this.eraseSpot(spot.x,spot.y)
+				var deleting = this.occupied(spot.x,spot.y,1);
+				if(deleting.connected){
+					var connected = this.occupied(deleting.connected.x,deleting.connected.y,1);
+				}
+				if (connected){
+					connected.connected = undefined;
+				}
+				this.eraseSpot(deleting.position.x,deleting.position.y);
 			},this)
 		},this.board)
 		this.dropDangling(cb);
