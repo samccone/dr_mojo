@@ -11,8 +11,11 @@ Board.prototype.inBounds = function(x,y) {
   return x >= 0 && x < this.width && y >= 0 && y < this.height;
 }
 
-Board.prototype.occupied = function(x,y) {
+Board.prototype.occupied = function(x,y,full) {
   if (this.board[x][y]) {
+    if(full) {
+      return this.board[x][y];
+    }
     return this.board[x][y].color;
   }
   return this.board[x][y];
@@ -46,7 +49,15 @@ Board.prototype.clearAll = function(){
 Board.prototype.dangling = function(){
   var dangling = [];
   this.eachSpot(function(spot,loc,b){
-    spot && loc.y < b.height - 1 && !b.occupied(loc.x, loc.y + 1) && dangling.push(loc);
+    if(spot && loc.y < b.height - 1 && !b.occupied(loc.x, loc.y + 1)){
+      var con = spot.connected;
+      if(!con){
+        dangling.push(b.occupied(loc.x,loc.y,1));
+      }
+      if(con && con.y < b.height - 1 && !b.occupied(con.x, con.y + 1)) {
+        dangling.push(b.occupied(loc.x,loc.y,1));
+      }
+    }
   });
   return dangling
 }
