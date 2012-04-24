@@ -56,6 +56,8 @@ Board.prototype.dangling = function(){
       } else {
         if( con.y < loc.y && !b.occupied(loc.x, loc.y + 1) && loc.y <  b.height - 1 ) {
           dangling.push(b.occupied(loc.x,loc.y,1));
+        } else if (con.y == loc.y && !b.occupied(con.x, con.y + 1)) {
+          dangling.push(b.occupied(loc.x,loc.y,1));
         }
       }
     }
