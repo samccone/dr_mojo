@@ -16,7 +16,7 @@ Board.prototype.occupied = function(x,y,full) {
     if(full) {
       return this.board[x][y];
     }
-    return this.board[x][y].color;
+    return this.board[x][y].color || this.board[x][y].pill.colors[this.board[x][y].pos];
   }
   return this.board[x][y];
 }
@@ -77,7 +77,7 @@ Board.prototype.matches = function(){
         var x = k ? j : i,
             y = k ? i : j,
             point = this.board[x][y],
-            color = point ? point.color : null,
+            color = point ? point.pill.colors[point.pos] : null,
             last = _.last(r),
             c = { x: x, y: y};
         last && last.color == color ? last.points.push(c) : r.push({color: color, points: [c]});

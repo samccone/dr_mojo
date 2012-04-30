@@ -25,6 +25,12 @@
 		height = 16;
 		return new Board(width,height);
 	}
+
+	function newPill(b,pos,colors){
+		var c = new CollisionDetector(b);
+		return 	new Pill(b, c, pos, colors);
+	}
+
 	$(function(){
 		module("Board");
 		test("Board Creation",function(){
@@ -56,18 +62,9 @@
 		});
 		test("Clear Board",function(){
 			var b = createBoard();
-			b.board[0][0] = {color : "red"};
-			b.board[2][1] = {color : "red"};
-			b.board[0][2] = {color : "red"};
-			b.board[0][3] = {color : "red"};
-			b.board[1][0] = {color : "red"};
-			b.board[1][1] = {color : "red"};
-			b.board[5][2] = {color : "red"};
-			b.board[1][3] = {color : "red"};
-			b.board[1][5] = {color : "red"};
-			b.board[1][6] = {color : "red"};
-			b.board[6][7] = {color : "red"};
-			b.board[2][8] = {color : "red"};
+			var position = [ {x : 0 , y : 0 }, {x : 2, y : 1 } ];
+			var colors = ["red", "red"];
+			newPill(b,position,colors);
 			b.clearAll();
 			var empty = true;
 			b.eachSpot(function(spot){
@@ -77,74 +74,58 @@
 			});
 			equal(true,empty,"Board should be empty");
 		})
+	module("Pill");
+		test("Create a Pill", function(){
+			var b = createBoard();
+			var c = new CollisionDetector(b);
+			var position = [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+			var colors = ["red", "blue"];
+			var p = new Pill(b, c, position, colors);
+			expect(0);
+		});
+		test("Pill detects a collision", function(){
+			var b = createBoard();
+			var c = new CollisionDetector(b);
+			var position2 = [ {x : 0 , y : 1 }, {x : 1 , y : 1 } ];
+			var position = [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+			var colors = ["red", "blue"];
+			var p = new Pill(b, c, position, colors);
+			var p2 = new Pill(b, c, position2, colors);
+			equal(false, p.moveDown(), "Piece Should Not be able to move down");
+		})
 	module("game");
 		test("Match Detection X axis",function(){
 			var b = createBoard();
-			b.board[0][0] = {color : "red"};
-			b.board[1][0] = {color : "red"};
-			b.board[2][0] = {color : "red"};
-			b.board[3][0] = {color : "red"};
-			b.board[2][height - 1] = {color : "blue"};
-			b.board[3][height - 1] = {color : "blue"};
-			b.board[4][height - 1] = {color : "blue"};
-			b.board[5][height - 1] = {color : "blue"};
-			b.board[6][height - 1] = {color : "blue"};
-			b.board[2][height - 2] = {color : "blue"};
-			b.board[3][height - 2] = {color : "blue"};
-			b.board[4][height - 2] = {color : "blue"};
-			b.board[5][height - 2] = {color : "blue"};
-			equal(3,b.matches().length,"Should Find 3 Matches");
+			newPill(b,[ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
+			newPill(b,[ {x : 2 , y : 0 }, {x : 3, y : 0 } ],["red", "red"]);
+			equal(b.matches().length,1,"Should Find 1 Match");
 		});
 
 		test("Match Detection Y axis",function(){
 			var b = createBoard();
-			b.board[0][1] = {color : "red"};
-			b.board[0][2] = {color : "red"};
-			b.board[0][3] = {color : "red"};
-			b.board[0][4] = {color : "red"};
-			b.board[0][6] = {color : "red"};
-			b.board[0][7] = {color : "red"};
-			b.board[0][8] = {color : "red"};
-			b.board[0][9] = {color : "red"};
-			b.board[2][6] = {color : "red"};
-			b.board[2][7] = {color : "red"};
-			b.board[2][8] = {color : "red"};
-			b.board[2][9] = {color : "red"};
-			equal(3,b.matches().length,"Should Find 3 Matches");
+			newPill(b,[ {x : 0 , y : 0 }, {x : 0, y : 1 } ],["red", "red"]);
+			newPill(b,[ {x : 0 , y : 2 }, {x : 0, y : 3 } ],["red", "red"]);
+
+			equal(b.matches().length,1,"Should Find 1 Matches");
 		});
 
 		test("Match Detection X and Y axis",function(){
 			var b = createBoard();
-			b.board[0][1] = {color : "red"};
-			b.board[0][2] = {color : "red"};
-			b.board[0][3] = {color : "red"};
-			b.board[0][4] = {color : "red"};
-			b.board[1][0] = {color : "teal"};
-			b.board[2][0] = {color : "teal"};
-			b.board[3][0] = {color : "teal"};
-			b.board[4][0] = {color : "teal"};
-			b.board[5][15] = {color : "red"};
-			b.board[5][14] = {color : "red"};
-			b.board[5][13] = {color : "red"};
-			b.board[5][12] = {color : "red"};
-			b.board[5][11] = {color : "red"};
-			b.board[5][10] = {color : "green"};
-			b.board[5][9] = {color : "teal"};
-			b.board[5][8] = {color : "teal"};
-			b.board[5][7] = {color : "teal"};
-			equal(3,b.matches().length,"Should Find 3 Matches");
+			newPill(b,[ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
+			newPill(b,[ {x : 2 , y : 0 }, {x : 3, y : 0 } ],["red", "red"]);
+
+			newPill(b,[ {x : 5 , y : 0 }, {x : 5, y : 1 } ],["red", "red"]);
+			newPill(b,[ {x : 5 , y : 2 }, {x : 5, y : 3 } ],["red", "red"]);
+			equal(b.matches().length,2,"Should Find 2 Matches");
 		});
 
 		test("Match Detection Overlapping Matches",function(){
 			var b = createBoard();
-			b.board[0][1] = {color : "red"};
-			b.board[0][2] = {color : "red"};
-			b.board[0][3] = {color : "red"};
-			b.board[0][4] = {color : "red"};
-			b.board[1][1] = {color : "red"};
-			b.board[2][1] = {color : "red"};
-			b.board[3][1] = {color : "red"};
-			equal(2,b.matches().length,"Should Find 2 Matches");
+			newPill(b,[ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
+			newPill(b,[ {x : 2 , y : 0 }, {x : 3, y : 0 } ],["red", "red"]);
+			newPill(b,[ {x : 1 , y : 1 }, {x : 1, y : 2 } ],["red", "red"]);
+			newPill(b,[ {x : 1 , y : 3 }, {x : 1, y : 4 } ],["red", "red"]);
+			equal(b.matches().length,2,"Should Find 2 Matches");
 		});
 
 		test("Dangling Pieces",function(){

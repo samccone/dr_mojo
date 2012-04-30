@@ -72,10 +72,10 @@ Pill.prototype.move = function(pos, down) {
   this.erase();
   var canMove = this.detector.canMove(pos);
   if(canMove) {
-    this.position[0].x = pos[0].x;
-    this.position[1].x = pos[1].x;
-    this.position[0].y = pos[0].y;
-    this.position[1].y = pos[1].y;
+    for( var i = 0; i < this.position.length; ++i){
+      this.position[i].x = pos[i].x;
+      this.position[i].y = pos[i].y;
+    }
   } else if (down){
     this.collision = true;
   }
@@ -85,28 +85,32 @@ Pill.prototype.move = function(pos, down) {
 }
 
 Pill.prototype.moveRight = function() {
-  this.move([{
+  var toMove = [{
               x : this.position[0].x + 1,
               y : this.position[0].y
-            },{
+            }];
+  this.position.length > 1 && toMove.push({
               x : this.position[1].x + 1,
               y : this.position[1].y
-            }]);
+            });
+  return this.move(toMove);
 }
 
 Pill.prototype.moveDown = function() {
-  this.move([{
+  var toMove = [{
               x : this.position[0].x,
               y : this.position[0].y + 1
-            },{
+            }];
+  this.position.length > 1 && toMove.push({
               x : this.position[1].x,
               y : this.position[1].y + 1
-            }], true);
+            });
+  return this.move(toMove);
 }
 
 
 Pill.prototype.moveLeft = function() {
-  this.move([{
+  return this.move([{
               x : this.position[0].x - 1,
               y : this.position[0].y
             },{
@@ -115,7 +119,8 @@ Pill.prototype.moveLeft = function() {
             }]);
 }
 
-Pill.prototype.updatePosition = function(last,lastWidth){
-  this.board.board[this.position[0].x][this.position[0].y] = {color: this.colors[0], position: this.position[0], connected: this.position[1]};
-  this.board.board[this.position[1].x][this.position[1].y] = {color: this.colors[1], position: this.position[1], connected: this.position[0]};
+Pill.prototype.updatePosition = function(){
+  for(var i = 0; i < this.position.length; ++i){
+      this.board.board[this.position[i].x][this.position[i].y] = { pos : i, pill : this};
+  }
 }

@@ -94,7 +94,8 @@ Game.prototype.findMatches = function(cb){
 				if (connected){
 					connected.connected = undefined;
 				}
-				this.eraseSpot(deleting.position.x,deleting.position.y);
+				var spot = deleting.pos;
+				this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y);
 			},this)
 		},this.board)
 		this.dropDangling(cb);
@@ -107,10 +108,7 @@ Game.prototype.dropDangling = function(cb){
 	var dangling = this.board.dangling();
 	if(dangling.length){
 		_.each(dangling,function(piece){
-			this.board.eraseSpot(piece.position.x, piece.position.y);
-			piece.position.y += 1;
-			this.board.board[piece.position.x][piece.position.y] = piece;
-			PieceDrawer.drawPiece(piece.position.x, piece.position.y, piece.color);
+			piece.pill.moveDown();
 		}, this);
 		this.dropDangling(cb);
 	} else {
