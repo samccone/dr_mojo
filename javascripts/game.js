@@ -75,8 +75,13 @@ Game.prototype.tick = function() {
 	this.pillAction('down');
 	if ( this.checkHit() || this.active_pill.isEmpty()) {
 		this.findMatches(function(){
+		if (!this.clock){
+				var _this = this;
+				this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
+		}
 			//Change this to where the pills are created
 			if(this.board.occupied(0,0)){
+				console.log("game over");
 			  this.gameOver();
 			}else{
 			  this.newPill();
@@ -111,15 +116,19 @@ Game.prototype.findMatches = function(cb){
 }
 
 Game.prototype.dropDangling = function(cb){
-	// var dangling = this.board.dangling();
-	// if(dangling.length){
-	// 	_.each(dangling,function(piece){
-	// 		piece.pill.moveDown();
-	// 	}, this);
-	// 	this.dropDangling(cb);
-	// } else {
-	// 	this.findMatches(cb);
-	// }
+	var dangling = this.board.dangling();
+	_.each(dangling, function(obj){
+		obj.pill.moveDown();
+	},this);
+	if(dangling.length > 0 ){
+		var _this = this;
+		window.clearInterval(_this.clock);
+		_this.clock = undefined;
+		var next = _.bind(this.dropDangling,this,cb);
+		setTimeout(next,this.game_speed);
+	} else {
+		this.findMatches(cb);
+	}
 }
 
 Game.prototype.start = function(speed){
