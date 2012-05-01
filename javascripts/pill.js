@@ -11,13 +11,13 @@ function Pill(board, detector, position, _colors) {
 
 Pill.prototype.draw = function(){
   for( var i = 0; i < this.colors.length; ++i){
-    PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i]);
+    this.position[i] && this.colors[i] && PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i]);
   }
 }
 
 Pill.prototype.erase = function(){
   for( var i = 0; i < this.position.length; ++i) {
-    this.board.eraseSpot(this.position[i].x, this.position[i].y, block_size, block_size);
+    this.position[i] && this.board.eraseSpot(this.position[i].x, this.position[i].y);
   }
 }
 
@@ -98,14 +98,17 @@ Pill.prototype.moveRight = function() {
 }
 
 Pill.prototype.moveDown = function() {
-  var toMove = [{
-              x : this.position[0].x,
-              y : this.position[0].y + 1
-            }];
-  this.position.length > 1 && toMove.push({
-              x : this.position[1].x,
-              y : this.position[1].y + 1
-            });
+  var toMove = []
+  for(var i = 0; i < this.position.length; ++i){
+    if(this.position[i]){
+      toMove.push({
+        x : this.position[i].x,
+        y : this.position[i].y + 1
+      });
+    } else {
+      toMove.push(undefined);
+    }
+  }
   return this.move(toMove);
 }
 
@@ -122,6 +125,8 @@ Pill.prototype.moveLeft = function() {
 
 Pill.prototype.updatePosition = function(){
   for(var i = 0; i < this.position.length; ++i){
+    if(this.position[i]) {
       this.board.board[this.position[i].x][this.position[i].y] = { pos : i, pill : this};
+    }
   }
 }
