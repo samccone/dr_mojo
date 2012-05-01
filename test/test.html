@@ -81,7 +81,7 @@
 			var position = [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
 			var colors = ["red", "blue"];
 			var p = new Pill(b, c, position, colors);
-			expect(0);
+			equal(Boolean(b.occupied(0,0)) && Boolean(b.occupied(1,0)), true, "piece should occupy spaces");
 		});
 		test("Pill detects a collision against other piece", function(){
 			var b = createBoard();
