@@ -95,7 +95,7 @@ Game.prototype.findMatches = function(cb){
 					connected.connected = undefined;
 				}
 				var spot = deleting.pos;
-				this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y);
+				this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y, 1);
 			},this)
 		},this.board)
 		this.dropDangling(cb);
@@ -105,15 +105,15 @@ Game.prototype.findMatches = function(cb){
 }
 
 Game.prototype.dropDangling = function(cb){
-	var dangling = this.board.dangling();
-	if(dangling.length){
-		_.each(dangling,function(piece){
-			piece.pill.moveDown();
-		}, this);
-		this.dropDangling(cb);
-	} else {
-		this.findMatches(cb);
-	}
+	// var dangling = this.board.dangling();
+	// if(dangling.length){
+	// 	_.each(dangling,function(piece){
+	// 		piece.pill.moveDown();
+	// 	}, this);
+	// 	this.dropDangling(cb);
+	// } else {
+	// 	this.findMatches(cb);
+	// }
 }
 
 Game.prototype.start = function(speed){
