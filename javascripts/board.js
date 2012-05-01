@@ -25,9 +25,16 @@ Board.prototype.printBoard = function() {
   console.log(this.board)
 }
 
-Board.prototype.eraseSpot = function(x, y) {
+Board.prototype.eraseSpot = function(x, y, fullDelete) {
   if(ctx){
     ctx.clearRect(x * block_size, y * block_size, block_size, block_size);
+  }
+  if(fullDelete){
+    var piece = this.board[x][y];
+    if(piece && piece.pill){
+      piece.pill.colors[piece.pos] = undefined;
+      piece.pill.position[piece.pos] = undefined;
+    }
   }
   this.board[x][y] = undefined;
 }
