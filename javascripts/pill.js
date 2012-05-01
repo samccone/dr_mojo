@@ -1,10 +1,10 @@
 function Pill(board, detector, position, _colors) {
-  this.detector       = detector;
-  this.board          = board;
-  this.position			  = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
-  this.colors         = _colors || [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
-  this.collision      = false;
-  this.rotationState  = 0;
+  this.detector         = detector;
+  this.board            = board;
+  this.position			    = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+  this.colors           = _colors || [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
+  this.collision        = false;
+  this.rotationState    = 0;
   this.updatePosition();
   this.draw();
 }
@@ -90,14 +90,17 @@ Pill.prototype.move = function(pos, down) {
 }
 
 Pill.prototype.moveRight = function() {
-  var toMove = [{
-              x : this.position[0].x + 1,
-              y : this.position[0].y
-            }];
-  this.position.length > 1 && toMove.push({
-              x : this.position[1].x + 1,
-              y : this.position[1].y
-            });
+  var toMove = []
+  for(var i = 0; i < this.position.length; ++i){
+    if(this.position[i]){
+      toMove.push({
+        x : this.position[i].x + 1,
+        y : this.position[i].y
+      });
+    } else {
+      toMove.push(undefined);
+    }
+  }
   return this.move(toMove);
 }
 
@@ -118,13 +121,18 @@ Pill.prototype.moveDown = function() {
 
 
 Pill.prototype.moveLeft = function() {
-  return this.move([{
-              x : this.position[0].x - 1,
-              y : this.position[0].y
-            },{
-              x : this.position[1].x - 1,
-              y : this.position[1].y
-            }]);
+  var toMove = []
+  for(var i = 0; i < this.position.length; ++i){
+    if(this.position[i]){
+      toMove.push({
+        x : this.position[i].x - 1,
+        y : this.position[i].y
+      });
+    } else {
+      toMove.push(undefined);
+    }
+  }
+  return this.move(toMove);
 }
 
 Pill.prototype.updatePosition = function(){
