@@ -71,13 +71,14 @@ Pill.prototype.rotate = function(to){
 Pill.prototype.move = function(pos, down) {
   this.erase();
   var canMove = this.detector.canMove(pos);
+  this.collision = !canMove;
   if(canMove) {
     for( var i = 0; i < this.position.length; ++i){
-      this.position[i].x = pos[i].x;
-      this.position[i].y = pos[i].y;
+      if(this.position[i]){
+        this.position[i].x = pos[i].x;
+        this.position[i].y = pos[i].y;
+      }
     }
-  } else if (down){
-    this.collision = true;
   }
   this.draw();
   this.updatePosition();
