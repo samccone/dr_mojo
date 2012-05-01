@@ -1,12 +1,14 @@
 function Game() {
-	this.board = new Board(board_size[0],board_size[1]);
-	this.detector = new CollisionDetector(this.board);
+	this.board 					= new Board(board_size[0],board_size[1]);
+	this.detector 			= new CollisionDetector(this.board);
+	this.paused					= false;
+	this.done						= false;
+	this.noInteractions = false;
 	this.setListeners();
-	this.paused = false;
-	this.done = false;
 }
 
 Game.prototype.newPill = function() {
+	this.noInteractions = false;
 	return this.active_pill = new Pill(this.board, this.detector);
 }
 
@@ -18,25 +20,27 @@ Game.prototype.gameOver = function() {
 Game.prototype.setListeners = function() {
 	var _this = this;
 	window.addEventListener('keydown', function(e){
-		switch( e.keyCode ) {
-			case 65: //a
-				_this.pillAction('rotate-left');
-				break;
-			case 83: //s
-				_this.pillAction('rotate-right');
-				break;
-			case 32:
-				_this.togglePause();
-				break;
-			case 37:
-				_this.pillAction('left');
-				break;
-			case 40:
-				_this.pillAction('down');
-				break;
-			case 39:
-				_this.pillAction('right');
-				break;
+		if(!_this.noInteractions){
+			switch( e.keyCode ) {
+				case 65: //a
+					_this.pillAction('rotate-left');
+					break;
+				case 83: //s
+					_this.pillAction('rotate-right');
+					break;
+				case 32:
+					_this.togglePause();
+					break;
+				case 37:
+					_this.pillAction('left');
+					break;
+				case 40:
+					_this.pillAction('down');
+					break;
+				case 39:
+					_this.pillAction('right');
+					break;
+			}
 		}
 	});
 }
@@ -84,6 +88,7 @@ Game.prototype.tick = function() {
 Game.prototype.findMatches = function(cb){
 	var cb = _.bind(cb,this);
 	var matches = this.board.matches();
+	var _this = this;
 	if(matches.length){
 		_.each(matches,function(match_set){
 			_.each(match_set,function(spot){
@@ -96,6 +101,7 @@ Game.prototype.findMatches = function(cb){
 				}
 				var spot = deleting.pos;
 				this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y, 1);
+				_this.noInteractions = true;
 			},this)
 		},this.board)
 		this.dropDangling(cb);
