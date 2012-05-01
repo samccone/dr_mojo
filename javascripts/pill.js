@@ -68,6 +68,10 @@ Pill.prototype.rotate = function(to){
   }
 }
 
+Pill.prototype.isEmpty = function() {
+  return !(Boolean(this.colors[0]) || Boolean(this.colors[1]));
+}
+
 Pill.prototype.move = function(pos, down) {
   this.erase();
   var canMove = this.detector.canMove(pos);

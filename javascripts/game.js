@@ -69,7 +69,7 @@ Game.prototype.togglePause = function(){
 
 Game.prototype.tick = function() {
 	this.pillAction('down');
-	if ( this.checkHit() ) {
+	if ( this.checkHit() || this.active_pill.isEmpty()) {
 		this.findMatches(function(){
 			//Change this to where the pills are created
 			if(this.board.occupied(0,0)){

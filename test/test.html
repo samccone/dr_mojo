@@ -83,6 +83,17 @@
 			var p = new Pill(b, c, position, colors);
 			equal(Boolean(b.occupied(0,0)) && Boolean(b.occupied(1,0)), true, "piece should occupy spaces");
 		});
+		test("Checking to see if a pill is empty", function(){
+			var b = createBoard();
+			var c = new CollisionDetector(b);
+			var position = [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+			var colors = ["red", "blue"];
+			var p = new Pill(b, c, position, colors);
+			b.eraseSpot(0,0,1);
+			equal(p.isEmpty(),0,"Pill Should Not be Empty");
+			b.eraseSpot(1,0,1);
+			equal(p.isEmpty(),1,"Pill Should be Empty");
+		});
 		test("Pill detects a collision against other piece", function(){
 			var b = createBoard();
 			var c = new CollisionDetector(b);
