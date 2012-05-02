@@ -12,6 +12,11 @@ Game.prototype.newPill = function() {
   return this.active_pill = new Pill(this.board, this.detector);
 }
 
+Game.prototype.newVirus = function(level, num) {
+  var virus = new Virus(this.board, this.detector, level, num);
+  return virus;
+}
+
 Game.prototype.gameOver = function() {
   this.done = true;
   this.clock = window.clearInterval(this.clock);
@@ -136,6 +141,15 @@ Game.prototype.start = function(speed){
   this.newPill();
   this.game_speed = speed || parseInt(prompt("Game Speed?"), 10);
   this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
+}
+
+Game.prototype.populateViruses = function(level) {
+  var self = this;
+  var pseudoLevel = Math.min(level,23);
+  for (var i=1; i <= ((pseudoLevel*4) + 4); i++) {
+    console.log('adding new virus:', i);
+    self.newVirus(pseudoLevel, i);
+  }
 }
 
 Game.prototype.checkHit = function(){
