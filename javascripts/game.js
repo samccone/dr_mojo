@@ -14,7 +14,7 @@ Game.prototype.newPill = function() {
 }
 
 Game.prototype.newVirus = function(level, num) {
-  var virus = new Virus(this.board, this.detector, level, num);
+  var virus = new Virus(this, level, num);
   return virus;
 }
 

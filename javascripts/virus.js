@@ -1,7 +1,8 @@
-function Virus(board, detector, level, randColor) {
+function Virus(game, level, randColor) {
   this.type       = 'Virus';
-  this.board      = board;
-  this.detector   = detector;
+  this.game		  = game;
+  this.board      = game.board;
+  this.detector   = game.detector;
   this.level      = level;
   this.maxY       = undefined;
   this.color      = undefined;
@@ -16,9 +17,9 @@ function Virus(board, detector, level, randColor) {
 
 Virus.prototype.setColor = function(randColor) {
   if (randColor < 4) {
-    this.color = colors[randColor];
+    this.color = this.game.colors[randColor];
   } else {
-    this.color = colors[Math.floor( Math.random()*colors.length )];
+    this.color = this.game.colors[Math.floor( Math.random()*this.game.colors.length )];
   }
 }
 
