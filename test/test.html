@@ -135,6 +135,24 @@
 			var p = new Pill(b, c, position, colors);
 			equal(false, p.moveDown(), "Piece Should Not be able to move down");
 		});
+	module("Detector");
+		test("Can Move Down", function(){
+			var b = createBoard();
+			a = newPill(b,[ {x : 2 , y : 1 }, {x : 2, y : 2 } ],["red", "red"]);
+			var toMove = []
+      for(var i = 0; i < a.position.length; ++i){
+        if(a.position[i]){
+          toMove.push({
+            x : a.position[i].x,
+            y : a.position[i].y + 1
+          });
+        } else {
+          toMove.push(undefined);
+        }
+      }
+      equal(a.detector.canMove(toMove), true, "shoud be able to move down");
+		});
+
 	module("game");
 		test("Match Detection X axis",function(){
 			var b = createBoard();
