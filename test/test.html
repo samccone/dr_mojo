@@ -104,6 +104,29 @@
 			var p2 = new Pill(b, c, position2, colors);
 			equal(false, p.moveDown(), "Piece Should Not be able to move down");
 		});
+		test("Pill Collission", function(){
+			var b = createBoard();
+			var c = new CollisionDetector(b);
+			var position = [ {x : 2 , y : 15 }, undefined ];
+			var colors = ["green", undefined];
+			new Pill(b, c, position, colors);
+			var position2 = [ {x : 3 , y : 15 }, undefined ];
+			var colors2 = ["teal", undefined];
+			new Pill(b, c, position2, colors2);
+			var position3 = [ undefined, {x : 4, y : 14} ];
+			var colors3 = [undefined , "green"];
+			new Pill(b, c, position3, colors3);
+			var position4 = [ undefined, {x : 4, y : 15} ];
+			var colors4 = [undefined , "red"];
+			new Pill(b, c, position4, colors4);
+			var position5 = [ {x : 7, y : 15}, undefined ];
+			var colors5 = ["teal", undefined];
+			new Pill(b, c, position5, colors5);
+			var position6 = [ {x : 6, y : 14}, {x : 7, y : 14} ];
+			var colors6 = ["green", "teal"];
+			new Pill(b, c, position5, colors5);
+			equal(b.dangling().length,0,'doo');
+		});
 		test("Pill detects a collision at bottom", function(){
 			var b = createBoard();
 			var c = new CollisionDetector(b);
@@ -149,18 +172,12 @@
 
 		test("Dangling Pieces",function(){
 			var b = createBoard();
-			b.board[0][1] = {color : "red", connected : {x : 1, y: 1}};
-			b.board[1][1] = {color : "red", connected : {x : 0, y: 1}};
-			b.board[1][2] = {color : "teal"};
-
-			b.board[3][12] = {color : "green", connected : {x : 3, y: 13}};
-			b.board[3][13] = {color : "red", connected : {x : 3, y: 12}};
-
-			b.board[5][12] = {color : "red", connected : {x : 6, y: 12}};
-			b.board[6][12] = {color : "teal", connected : {x : 5, y: 12}};
-
-			b.board[0][b.height -1] = {color : "red"};
-			equal(b.dangling().length, 4, "Should Find 4 Dangling Piece(s)")
+			newPill(b,[ {x : 0 , y : 1 }, {x : 1, y : 1 } ],["red", "red"]);
+			newPill(b,[ {x : 1 , y : 2 }, undefined ],["teal", undefined]);
+			newPill(b,[ {x : 3 , y : 12 }, {x : 3 , y : 13 } ],["green", "red"]);
+			newPill(b,[ {x : 5 , y : 12 }, {x : 6 , y : 12 } ],["red", "teal"]);
+			newPill(b,[ {x : 0 , y : b.height -1 }, undefined ],["red", undefined]);
+			equal(b.dangling().length, 3, "Should Find 3 Dangling Piece(s)")
 		});
 	})
 	</script>

@@ -42,7 +42,7 @@ Board.prototype.eraseSpot = function(x, y, fullDelete) {
 Board.prototype.eachSpot = function(cb){
   for(var i = 0; i < this.width; ++i){
     for(var j = 0; j < this.height; ++j){
-      cb(this.board[i][j],{x : i, y: j},this);
+      cb(this.occupied(i,j,1),{x : i, y: j},this);
     }
   }
 }
@@ -56,20 +56,25 @@ Board.prototype.clearAll = function(){
 Board.prototype.dangling = function(){
   var dangling = [];
   this.eachSpot(function(spot,loc,b){
-    if(spot && loc.y < b.height - 1 && !b.occupied(loc.x, loc.y + 1)){
-      var con = spot.connected;
-      if(!con){
-        dangling.push(b.occupied(loc.x,loc.y,1));
-      } else {
-        if( con.y < loc.y && !b.occupied(loc.x, loc.y + 1) && loc.y <  b.height - 1 ) {
-          dangling.push(b.occupied(loc.x,loc.y,1));
-        } else if (con.y == loc.y && !b.occupied(con.x, con.y + 1)) {
-          dangling.push(b.occupied(loc.x,loc.y,1));
+    if(spot){
+      var detector = spot.pill.detector;
+      var toMove = []
+      for(var i = 0; i < spot.pill.position.length; ++i){
+        if(spot.pill.position[i]){
+          toMove.push({
+            x : spot.pill.position[i].x,
+            y : spot.pill.position[i].y + 1
+          });
+        } else {
+          toMove.push(undefined);
         }
+      }
+      if(detector.canMove(toMove)){
+        dangling.push(spot);
       }
     }
   });
-  return dangling
+  return dangling;
 }
 
 Board.prototype.matches = function(){
