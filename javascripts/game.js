@@ -148,7 +148,6 @@ Game.prototype.populateViruses = function(level) {
   var self = this;
   var pseudoLevel = Math.min(level,23);
   for (var i=1; i <= ((pseudoLevel*4) + 4); i++) {
-    console.log('adding new virus:', i);
     self.newVirus(pseudoLevel, i);
   }
 }
