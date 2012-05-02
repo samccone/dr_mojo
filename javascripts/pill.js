@@ -1,7 +1,7 @@
 function Pill(board, detector, position, _colors) {
   this.detector         = detector;
   this.board            = board;
-  this.position			    = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
+  this.position         = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];
   this.colors           = _colors || [ colors[Math.floor(Math.random()*colors.length)], colors[Math.floor(Math.random()*colors.length)] ];
   this.collision        = false;
   this.rotationState    = 0;

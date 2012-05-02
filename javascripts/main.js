@@ -4,13 +4,15 @@ var colors      = ["green", "red" , "teal"];
 var block_size  = 35;
 var the_game;
 var board_size  = [8,16];
+var level = 1;
 
 if(canvas){
-	canvas.setAttribute('width', board_size[0] * block_size + "px");
-	canvas.setAttribute('height', board_size[1] * block_size + "px");
+  canvas.setAttribute('width', board_size[0] * block_size + "px");
+  canvas.setAttribute('height', board_size[1] * block_size + "px");
 
-	window.onload = function(){
-		the_game = new Game();
-	  the_game.start(200);
-	}
+  window.onload = function(){
+    the_game = new Game();
+    the_game.populateViruses(level);
+    the_game.start(200);
+  }
 }
