@@ -4,6 +4,7 @@ function Game() {
   this.paused         = false;
   this.done           = false;
   this.noInteractions = false;
+  this.colors      	  = ["green", "red" , "teal"];
   this.setListeners();
 }
 
