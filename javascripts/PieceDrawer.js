@@ -1,7 +1,7 @@
 var PieceDrawer = (function(){
   return {
     drawPiece : function(x, y, color, drawVirus){
-		console.log("** drawing piece at coords:", x, y);
+		// console.log("** drawing piece at coords:", x, y);
       if(ctx) {
 		if (drawVirus === true) {
 			// draw an X if we are drawing a Virus

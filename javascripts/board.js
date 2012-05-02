@@ -30,7 +30,6 @@ Board.prototype.occupied = function(x,y,full) {
  *  location was already occupied
  */
 Board.prototype.addPiece = function(obj, obj_pos) {
-	console.log("checking if occupied for: ", obj.position.x, obj.position.y);
   if (this.occupied(obj.position.x, obj.position.y) === undefined) {
     this.board[obj.position.x][obj.position.y] = {pill : obj, pos : obj_pos};
     return true;
