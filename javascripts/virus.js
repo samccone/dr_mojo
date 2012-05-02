@@ -27,18 +27,16 @@ Virus.prototype.setColor = function() {
 }
 
 Virus.prototype.setMaxBounds = function() {
-  if (this.level <= 4 ) { this.maxY = 10; }
-  else if (this.level <= 8) { this.maxY = 9; }
-  else if (this.level <= 12 ) { this.maxY = 8; }
-  else if (this.level <= 16 ) { this.maxY = 7; }
-  else { this.maxY = 6; }
-	// 
-	// this.maxY=15;
+  if (this.level <= 4 ) { this.maxY = 7; }
+  else if (this.level <= 8) { this.maxY = 6; }
+  else if (this.level <= 12 ) { this.maxY = 5; }
+  else if (this.level <= 16 ) { this.maxY = 4; }
+  else { this.maxY = 3; }
 }
 
 Virus.prototype.setPosition = function() {
   var randX = Math.floor(Math.random() * this.board.width);
-  var randY = Math.floor(Math.random() * 13) + 3;  // we dont ever put anything in the first 4 rows
+  var randY = Math.floor(Math.random() * 13) + this.maxY;  // we dont ever put anything in the first X rows based on level
 
   if (this.board.occupied(randX, randY) === undefined) {
   	this.position.x = randX;
