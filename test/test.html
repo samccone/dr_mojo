@@ -139,6 +139,7 @@
 		test("Can Move Down", function(){
 			var b = createBoard();
 			a = newPill(b,[ {x : 2 , y : 1 }, {x : 2, y : 2 } ],["red", "red"]);
+			a.rotationState = 1;
 			var toMove = []
       for(var i = 0; i < a.position.length; ++i){
         if(a.position[i]){
@@ -150,7 +151,7 @@
           toMove.push(undefined);
         }
       }
-      equal(a.detector.canMove(toMove), true, "shoud be able to move down");
+      equal(a.detector.canMove(toMove, a), true, "shoud be able to move down");
 		});
 
 	module("game");
@@ -195,7 +196,7 @@
 			newPill(b,[ {x : 3 , y : 12 }, {x : 3 , y : 13 } ],["green", "red"]);
 			newPill(b,[ {x : 5 , y : 12 }, {x : 6 , y : 12 } ],["red", "teal"]);
 			newPill(b,[ {x : 0 , y : b.height -1 }, undefined ],["red", undefined]);
-			equal(b.dangling().length, 3, "Should Find 3 Dangling Piece(s)")
+			equal(b.dangling().length, 5, "Should Find 5 Dangling Piece(s)")
 		});
 	})
 	</script>

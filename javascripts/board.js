@@ -69,7 +69,7 @@ Board.prototype.dangling = function(){
           toMove.push(undefined);
         }
       }
-      if(detector.canMove(toMove)){
+      if(detector.canMove(toMove, spot.pill)){
         dangling.push(spot);
       }
     }
