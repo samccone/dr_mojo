@@ -6,13 +6,12 @@ function Virus(game, level, randColor) {
   this.level      = level;
   this.maxY       = undefined;
   this.color      = undefined;
-  this.colors     = [this.color]; // for compatibility with Pill object
+  this.colors     = undefined; // for compatibility with Pill object
   this.position   = {x : undefined, y : undefined};
 
   this.setColor(randColor);
   this.setMaxBounds();
   this.setPosition();
-  this.draw();
 }
 
 Virus.prototype.setColor = function(randColor) {
@@ -21,6 +20,7 @@ Virus.prototype.setColor = function(randColor) {
   } else {
     this.color = this.game.colors[Math.floor( Math.random()*this.game.colors.length )];
   }
+  this.colors = [this.color];
 }
 
 Virus.prototype.setMaxBounds = function() {
@@ -34,16 +34,17 @@ Virus.prototype.setMaxBounds = function() {
 Virus.prototype.setPosition = function() {
   var randX = Math.floor(Math.random() * this.board.width);
   var randY = Math.floor(Math.random() * this.maxY);
-  this.position.x = randX;
-  this.position.y = randY;
 
   if (this.board.occupied(randX, randY) === undefined) {
+  	this.position.x = randX;
+  	this.position.y = randY;
     this.board.addPiece(this, 0);
+	this.draw();
   } else {
     this.setPosition();
   }
 }
 
 Virus.prototype.draw = function() {
-  this.position.x && this.position.y && this.color && PieceDrawer.drawVirus(this.position, this.color);
+  PieceDrawer.drawVirus(this.position, this.color);
 }
