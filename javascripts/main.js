@@ -4,7 +4,8 @@ var colors      = ["green", "red" , "teal"];
 var block_size  = 35;
 var the_game;
 var board_size  = [8,16];
-var level = 1;
+var level = parseInt(prompt("Level 0 - 20"), 10);
+
 
 if(canvas){
   canvas.setAttribute('width', board_size[0] * block_size + "px");
@@ -13,6 +14,6 @@ if(canvas){
   window.onload = function(){
     the_game = new Game();
     the_game.populateViruses(level);
-    the_game.start(200);
+    the_game.start(300);
   }
 }
