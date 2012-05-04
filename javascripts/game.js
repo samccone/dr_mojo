@@ -105,10 +105,7 @@ Game.prototype.findMatches = function(cb){
       _.each(match_set,function(spot){
         var deleting = this.occupied(spot.x,spot.y,1);
         if(deleting.connected){
-          var connected = this.occupied(deleting.connected.x,deleting.connected.y,1);
-        }
-        if (connected){
-          connected.connected = undefined;
+          this.occupied(deleting.connected.x,deleting.connected.y,1).connected = undefined;
         }
         var spot = deleting.pos;
         this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y, 1);
