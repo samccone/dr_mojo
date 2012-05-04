@@ -1,4 +1,5 @@
 function Pill(board, detector, position, _colors) {
+  this.type             = "pill";
   this.detector         = detector;
   this.board            = board;
   this.position         = position || [ {x : 0 , y : 0 }, {x : 1 , y : 0 } ];

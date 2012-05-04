@@ -108,7 +108,11 @@ Game.prototype.findMatches = function(cb){
           this.occupied(deleting.connected.x,deleting.connected.y,1).connected = undefined;
         }
         var spot = deleting.pos;
-        this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y, 1);
+        if ( deleting.pill.position[spot] ) {
+          this.eraseSpot(deleting.pill.position[spot].x,deleting.pill.position[spot].y, 1);
+        } else {
+          this.eraseSpot(deleting.pill.position.x,deleting.pill.position.y, 1);
+        }
         _this.noInteractions = true;
       },this)
     },this.board)

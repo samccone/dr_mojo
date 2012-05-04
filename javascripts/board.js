@@ -73,7 +73,7 @@ Board.prototype.clearAll = function(){
 Board.prototype.dangling = function(){
   var dangling = [];
   this.eachSpot(function(spot,loc,b){
-    if(spot){
+    if(spot && spot.pill.type != "Virus"){
       var detector = spot.pill.detector;
       var toMove = []
       for(var i = 0; i < spot.pill.position.length; ++i){
