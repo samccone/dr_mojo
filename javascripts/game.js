@@ -86,7 +86,7 @@ Game.prototype.tick = function() {
         this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
     }
       //Change this to where the pills are created
-      if(this.board.occupied(0,0)){
+      if(this.board.occupied(Math.floor(this.board.width/2) -1,0)){
         console.log("game over");
         this.gameOver();
       }else{
