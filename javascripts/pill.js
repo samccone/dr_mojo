@@ -94,8 +94,8 @@ Pill.prototype.move = function(pos, rotation_state) {
 
 Pill.prototype.moveRight = function() {
   var toMove = []
-  for(var i = 0; i < this.position.length; ++i){
-    if(this.position[i]){
+  for (var i = 0; i < this.position.length; ++i) {
+    if (this.position[i]) {
       toMove.push({
         x : this.position[i].x + 1,
         y : this.position[i].y
@@ -109,8 +109,8 @@ Pill.prototype.moveRight = function() {
 
 Pill.prototype.moveDown = function() {
   var toMove = []
-  for(var i = 0; i < this.position.length; ++i){
-    if(this.position[i]){
+  for (var i = 0; i < this.position.length; ++i) {
+    if (this.position[i]) {
       toMove.push({
         x : this.position[i].x,
         y : this.position[i].y + 1
@@ -125,8 +125,8 @@ Pill.prototype.moveDown = function() {
 
 Pill.prototype.moveLeft = function() {
   var toMove = []
-  for(var i = 0; i < this.position.length; ++i){
-    if(this.position[i]){
+  for (var i = 0; i < this.position.length; ++i) {
+    if (this.position[i]) {
       toMove.push({
         x : this.position[i].x - 1,
         y : this.position[i].y
@@ -138,9 +138,9 @@ Pill.prototype.moveLeft = function() {
   return this.move(toMove);
 }
 
-Pill.prototype.updatePosition = function(){
-  for(var i = 0; i < this.position.length; ++i){
-    if(this.position[i]) {
+Pill.prototype.updatePosition = function() {
+  for(var i = 0; i < this.position.length; ++i) {
+    if (this.position[i]) {
       this.board.board[this.position[i].x][this.position[i].y] = { pos : i, pill : this};
     }
   }
