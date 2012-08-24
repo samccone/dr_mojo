@@ -12,7 +12,8 @@ function Pill(board, detector, position, _colors) {
 
 Pill.prototype.draw = function(){
   for( var i = 0; i < this.colors.length; ++i){
-    this.position[i] && this.colors[i] && PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i]);
+    var piece_rotation = (this.rotationState + 2*i)%4;
+    this.position[i] && this.colors[i] && PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i], piece_rotation);
   }
 }
 
@@ -64,20 +65,21 @@ Pill.prototype.rotate = function(to){
       pos[1].y = pos[0].y;
     break;
   }
-  if(this.move(pos)) {
-    this.rotationState = to;
-  }
+  this.move(pos, to)
 }
 
 Pill.prototype.isEmpty = function() {
   return !(Boolean(this.colors[0]) || Boolean(this.colors[1]));
 }
 
-Pill.prototype.move = function(pos, down) {
+Pill.prototype.move = function(pos, rotation_state) {
   this.erase();
   var canMove = this.detector.canMove(pos);
   this.collision = !canMove;
   if(canMove) {
+    if(typeof(rotation_state)!='undefined'){
+      this.rotationState = rotation_state
+    }
     for( var i = 0; i < this.position.length; ++i){
       if(this.position[i]){
         this.position[i].x = pos[i].x;
