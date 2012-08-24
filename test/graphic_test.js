@@ -16,10 +16,16 @@ if(canvas){
     for (var row = 2; row < 16; row +=4){
       for (var column = 2; column < 16; column +=4){
         var direction = (row-2)/4
-        var xdiff = Math.sin(direction*Math.PI/2)
-        var ydiff = Math.cos(direction*Math.PI/2)
-        new Pill(the_game.board, the_game.detector, [ {x : column, y : row}, {x : column+xdiff, y : row+ydiff} ]);
+        pill = new Pill(the_game.board, the_game.detector, [ {x : column -1  , y : row }, {x : column , y : row } ]);
+        for (var i = 0; i < direction; i++){
+          pill.rotateLeft();
+        }
       }
     }
+    the_game.tick = function(){
+      this.active_pill.rotateRight();
+      this.active_pill.moveDown();
+    }
+    the_game.start(300);
   }
 }
