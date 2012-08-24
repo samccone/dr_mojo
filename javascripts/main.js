@@ -4,7 +4,7 @@ var colors      = ["green", "red" , "teal"];
 var block_size  = 35;
 var the_game;
 var board_size  = [8,16];
-var level = parseInt(prompt("Level 0 - 20"), 10);
+var level = 0;
 
 
 if(canvas){
