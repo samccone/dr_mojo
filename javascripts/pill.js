@@ -30,11 +30,11 @@ Pill.prototype.erase = function() {
 }
 
 Pill.prototype.rotateLeft = function() {
-  this.rotate((this.rotationState + 1) % 4);
+  this.rotate((4+this.rotationState + 1) % 4);
 }
 
 Pill.prototype.rotateRight = function() {
-  this.rotate((this.rotationState - 1) % 4);
+  this.rotate((4+this.rotationState - 1) % 4);
 }
 
 Pill.prototype.clonePosition = function() {
@@ -50,21 +50,18 @@ Pill.prototype.clonePosition = function() {
 
 Pill.prototype.rotate = function(to) {
   var pos = this.clonePosition();
-  switch (to) {
-  case -3:
-  case 1:
-    pos[1].x = pos[0].x;
-    pos[1].y = pos[0].y + 1;
+  switch(to) {
+    case 1:
+      pos[1].x = pos[0].x;
+      pos[1].y = pos[0].y + 1;
     break;
-  case -2:
-  case 2:
-    pos[1].x = pos[0].x - 1;
-    pos[1].y = pos[0].y;
+    case 2:
+      pos[1].x = pos[0].x -1;
+      pos[1].y = pos[0].y;
     break;
-  case -1:
-  case 3:
-    pos[1].x = pos[0].x;
-    pos[1].y = pos[0].y - 1;
+    case 3:
+      pos[1].x = pos[0].x;
+      pos[1].y = pos[0].y - 1;
     break;
   case 0:
     pos[1].x = pos[0].x + 1;

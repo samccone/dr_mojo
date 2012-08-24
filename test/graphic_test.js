@@ -22,6 +22,9 @@ if(canvas){
         }
       }
     }
+    for (var i = 1; i < 4; i++){
+      virus = new Virus(the_game, level, i)
+    }
     the_game.tick = function(){
       this.active_pill.rotateRight();
       this.active_pill.moveDown();

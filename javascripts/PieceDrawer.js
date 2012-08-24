@@ -1,30 +1,46 @@
 var PieceDrawer = (function() {
   return {
-    drawPiece: function(x, y, color, rotation, drawVirus) {
+    drawPiece : function(x, y, color, rotation, drawVirus) {
+
+      var eyesize = 4;
+      var mouthsize = 20;
+
       if (ctx) {
         if (drawVirus === true) {
-          // draw an X if we are drawing a Virus
           ctx.fillStyle = color;
-          ctx.fillRect(x * block_size, y * block_size, block_size, block_size);
 
-          ctx.fillStyle = "black";
           ctx.beginPath();
-          ctx.moveTo(x * block_size, y * block_size);
-          ctx.lineTo(x * block_size + block_size, y * block_size);
-          ctx.lineTo(x * block_size + block_size, y * block_size + block_size);
+          ctx.moveTo(x*block_size, (y+1/4)*block_size);
+          ctx.lineTo(x*block_size, (y+3/4)*block_size);
+          ctx.lineTo((x+1/4)*block_size, (y+1)*block_size);
+          ctx.lineTo((x+3/4)*block_size, (y+1)*block_size);
+          ctx.lineTo((x+1)*block_size, (y+3/4)*block_size);
+          ctx.lineTo((x+1)*block_size, (y+1/4)*block_size);
+          ctx.lineTo((x+3/4)*block_size, y*block_size);
+          ctx.lineTo((x+1/4)*block_size, y*block_size);
           ctx.closePath();
-          ctx.stroke();
+          ctx.fill();
+
+          ctx.fillStyle = 'black';
+          ctx.fillRect((x+1/2)*block_size+eyesize, (y+1/4)*block_size, eyesize, eyesize);
+          ctx.fillRect((x+1/2)*block_size-2*eyesize, (y+1/4)*block_size, eyesize, eyesize);
+          ctx.fillRect((x+1/2)*block_size-mouthsize/2, (y+5/8)*block_size, mouthsize, 2);
+
+          ctx.fillStyle = 'white';
           ctx.beginPath();
-          ctx.moveTo(x * block_size + block_size, y * block_size);
-          ctx.lineTo(x * block_size + block_size, y * block_size + block_size);
-          ctx.lineTo(x * block_size, y * block_size + block_size);
+          ctx.moveTo((x+1/2)*block_size-mouthsize/2+2, (y+5/8)*block_size+2);
+          ctx.lineTo((x+1/2)*block_size-mouthsize/2+4, (y+3/4)*block_size+2);
+          ctx.lineTo((x+1/2)*block_size-mouthsize/2+6, (y+5/8)*block_size+2);
           ctx.closePath();
-          ctx.stroke();
+          ctx.fill();
+
           ctx.beginPath();
-          ctx.moveTo(x * block_size, y * block_size);
-          ctx.lineTo(x * block_size, y * block_size + block_size);
+          ctx.moveTo((x+1/2)*block_size+mouthsize/2-2, (y+5/8)*block_size+2);
+          ctx.lineTo((x+1/2)*block_size+mouthsize/2-4, (y+3/4)*block_size+2);
+          ctx.lineTo((x+1/2)*block_size+mouthsize/2-6, (y+5/8)*block_size+2);
           ctx.closePath();
-          ctx.stroke();
+          ctx.fill();
+
         } else {
           ctx.fillStyle = color;
           ctx.beginPath();
@@ -37,19 +53,16 @@ var PieceDrawer = (function() {
             ctx.fillStyle = 'black'
             ctx.fillRect((x + 1) * block_size, y * block_size, -2, block_size);
             break;
-          case -3:
           case 1:
             ctx.fillRect(x * block_size, (y + .5) * block_size, block_size, block_size / 2);
             ctx.fillStyle = 'black'
             ctx.fillRect(x * block_size, (y + 1) * block_size, block_size, -2);
             break;
-          case -2:
           case 2:
             ctx.fillRect(x * block_size, y * block_size, block_size / 2, block_size);
             ctx.fillStyle = 'black'
             ctx.fillRect(x * block_size, y * block_size, 2, block_size);
             break;
-          case -1:
           case 3:
             ctx.fillRect(x * block_size, y * block_size, block_size, block_size / 2);
             ctx.fillStyle = 'black'
@@ -66,10 +79,10 @@ var PieceDrawer = (function() {
 
     drawLink: function(position1, position2, color1, color2) {
       if (ctx) {
-        var x1 = position1.x
-        var y1 = position1.y
-        var x2 = position2.x
-        var y2 = position2.y
+        var x1 = position1.x;
+        var y1 = position1.y;
+        var x2 = position2.x;
+        var y2 = position2.y;
 
         if (x1 == x2) {
           ctx.fillStyle = color1;
