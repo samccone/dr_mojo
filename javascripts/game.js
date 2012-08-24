@@ -113,7 +113,7 @@ Game.prototype.nextLevel = function() {
   this.gameOver();
   this.board.clearAll();
   the_game.populateViruses(++level);
-  alert("Level " + level + 1);
+  alert("Level " + (parseInt(level, 10) + 1));
   the_game.start(300);
 }
 
