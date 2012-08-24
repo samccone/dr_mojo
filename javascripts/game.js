@@ -92,14 +92,24 @@ Game.prototype.tick = function() {
         this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
     }
       //Change this to where the pills are created
-      if(this.virusCount == 0 || this.board.occupied(Math.floor(this.board.width/2) -1,0)){
+      if(this.board.occupied(Math.floor(this.board.width/2) -1, 0)){
         alert("game over");
         this.gameOver();
-      }else{
+      } else if (this.virusCount == 0) {
+        this.nextLevel();
+      } else {
         this.newPill();
       }
     });
   }
+}
+
+Game.prototype.nextLevel = function() {
+  this.gameOver();
+  this.board.clearAll();
+  the_game.populateViruses(++level);
+  alert("Level "+ level + 1);
+  the_game.start(300);
 }
 
 Game.prototype.findMatches = function(cb){
@@ -147,8 +157,9 @@ Game.prototype.dropDangling = function(cb){
 
 Game.prototype.start = function(speed){
   var _this = this;
+  this.done = false;
   this.newPill();
-  this.game_speed = speed || parseInt(prompt("Game Speed?"), 10);
+  this.game_speed = speed;
   this.clock = window.setInterval(function(){_this.tick()}, this.game_speed);
 }
 
@@ -165,5 +176,5 @@ Game.prototype.checkHit = function(){
 }
 
 Game.prototype.setVirusCount = function(){
-  document.getElementById("viruses").innerHTML = this.virusCount;  
+  document.getElementById("viruses").innerHTML = this.virusCount;
 }
