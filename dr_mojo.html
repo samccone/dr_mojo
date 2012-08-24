@@ -1,38 +1,11 @@
 <html>
   <head>
-    <style>
-      #game {
-        margin: 0px auto;
-        display: block;
-      }
-      #instructions {
-        font-family: helveticaNeue;
-        font-size: 11px;
-        color:
-        #1D1D1D;
-        text-transform: uppercase;
-      }
-      #hold {
-        max-width: 800px;
-        text-align: center;
-        margin: 0px auto;
-      }
-      #viruses {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        height: 40px;
-        width: 40px;
-        font-size: 45px;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="styles/styles.css"/>
   </head>
   <div id="viruses">
   </div>
   <div id="hold">
-    <canvas id="game" style="border:solid 2px #000"></canvas>
-    <div id="instructions">arrow keys to move ... a and s to rotate</div>
+    <canvas id="game"></canvas>
   </div>
   <script src="javascripts/PieceDrawer.js"></script>
   <script src="javascripts/underscore.js"></script>
