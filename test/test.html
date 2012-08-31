@@ -154,7 +154,7 @@
       equal(a.detector.canMove(toMove, a), true, "shoud be able to move down");
 		});
 
-	module("game");
+	module("board");
 		test("Match Detection X axis",function(){
 			var b = createBoard();
 			newPill(b,[ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
@@ -197,6 +197,36 @@
 			newPill(b,[ {x : 5 , y : 12 }, {x : 6 , y : 12 } ],["red", "teal"]);
 			newPill(b,[ {x : 0 , y : b.height -1 }, undefined ],["red", undefined]);
 			equal(b.dangling().length, 5, "Should Find 5 Dangling Piece(s)")
+		});
+
+	module("game");
+		test("Clears a row",function(){
+			var g = new Game();
+			new Pill(g.board, g.detector, [ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
+			new Pill(g.board, g.detector, [ {x : 2 , y : 0 }, {x : 3, y : 0 } ],["red", "red"]);
+			equal(g.board.matches().length,1,"Should Find 1 Match");
+			g.findMatches(function(){});
+			equal(g.board.matches().length,0,"Should Find 0 Matches after clear");
+		});
+
+		test("Clears a column",function(){
+			var g = new Game();
+			new Pill(g.board, g.detector, [ {x : 0 , y : 0 }, {x : 0, y : 1 } ],["red", "red"]);
+			new Pill(g.board, g.detector, [ {x : 0 , y : 2 }, {x : 0, y : 3 } ],["red", "red"]);
+			equal(g.board.matches().length,1,"Should Find 1 Match");
+			g.findMatches(function(){});
+			equal(g.board.matches().length,0,"Should Find 0 Matches after clear");
+		});
+
+		test("Clears overlapping matches",function(){
+			var g = new Game();
+			new Pill(g.board, g.detector, [ {x : 0 , y : 0 }, {x : 1, y : 0 } ],["red", "red"]);
+			new Pill(g.board, g.detector, [ {x : 2 , y : 0 }, {x : 3, y : 0 } ],["red", "red"]);
+			new Pill(g.board, g.detector, [ {x : 1 , y : 1 }, {x : 1, y : 2 } ],["red", "red"]);
+			new Pill(g.board, g.detector, [ {x : 1 , y : 3 }, {x : 1, y : 4 } ],["red", "red"]);
+			equal(g.board.matches().length,2,"Should Find 1 Match");
+			g.findMatches(function(){});
+			equal(g.board.matches().length,0,"Should Find 0 Matches after clear");
 		});
 	})
 	</script>
