@@ -1,5 +1,15 @@
 var PieceDrawer = (function() {
+
+  pill_images = {};
+  ['red', 'green', 'blue'].map(function(color) {
+    ['left', 'top', 'right', 'bottom'].map(function(dir, index) {
+      pill_images[color+'_'+index] = new Image()
+      pill_images[color+'_'+index].src = 'images/'+color+'_'+dir+'.png'
+    });
+  });
+
   return {
+
     drawPiece : function(x, y, color, rotation, drawVirus) {
 
       var eyesize = 4;
@@ -42,33 +52,7 @@ var PieceDrawer = (function() {
           ctx.fill();
 
         } else {
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.arc(x * block_size + block_size / 2, y * block_size + block_size / 2, block_size / 2, block_size / 2, Math.PI * 2, true);
-          ctx.closePath();
-          ctx.fill();
-          switch (rotation) {
-          case 0:
-            ctx.fillRect((x + .5) * block_size, y * block_size, block_size / 2, block_size);
-            ctx.fillStyle = 'black'
-            ctx.fillRect((x + 1) * block_size, y * block_size, -2, block_size);
-            break;
-          case 1:
-            ctx.fillRect(x * block_size, (y + .5) * block_size, block_size, block_size / 2);
-            ctx.fillStyle = 'black'
-            ctx.fillRect(x * block_size, (y + 1) * block_size, block_size, -2);
-            break;
-          case 2:
-            ctx.fillRect(x * block_size, y * block_size, block_size / 2, block_size);
-            ctx.fillStyle = 'black'
-            ctx.fillRect(x * block_size, y * block_size, 2, block_size);
-            break;
-          case 3:
-            ctx.fillRect(x * block_size, y * block_size, block_size, block_size / 2);
-            ctx.fillStyle = 'black'
-            ctx.fillRect(x * block_size, y * block_size, block_size, 2);
-            break;
-          }
+          pill_images[color+'_'+rotation] && ctx.drawImage(pill_images[color+'_'+rotation], x*block_size, y*block_size);
         }
       }
     },

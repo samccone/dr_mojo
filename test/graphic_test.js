@@ -1,6 +1,6 @@
 var canvas      = document.getElementById('game');
 var ctx         = canvas && canvas.getContext('2d');
-var colors      = ["green", "red" , "teal"];
+var colors      = ["green", "red" , "blue"];
 var block_size  = 35;
 var the_game;
 var board_size  = [16,16];

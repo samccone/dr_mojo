@@ -5,7 +5,7 @@ function Game() {
   this.done = false;
   this.noInteractions = false;
   this.virusCount = 0;
-  this.colors = ["green", "red", "teal"];
+  this.colors = ["green", "red", "blue"];
   this.setListeners();
 }
 
