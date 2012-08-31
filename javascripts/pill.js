@@ -50,12 +50,14 @@ Pill.prototype.clonePosition = function() {
 
 Pill.prototype.rotate = function(to) {
   var pos = this.clonePosition();
+  var offset_x = 0;
   switch(to) {
     case 1:
       pos[1].x = pos[0].x;
       pos[1].y = pos[0].y + 1;
     break;
     case 2:
+      offset_x = 1;
       pos[1].x = pos[0].x -1;
       pos[1].y = pos[0].y;
     break;
@@ -63,12 +65,18 @@ Pill.prototype.rotate = function(to) {
       pos[1].x = pos[0].x;
       pos[1].y = pos[0].y - 1;
     break;
-  case 0:
-    pos[1].x = pos[0].x + 1;
-    pos[1].y = pos[0].y;
+    case 0:
+      offset_x = -1
+      pos[1].x = pos[0].x + 1;
+      pos[1].y = pos[0].y;
     break;
   }
-  this.move(pos, to)
+  if ( !this.move(pos, to) && offset_x ){
+    //Try again with the x offset
+    pos[0].x = pos[0].x + offset_x;
+    pos[1].x = pos[1].x + offset_x;
+    this.move(pos, to)
+  }
 }
 
 Pill.prototype.isEmpty = function() {
