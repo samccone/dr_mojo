@@ -3,9 +3,15 @@ var PieceDrawer = (function() {
   pill_images = {};
   ['red', 'green', 'blue'].map(function(color) {
     ['left', 'top', 'right', 'bottom'].map(function(dir, index) {
-      pill_images[color+'_'+index] = new Image()
-      pill_images[color+'_'+index].src = 'images/'+color+'_'+dir+'.png'
+      pill_images[color+'_'+index] = new Image();
+      pill_images[color+'_'+index].src = 'images/'+color+'_'+dir+'.png';
     });
+  });
+
+  virus_images = {};
+  ['red', 'green', 'blue'].map(function(color) {
+    virus_images[color] = new Image();
+    virus_images[color].src = 'images/virus_'+color+'.png'
   });
 
   return {
@@ -17,40 +23,7 @@ var PieceDrawer = (function() {
 
       if (ctx) {
         if (drawVirus === true) {
-          ctx.fillStyle = color;
-
-          ctx.beginPath();
-          ctx.moveTo(x*block_size, (y+1/4)*block_size);
-          ctx.lineTo(x*block_size, (y+3/4)*block_size);
-          ctx.lineTo((x+1/4)*block_size, (y+1)*block_size);
-          ctx.lineTo((x+3/4)*block_size, (y+1)*block_size);
-          ctx.lineTo((x+1)*block_size, (y+3/4)*block_size);
-          ctx.lineTo((x+1)*block_size, (y+1/4)*block_size);
-          ctx.lineTo((x+3/4)*block_size, y*block_size);
-          ctx.lineTo((x+1/4)*block_size, y*block_size);
-          ctx.closePath();
-          ctx.fill();
-
-          ctx.fillStyle = 'black';
-          ctx.fillRect((x+1/2)*block_size+eyesize, (y+1/4)*block_size, eyesize, eyesize);
-          ctx.fillRect((x+1/2)*block_size-2*eyesize, (y+1/4)*block_size, eyesize, eyesize);
-          ctx.fillRect((x+1/2)*block_size-mouthsize/2, (y+5/8)*block_size, mouthsize, 2);
-
-          ctx.fillStyle = 'white';
-          ctx.beginPath();
-          ctx.moveTo((x+1/2)*block_size-mouthsize/2+2, (y+5/8)*block_size+2);
-          ctx.lineTo((x+1/2)*block_size-mouthsize/2+4, (y+3/4)*block_size+2);
-          ctx.lineTo((x+1/2)*block_size-mouthsize/2+6, (y+5/8)*block_size+2);
-          ctx.closePath();
-          ctx.fill();
-
-          ctx.beginPath();
-          ctx.moveTo((x+1/2)*block_size+mouthsize/2-2, (y+5/8)*block_size+2);
-          ctx.lineTo((x+1/2)*block_size+mouthsize/2-4, (y+3/4)*block_size+2);
-          ctx.lineTo((x+1/2)*block_size+mouthsize/2-6, (y+5/8)*block_size+2);
-          ctx.closePath();
-          ctx.fill();
-
+          virus_images[color] && ctx.drawImage(virus_images[color], x*block_size, y*block_size);
         } else {
           pill_images[color+'_'+rotation] && ctx.drawImage(pill_images[color+'_'+rotation], x*block_size, y*block_size);
         }
