@@ -125,15 +125,17 @@ Game.prototype.findMatches = function(cb) {
     _.each(matches, function(match_set) {
       _.each(match_set, function(spot) {
         var deleting = this.occupied(spot.x, spot.y, 1);
-        if (deleting.connected) {
-          this.occupied(deleting.connected.x, deleting.connected.y, 1).connected = undefined;
-        }
-        var spot = deleting.pos;
-        if (deleting.pill.position[spot]) {
-          this.eraseSpot(deleting.pill.position[spot].x, deleting.pill.position[spot].y, 1);
-        } else {
-          this.eraseSpot(deleting.pill.position.x, deleting.pill.position.y, 1);
-          _this.updateVirusCount(-1);
+        if (deleting != undefined){
+          if (deleting.connected) {
+            this.occupied(deleting.connected.x, deleting.connected.y, 1).connected = undefined;
+          }
+          var spot = deleting.pos;
+          if (deleting.pill.position[spot]) {
+            this.eraseSpot(deleting.pill.position[spot].x, deleting.pill.position[spot].y, 1);
+          } else {
+            this.eraseSpot(deleting.pill.position.x, deleting.pill.position.y, 1);
+            _this.updateVirusCount(-1);
+          }
         }
         _this.noInteractions = true;
       }, this)
