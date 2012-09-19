@@ -15,6 +15,8 @@ Game.prototype.newPill = function() {
   this.noInteractions = false;
   this.active_pill = this.next_pill;
   this.next_pill = new Pill(this.board, this.detector);
+  this.active_pill.draw();
+  this.next_pill.draw(oracle_ctx);
   return this.active_pill;
 }
 

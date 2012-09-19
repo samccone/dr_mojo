@@ -16,10 +16,10 @@ function Pill(board, detector, position, _colors) {
   this.draw();
 }
 
-Pill.prototype.draw = function() {
+Pill.prototype.draw = function(context) {
   for (var i = 0; i < this.colors.length; ++i) {
     var piece_rotation = (this.rotationState + 2 * i) % 4;
-    this.position[i] && this.colors[i] && PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i], piece_rotation);
+    this.position[i] && this.colors[i] && PieceDrawer.drawPiece(this.position[i].x, this.position[i].y, this.colors[i], piece_rotation, false, context);
   }
 }
 

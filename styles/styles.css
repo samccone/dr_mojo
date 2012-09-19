@@ -14,11 +14,11 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font: inherit;
   font-size: 100%;
+  font: inherit;
   vertical-align: baseline; }
 
-html {
+body {
   line-height: 1; }
 
 ol, ul {
@@ -60,6 +60,7 @@ html {
   border-radius: 4px;
   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); }
 
 #hold {
@@ -69,6 +70,7 @@ html {
   #hold .controls {
     float: right;
     width: 480px;
+    height: 300px;
     overflow: hidden;
     margin: 150px 0px;
     font-size: 12px; }
@@ -92,3 +94,7 @@ html {
   width: 40px;
   font-size: 45px;
   text-align: center; }
+
+#oracle {
+  margin: 15px 250px;
+  position: absolute; }

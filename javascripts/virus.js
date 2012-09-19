@@ -50,5 +50,5 @@ Virus.prototype.setPosition = function() {
 }
 
 Virus.prototype.draw = function() {
-  PieceDrawer.drawVirus(this.position, this.color);
+  PieceDrawer.drawVirus(this.position, this.color, ctx);
 }

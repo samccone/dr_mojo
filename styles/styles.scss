@@ -21,6 +21,7 @@ html {
   .controls {
     float: right;
     width: 480px;
+    height: 300px;
     overflow:hidden;
     margin: 150px 0px;
     font-size: 12px;
@@ -48,4 +49,9 @@ html {
   width: 40px;
   font-size: 45px;
   text-align: center;
+}
+
+#oracle {
+  margin: 15px 250px;
+  position: absolute;
 }
