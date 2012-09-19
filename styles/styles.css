@@ -1,4 +1,5 @@
 #game {
+  float: left;
   margin: 0px auto;
   display: block;
   border: solid 7px #ACACAC;
@@ -15,6 +16,22 @@
   max-width: 800px;
   text-align: center;
   margin: 0px auto; }
+  #hold .controls {
+    float: right;
+    width: 480px;
+    overflow: hidden;
+    margin: 150px 12px; }
+    #hold .controls dt {
+      float: left;
+      text-align: right;
+      width: 100px;
+      margin: 15px auto;
+      clear: both; }
+    #hold .controls dd {
+      float: right;
+      text-align: left;
+      width: 350px;
+      margin: 15px auto; }
 
 #viruses {
   position: fixed;
