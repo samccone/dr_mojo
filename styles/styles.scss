@@ -1,4 +1,9 @@
 @import "compass";
+@import "compass/reset";
+
+html {
+  font-family: 'Press Start 2P', cursive;
+}
 
 #game {
   float: left;
@@ -10,14 +15,15 @@
 }
 
 #hold {
-  max-width: 800px;
+  width: 800px;
   text-align: center;
   margin: 0px auto;
   .controls {
     float: right;
     width: 480px;
     overflow:hidden;
-    margin: 150px 12px;
+    margin: 150px 0px;
+    font-size: 12px;
     dt {
       float:left;
       text-align:right;
@@ -37,7 +43,7 @@
 #viruses {
   position: fixed;
   top: 0px;
-  left: 0px;
+  right: 10px;
   height: 40px;
   width: 40px;
   font-size: 45px;
