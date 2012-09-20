@@ -16,16 +16,16 @@ var PieceDrawer = (function() {
 
   return {
 
-    drawPiece : function(x, y, color, rotation, drawVirus) {
-
+    drawPiece : function(x, y, color, rotation, drawVirus, context) {
       var eyesize = 4;
       var mouthsize = 20;
+      context = typeof context !== 'undefined' ? context : ctx;
 
-      if (ctx) {
+      if (context) {
         if (drawVirus === true) {
           virus_images[color] && ctx.drawImage(virus_images[color], x*block_size, y*block_size);
         } else {
-          pill_images[color+'_'+rotation] && ctx.drawImage(pill_images[color+'_'+rotation], x*block_size, y*block_size);
+          pill_images[color+'_'+rotation] && context.drawImage(pill_images[color+'_'+rotation], x*block_size, y*block_size);
         }
       }
     },

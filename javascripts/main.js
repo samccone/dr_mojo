@@ -11,6 +11,12 @@ if (canvas) {
   canvas.setAttribute('width', board_size[0] * block_size + "px");
   canvas.setAttribute('height', board_size[1] * block_size + "px");
 
+  var holder = document.getElementById('hold');
+  var oracle_canvas = document.createElement('canvas');
+  oracle_canvas.id = 'oracle'
+  holder.appendChild(oracle_canvas);
+  var oracle_ctx = oracle.getContext('2d');
+
   window.onload = function() {
     the_game = new Game();
     the_game.populateViruses(level);

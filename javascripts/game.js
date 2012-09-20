@@ -6,12 +6,18 @@ function Game() {
   this.noInteractions = false;
   this.virusCount = 0;
   this.colors = ["green", "red", "blue"];
+  this.active_pill = new Pill(this.board, this.detector);
+  this.next_pill = new Pill(this.board, this.detector);
   this.setListeners();
 }
 
 Game.prototype.newPill = function() {
   this.noInteractions = false;
-  return this.active_pill = new Pill(this.board, this.detector);
+  this.active_pill = this.next_pill;
+  this.next_pill = new Pill(this.board, this.detector);
+  this.active_pill.draw();
+  this.next_pill.draw(oracle_ctx);
+  return this.active_pill;
 }
 
 Game.prototype.updateVirusCount = function(change) {
