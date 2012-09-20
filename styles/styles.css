@@ -115,3 +115,6 @@ html {
   width: 600px; }
   #shadingText p {
     margin: 12px; }
+
+#instructions {
+  display: none; }
