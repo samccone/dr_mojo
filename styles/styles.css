@@ -98,3 +98,8 @@ html {
 #oracle {
   margin: 15px 250px;
   position: absolute; }
+
+#pause {
+  color: white;
+  text-align: center;
+  margin-top: 250px; }
