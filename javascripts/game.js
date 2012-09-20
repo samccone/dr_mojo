@@ -90,7 +90,7 @@ Game.prototype.pillAction = function(action) {
 
 Game.prototype.togglePause = function() {
   this.paused = !this.paused;
-  Utils.shading(this.paused);
+  Utils.shading(this.paused, 'Pause');
 }
 
 Game.prototype.tick = function() {

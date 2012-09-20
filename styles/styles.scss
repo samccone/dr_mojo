@@ -56,12 +56,6 @@ html {
   position: absolute;
 }
 
-#pause {
-  color: white;
-  text-align: center;
-  margin-top: 250px;
-}
-
 #shadow {
   position: fixed;
   top: 0;
@@ -70,4 +64,14 @@ html {
   height: 100%;
   background: rgba(0, 0, 0, 0.9);
   z-index: 2000;
+}
+
+#shadingText {
+  color: white;
+  text-align: center;
+  margin: 250px;
+  width: 600px;
+  p {
+    margin: 12px;
+  }
 }

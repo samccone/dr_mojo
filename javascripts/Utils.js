@@ -1,16 +1,24 @@
 var Utils = (function() {
   return {
-    shading : function(toggle) {
+    shading : function(toggle, message) {
       if(toggle){
-        var pause = document.createElement('div');
-        pause.setAttribute('id', 'pause');
-        pause.innerHTML = 'Pause';
+        var shadow = document.getElementById('shadow');
+        if(shadow){
+          var shadingText = document.getElementById('shadingText');
+          shadingText.innerHTML = message;
 
-        var shadow = document.createElement('div');
-        shadow.setAttribute('id', 'shadow');
-        shadow.appendChild(pause);
+          shadow.appendChild(shadingText);
+        } else {
+          var shadingText = document.createElement('div');
+          shadingText.setAttribute('id', 'shadingText');
+          shadingText.innerHTML = message;
 
-        document.body.appendChild(shadow);
+          var shadow = document.createElement('div');
+          shadow.setAttribute('id', 'shadow');
+          shadow.appendChild(shadingText);
+
+          document.body.appendChild(shadow);
+        }
       } else {
         var shadow = document.getElementById('shadow');
         shadow.parentNode.removeChild(shadow);
