@@ -1,42 +1,30 @@
 <html>
   <head>
-    <style>
-      #game {
-        margin: 0px auto;
-        display: block;
-      }
-      #instructions {
-        font-family: helveticaNeue;
-        font-size: 11px;
-        color:
-        #1D1D1D;
-        text-transform: uppercase;
-      }
-      #hold {
-        max-width: 800px;
-        text-align: center;
-        margin: 0px auto;
-      }
-      #viruses {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        height: 40px;
-        width: 40px;
-        font-size: 45px;
-        text-align: center;
-      }
-    </style>
+    <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/styles.css"/>
   </head>
   <div id="viruses">
   </div>
   <div id="hold">
-    <canvas id="game" style="border:solid 2px #000"></canvas>
-    <div id="instructions">arrow keys to move ... a and s to rotate</div>
+    <canvas id="game"></canvas>
+
+    <dl class="controls">
+      <dt>a:</dt>
+      <dd>Rotates vitamin capsules to the right (clockwise).</dd>
+
+      <dt>s:</dt>
+      <dd>Rotates vitamin capsules to the left (counter clockwise).</dd>
+
+      <dt>Left & Right:</dt>
+      <dd>Moves vitamin capsules left and right.</dd>
+
+      <dt>Down Arrow:</dt>
+      <dd>Drops vitamin capsule down quickly.</dd>
+
+      <dt>Space:</dt>
+      <dd>Pause</dd>
+    </dl>
   </div>
-  <audio controls>
-    <source src="music/fever.mp3" />
-  </audio>
   <script src="javascripts/PieceDrawer.js"></script>
   <script src="javascripts/underscore.js"></script>
   <script src="javascripts/board.js"></script>
@@ -45,4 +33,5 @@
   <script src="javascripts/virus.js"></script>
   <script src="javascripts/game.js"></script>
   <script src="javascripts/main.js"></script>
+  <script src="javascripts/Utils.js"></script>
 </html>
