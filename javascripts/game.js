@@ -61,6 +61,9 @@ Game.prototype.setListeners = function() {
       case 39:
         _this.pillAction('right');
         break;
+      case 191:
+        _this.toggleInstructions();
+        break;
       }
     }
   });
@@ -90,6 +93,12 @@ Game.prototype.pillAction = function(action) {
 
 Game.prototype.togglePause = function() {
   this.paused = !this.paused;
+  Utils.shading(this.paused, 'Pause');
+}
+
+Game.prototype.toggleInstructions = function(){
+  this.paused = !this.paused;
+  Utils.shading(this.paused, document.getElementById('instructions').innerHTML);
 }
 
 Game.prototype.tick = function() {
