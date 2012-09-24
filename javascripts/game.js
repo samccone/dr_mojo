@@ -1,4 +1,4 @@
-function Game() {
+function Game(lvl, speed) {
   this.board = new Board(board_size[0], board_size[1]);
   this.detector = new CollisionDetector(this.board);
   this.paused = false;
@@ -8,8 +8,9 @@ function Game() {
   this.colors = ["green", "red", "blue"];
   this.active_pill = new Pill(this.board, this.detector);
   this.next_pill = new Pill(this.board, this.detector);
+  this.level = new Level(lvl, speed);
   this.setListeners();
-  this.populateViruses(0);
+  this.populateViruses(this.level.number);
 }
 
 Game.prototype.newPill = function() {
@@ -101,7 +102,7 @@ Game.prototype.tick = function() {
         var _this = this;
         this.clock = window.setInterval(function() {
           _this.tick()
-        }, this.game_speed);
+        }, this.level.velocity());
       }
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
@@ -163,20 +164,19 @@ Game.prototype.dropDangling = function(cb) {
     window.clearInterval(_this.clock);
     _this.clock = undefined;
     var next = _.bind(this.dropDangling, this, cb);
-    setTimeout(next, this.game_speed);
+    setTimeout(next, this.level.velocity());
   } else {
     this.findMatches(cb);
   }
 }
 
-Game.prototype.start = function(speed) {
+Game.prototype.start = function() {
   var _this = this;
   this.done = false;
   this.newPill();
-  this.game_speed = speed;
   this.clock = window.setInterval(function() {
     _this.tick()
-  }, this.game_speed);
+  }, this.level.velocity());
 }
 
 Game.prototype.populateViruses = function(level) {
