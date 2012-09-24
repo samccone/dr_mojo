@@ -9,6 +9,7 @@ function Game() {
   this.active_pill = new Pill(this.board, this.detector);
   this.next_pill = new Pill(this.board, this.detector);
   this.setListeners();
+  this.populateViruses(0);
 }
 
 Game.prototype.newPill = function() {

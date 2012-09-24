@@ -19,7 +19,6 @@ if (canvas) {
 
   window.onload = function() {
     the_game = new Game();
-    the_game.populateViruses(level);
     the_game.start(300);
   }
 }
