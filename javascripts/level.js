@@ -1,9 +1,15 @@
+const SPEED_VEL = {'low': 300, 'med': 200, 'hi': 150};
+const POINTS    = {'low': 100, 'med': 200, 'hi': 300};
+
 function Level(n, s) {
   this.number = n;
   this.speed  = s;
 }
 
 Level.prototype.velocity = function() {
-  var speed_in_number = {'Low': 300, 'Med': 600, 'High': 900};
-  return speed_in_number[this.speed];
+  return SPEED_VEL[this.speed.toLowerCase()];
+}
+
+Level.prototype.virus_score = function(){
+  return POINTS[this.speed.toLowerCase()];
 }

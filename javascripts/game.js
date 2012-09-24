@@ -9,6 +9,8 @@ function Game(lvl, speed) {
   this.active_pill = new Pill(this.board, this.detector);
   this.next_pill = new Pill(this.board, this.detector);
   this.level = new Level(lvl, speed);
+  this.score = 0;
+  this.setScore();
   this.setListeners();
   this.populateViruses(this.level.number);
 }
@@ -138,7 +140,18 @@ Game.prototype.findMatches = function(cb) {
   var cb = _.bind(cb, this);
   var matches = this.board.matches();
   var _this = this;
+
   if (matches.length) {
+    var virus_count = 0;
+    _.each(matches, function(match_set){
+      virus_count = _.filter(match_set, function(coord) {
+        var cell = _this.board.occupied(coord.x, coord.y, 1);
+        return (cell.pill.type === 'Virus');
+      }).length;
+    });
+    this.scoring(virus_count);
+    this.setScore();
+
     _.each(matches, function(match_set) {
       _.each(match_set, function(spot) {
         var deleting = this.occupied(spot.x, spot.y, 1);
@@ -202,4 +215,36 @@ Game.prototype.checkHit = function() {
 
 Game.prototype.setVirusCount = function() {
   document.getElementById("viruses").innerHTML = this.virusCount;
+}
+
+Game.prototype.setScore = function() {
+  document.getElementById("score").innerHTML = this.score;
+}
+
+// ----------------------------------------------------------------------------
+// -------------------------- Dr. Mojo Scoring --------------------------------
+// ----------------------------------------------------------------------------
+// Virus Kills           Low Speed           Medium Speed           High Speed
+//     1                    100                  200                    300
+//     2                    200                  400                    600
+//     3                    400                  800                   1200
+//     4                    800                 1600                   2400
+//     5                   1600                 3200                   4800
+//     6                   3200                 6400                   9600
+
+// Combos mean more points per virus. The scoring adds up, so if you kill three
+// viruses with one Pill Drop on Medium Speed:
+
+//  200 + 400 + 800 = 1400
+
+// If you were to just score three singles instead, you would only get 600
+// points, meaning it pays to set up combos!
+Game.prototype.scoring = function(virus_count) {
+  var sum = 0;
+
+  for(var i=0; i <= virus_count-1; ++i){
+    sum += this.level.virus_score() * Math.pow(2, i);
+  }
+
+  this.score += sum;
 }
