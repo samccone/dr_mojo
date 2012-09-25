@@ -109,6 +109,7 @@ Game.prototype.tick = function() {
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
         alert("game over");
+        this.saveScore();
         this.gameOver();
       } else if (this.virusCount == 0) {
         this.nextLevel();
@@ -208,8 +209,28 @@ Game.prototype.setVirusCount = function() {
   document.getElementById("viruses").innerHTML = this.virusCount;
 }
 
+Game.prototype.saveScore = function() {
+  var gameScore = new GameScore();
+
+  gameScore.save({
+    score: this.score
+  });
+}
+
 Game.prototype.setScore = function() {
-  document.getElementById("score").innerHTML = this.score;
+  var query = new Parse.Query(GameScore);
+
+  $("#score .score").html(this.score);
+
+  query.descending("score").limit(1);
+  query.first({
+    success: function(object) {
+      $("#highScore .score").html(object.attributes.score);
+    },
+    error: function(error) {
+      $("#highScore .score").html('0');
+    }
+  });
 }
 
 // ----------------------------------------------------------------------------
