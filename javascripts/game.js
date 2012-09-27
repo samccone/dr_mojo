@@ -219,15 +219,12 @@ Game.prototype.setVirusCount = function() {
 }
 
 Game.prototype.saveScore = function() {
-  var gameScore = new GameScore();
-
-  gameScore.save({
-    score: this.score
-  });
+  var score = new app.models.Score({score: this.score});
+  score.save();
 }
 
 Game.prototype.setScore = function() {
-  var query = new Parse.Query(GameScore);
+  var query = new Parse.Query(app.models.Score);
 
   $("#score .score").html(this.score);
 
