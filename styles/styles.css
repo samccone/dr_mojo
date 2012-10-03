@@ -118,3 +118,8 @@ html {
 
 #instructions {
   display: none; }
+
+.amount {
+  border: 0;
+  color: #f6931f;
+  font-weight: bold; }

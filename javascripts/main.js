@@ -1,11 +1,23 @@
+
+var params = [], hash;
+var q = document.URL.split('?')[1];
+if(q != undefined){
+  q = q.split('&');
+  for(var i = 0; i < q.length; i++){
+      hash = q[i].split('=');
+      params.push(hash[1]);
+      params[hash[0]] = hash[1];
+  }
+}
+
 var canvas = document.getElementById('game');
 var ctx = canvas && canvas.getContext('2d');
 var colors = ["green", "red", "blue"];
 var block_size = 35;
 var the_game;
 var board_size = [8, 16];
-var level = 0;
-var speed = 'Low';
+var level = params['level'] || 0;
+var speed = params['speed'] || 'Low';
 
 if (canvas) {
   canvas.setAttribute('width', board_size[0] * block_size + "px");
@@ -25,4 +37,4 @@ if (canvas) {
 
 window.app = {
   models: {}
-};
+}
