@@ -2,9 +2,20 @@
   <head>
     <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/styles.css"/>
+    <script src="javascripts/lib/jquery-1.8.2.min.js"></script>
+    <script src="javascripts/lib/underscore.js"></script>
+    <script src="javascripts/lib/backbone-min.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.1.1.min.js"></script>
   </head>
-  <div id="viruses">
+  <div id="highScore">
+    <div class="text"> TOP </div>
+    <div class="score"></div>
   </div>
+  <div id="score">
+    <div class="text"> SCORE </div>
+    <div class="score"></div>
+  </div>
+  <div id="viruses"></div>
   <div id="hold">
     <canvas id="game"></canvas>
 
@@ -38,12 +49,13 @@
     </div>
   </div>
   <script src="javascripts/PieceDrawer.js"></script>
-  <script src="javascripts/underscore.js"></script>
   <script src="javascripts/board.js"></script>
   <script src="javascripts/collisionDetector.js"></script>
   <script src="javascripts/pill.js"></script>
   <script src="javascripts/virus.js"></script>
   <script src="javascripts/game.js"></script>
+  <script src="javascripts/level.js"></script>
   <script src="javascripts/main.js"></script>
   <script src="javascripts/Utils.js"></script>
+  <script src="javascripts/score.js"></script>
 </html>

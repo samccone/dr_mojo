@@ -1,4 +1,4 @@
-function Game() {
+function Game(lvl, speed) {
   this.board = new Board(board_size[0], board_size[1]);
   this.detector = new CollisionDetector(this.board);
   this.paused = false;
@@ -8,7 +8,11 @@ function Game() {
   this.colors = ["green", "red", "blue"];
   this.active_pill = new Pill(this.board, this.detector);
   this.next_pill = new Pill(this.board, this.detector);
+  this.level = new Level(lvl, speed);
+  this.score = 0;
+  this.setScore();
   this.setListeners();
+  this.populateViruses(this.level.number);
 }
 
 Game.prototype.newPill = function() {
@@ -109,11 +113,12 @@ Game.prototype.tick = function() {
         var _this = this;
         this.clock = window.setInterval(function() {
           _this.tick()
-        }, this.game_speed);
+        }, this.level.velocity());
       }
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
         alert("game over");
+        this.saveScore();
         this.gameOver();
       } else if (this.virusCount == 0) {
         this.nextLevel();
@@ -136,7 +141,18 @@ Game.prototype.findMatches = function(cb) {
   var cb = _.bind(cb, this);
   var matches = this.board.matches();
   var _this = this;
+
   if (matches.length) {
+    var virus_count = 0;
+    _.each(matches, function(match_set){
+      virus_count = _.filter(match_set, function(coord) {
+        var cell = _this.board.occupied(coord.x, coord.y, 1);
+        return (cell.pill.type === 'Virus');
+      }).length;
+    });
+    this.scoring(virus_count);
+    this.setScore();
+
     _.each(matches, function(match_set) {
       _.each(match_set, function(spot) {
         var deleting = this.occupied(spot.x, spot.y, 1);
@@ -171,20 +187,19 @@ Game.prototype.dropDangling = function(cb) {
     window.clearInterval(_this.clock);
     _this.clock = undefined;
     var next = _.bind(this.dropDangling, this, cb);
-    setTimeout(next, this.game_speed);
+    setTimeout(next, this.level.velocity());
   } else {
     this.findMatches(cb);
   }
 }
 
-Game.prototype.start = function(speed) {
+Game.prototype.start = function() {
   var _this = this;
   this.done = false;
   this.newPill();
-  this.game_speed = speed;
   this.clock = window.setInterval(function() {
     _this.tick()
-  }, this.game_speed);
+  }, this.level.velocity());
 }
 
 Game.prototype.populateViruses = function(level) {
@@ -201,4 +216,53 @@ Game.prototype.checkHit = function() {
 
 Game.prototype.setVirusCount = function() {
   document.getElementById("viruses").innerHTML = this.virusCount;
+}
+
+Game.prototype.saveScore = function() {
+  var score = new app.models.Score({score: this.score});
+  score.save();
+}
+
+Game.prototype.setScore = function() {
+  var query = new Parse.Query(app.models.Score);
+
+  $("#score .score").html(this.score);
+
+  query.descending("score").limit(1);
+  query.first({
+    success: function(object) {
+      $("#highScore .score").html(object.attributes.score);
+    },
+    error: function(error) {
+      $("#highScore .score").html('0');
+    }
+  });
+}
+
+// ----------------------------------------------------------------------------
+// -------------------------- Dr. Mojo Scoring --------------------------------
+// ----------------------------------------------------------------------------
+// Virus Kills           Low Speed           Medium Speed           High Speed
+//     1                    100                  200                    300
+//     2                    200                  400                    600
+//     3                    400                  800                   1200
+//     4                    800                 1600                   2400
+//     5                   1600                 3200                   4800
+//     6                   3200                 6400                   9600
+
+// Combos mean more points per virus. The scoring adds up, so if you kill three
+// viruses with one Pill Drop on Medium Speed:
+
+//  200 + 400 + 800 = 1400
+
+// If you were to just score three singles instead, you would only get 600
+// points, meaning it pays to set up combos!
+Game.prototype.scoring = function(virus_count) {
+  var sum = 0;
+
+  for(var i=0; i <= virus_count-1; ++i){
+    sum += this.level.virus_score() * Math.pow(2, i);
+  }
+
+  this.score += sum;
 }
