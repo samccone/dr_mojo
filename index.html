@@ -8,21 +8,51 @@
     <script type="text/javascript" src="javascripts/setup.js"></script>
     <link type="text/css" href="styles/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
   </head>
-  <body>
-    1 PLAYER GAME
+  <body class="grid">
 
-    <p>
-      VIRUS LEVEL
-      <div id="level_amount" class="amount">0</div>
-    </p>
-    <div id="level_slider"></div>
+    <div class="top_section"> 1 PLAYER GAME </div>
 
-    <p>SPEED</p>
-    <div id="speed_amount" class="amount">LOW</div>
-    <div id="speed_slider"></div>
+    <div class="pane">
+      <div class="option">
+        <div class="title"> VIRUS LEVEL </div>
 
-    <p>MUSIC TYPE</p>
-    <div id="music_amount" class="amount">FEWER</div>
-    <div id="music_slider"></div>
+        <div class="players"> 1P </div>
+
+        <div class="sliders">
+          <div id="level_slider"></div>
+        </div>
+
+        <div id="level_amount" class="levels amount level-number"> 0 </div>
+      </div>
+
+
+      <div class="option">
+        <div class="title"> SPEED </div>
+
+        <div class="players"> 1P </div>
+
+        <div class="sliders">
+          <div id="speed_slider"></div>
+        </div>
+
+        <div id="speed_amount" class="speeds amount"> LOW </div>
+      </div>
+
+
+      <div class="option">
+        <div class="title"> MUSIC TYPE </div>
+        <div class="players">&nbsp;</div>
+
+        <div class="sliders">
+          <div id="music_slider"></div>
+        </div>
+
+        <div id="music_amount" class="musics amount">FEWER</div>
+      </div>
+
+      <div class="option">
+        <a href="#" id="play">Play</a>
+      </div>
+    </div>
   </body>
 </html>

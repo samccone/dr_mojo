@@ -41,6 +41,11 @@ $(function(){
       $( "#music_amount" ).html( musics[ui.value] );
     }
   });
+
+  $("#play").bind('click', function(){
+    start();
+    return false;
+  });
 });
 
 window.addEventListener('keydown', function(e) {
