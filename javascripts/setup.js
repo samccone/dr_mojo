@@ -10,7 +10,7 @@ function Setup() {
 function start(){
   var settings = new Setup();
 
-  window.location.href = "./dr_mojo.html?" + jQuery.param(settings);
+  window.location.href = "./src/play_game.html?" + jQuery.param(settings);
 };
 
 $(function(){
