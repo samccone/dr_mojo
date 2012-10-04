@@ -12,43 +12,68 @@ html {
   border: solid 7px #ACACAC;
   @include border-radius(4px);
   @include box-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
+  background: black;
 }
 
 #hold {
   width: 800px;
   text-align: center;
   margin: 0px auto;
-  .controls {
-    float: right;
-    width: 480px;
-    height: 300px;
-    overflow:hidden;
-    margin: 150px 0px;
-    font-size: 12px;
-    dt {
-      float:left;
-      text-align:right;
-      width:100px;
-      margin: 15px auto;
-      clear: both;
-    }
-    dd{
-      float:right;
-      text-align:left;
-      width:350px;
-      margin: 15px auto;
-    }
+}
+
+.scores{
+  width: 15%;
+  background-color: #B8DBFF;
+  border-top: 3px solid #E6E693;
+  border-right: 5px solid #E6E693;
+  border-left: 5px solid #E6E693;
+  border-bottom: 3px solid #E6E693;
+  float: left;
+  margin-right: 50px;
+  #highScore{
+    margin: 10px 15px;
+    padding-top: 5px;
+  }
+  #score{
+    margin: 5px 15px;
+    padding-top: 5px;
   }
 }
 
-#viruses {
-  position: fixed;
-  top: 0px;
-  right: 10px;
-  height: 40px;
-  width: 40px;
-  font-size: 45px;
-  text-align: center;
+.info{
+  width: 12%;
+  background-color: #B8DBFF;
+  border-top: 3px solid #E6E693;
+  border-right: 5px solid #E6E693;
+  border-left: 5px solid #E6E693;
+  border-bottom: 3px solid #E6E693;
+  float: right;
+  margin-top: 200px;
+  margin-right: 250px;
+  .level{
+    margin: 10px 15px;
+    padding-top: 5px;
+  }
+  #level_count{
+    padding-right: 10px;
+    float: right;
+  }
+  .speed{
+    margin: 15px;
+    padding-top: 15px;
+  }
+  #speed_count{
+    float: right;
+    padding-right: 10px;
+  }
+  .virus{
+    margin: 30px 15px 0px 15px;
+    padding-top: 15px;
+  }
+  #viruses {
+    padding-right: 10px;
+    float: right;
+  }
 }
 
 #oracle {
@@ -69,13 +94,183 @@ html {
 #shadingText {
   color: white;
   text-align: center;
-  margin: 250px;
-  width: 600px;
+  margin: 200px;
+  width: 50%;
   p {
     margin: 12px;
+  }
+  dl {
+    max-width: 800px;
+    overflow: hidden;
+  }
+  dt, dd {
+      margin-top: 20px;
+  }
+  dt {
+      clear: both;
+      float: left;
+      width: 15px;
+  }
+  dd {
+      float: right;
+      margin-left: 10px;
+      width: 450px;
   }
 }
 
 #instructions{
   display: none;
+}
+
+.controls{
+  display: none;
+  float: right;
+  width: 480px;
+  height: 300px;
+  overflow:hidden;
+  margin: 150px 0px;
+  font-size: 12px;
+  dt {
+    float:left;
+    text-align:right;
+    width:100px;
+    margin: 15px auto;
+    clear: both;
+  }
+  dd{
+    float:right;
+    text-align:left;
+    width:350px;
+    margin: 15px auto;
+  }
+}
+
+.helps{
+  display:block;
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:150px;
+  background:#eee;
+  border:1px solid #ddd;
+}
+
+.amount{
+  border:0;
+  color:#f6931f;
+  font-weight:bold;
+  margin: 3px;
+}
+
+.level-number{
+  float: right;
+  border: 3px solid #0f0;
+  border-radius: 5px;
+  -moz-border-radius:5px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+}
+
+.grid{
+  background-color: #febf01;
+  background-size:60px 60px;
+  background-position:0 0, 30px 30px;
+  padding: 50px;
+
+  background-image: -webkit-linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, #ff0084 75%, #ff0084),
+  -webkit-linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, #ff0084 75%, #ff0084);
+  background-image: -moz-linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -moz-linear-gradient(-45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            linear-gradient(-45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: -o-linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -o-linear-gradient(-45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -ms-linear-gradient(-45deg, #ff0084 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+}
+
+.grid-game{
+  background-color: black;
+  background-size: 60px 60px;
+  background-position:0 0, 30px 30px;
+  padding: 50px;
+
+  background-image: -webkit-linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, #707676 75%, #707676),
+  -webkit-linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, #707676 75%, #707676);
+  background-image: -moz-linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -moz-linear-gradient(-45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            linear-gradient(-45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: -o-linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -o-linear-gradient(-45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)),
+            -ms-linear-gradient(-45deg, #707676 25%, rgba(0,0,0,0) 25%, rgba(0,0,0,0)); 
+}
+
+.top_section{
+  top: 0px;
+  height: 16px;
+  width: 250px;
+  border-radius: 10px;
+  color: red;
+  margin: 0px auto;
+  background: black;
+  padding: 15px;
+  margin-bottom: -6px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  border-top: 3px solid brown;
+  border-right: 3px solid brown;
+  border-left: 3px solid brown;
+  border-bottom: 3px solid black;
+}
+
+.pane{
+  width: 55%;
+  background: black;
+  padding: 5%;
+  color: #FFF;
+  margin: 0px auto;
+  border-radius: 10px;
+  min-width: 400px;
+  position: relative;
+  border: 3px solid brown;
+  z-index: 1;
+
+  .option{
+    margin: 60px 40px;
+    .title{
+      clear: both;
+      margin: 12px 0px;
+    }
+    .players{
+      float: left;
+      width: 10%;
+    }
+    .sliders{
+      float: left;
+      width: 60%;
+    }
+    .levels{
+      float: left;
+      width: 10%;
+      margin: -30px 25px;
+    }
+    .speeds{
+      float: left;
+      width: 10%;
+      margin-left: 25px;
+    }
+    .musics{
+      float: left;
+      width: 10%;
+      margin-left: 25px;
+    }
+    #play{
+      float: right;
+      margin-right: 10px;
+    }
+  }
 }
