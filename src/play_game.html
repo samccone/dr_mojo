@@ -7,37 +7,68 @@
     <script src="../javascripts/lib/backbone-min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.1.1.min.js"></script>
   </head>
-  <div id="highScore">
-    <div class="text"> TOP </div>
-    <div class="score"></div>
-  </div>
-  <div id="score">
-    <div class="text"> SCORE </div>
-    <div class="score"></div>
-  </div>
-  <div id="viruses"></div>
-  <div id="hold">
-    <canvas id="game"></canvas>
+  <body class="grid-game">
+    <div class="scores">
+      <div id="highScore">
+        <div class="text"> TOP </div>
+        <div class="score"></div>
+      </div>
+      <div id="score">
+        <div class="text"> SCORE </div>
+        <div class="score"></div>
+      </div>
+    </div>
 
-    <dl class="controls">
-      <dt>a:</dt>
-      <dd>Rotates vitamin capsules to the right (clockwise).</dd>
+    <div id="hold">
+      <canvas id="game"></canvas>
+    </div>
 
-      <dt>s:</dt>
-      <dd>Rotates vitamin capsules to the left (counter clockwise).</dd>
+    <div class="info">
+      <div class="level">LEVEL</div>
+      <div id="level_count"></div>
+      <div class="speed">SPEED</div>
+      <div id="speed_count"></div>
+      <div class="virus">VIRUS</div>
+      <div id="viruses"></div>
+    </div>
 
-      <dt>Left & Right:</dt>
-      <dd>Moves vitamin capsules left and right.</dd>
+    <div class="helps">
+      h - help
+    </div>
 
-      <dt>Down Arrow:</dt>
-      <dd>Drops vitamin capsule down quickly.</dd>
+    <script src="../javascripts/PieceDrawer.js"></script>
+    <script src="../javascripts/board.js"></script>
+    <script src="../javascripts/collisionDetector.js"></script>
+    <script src="../javascripts/pill.js"></script>
+    <script src="../javascripts/virus.js"></script>
+    <script src="../javascripts/game.js"></script>
+    <script src="../javascripts/level.js"></script>
+    <script src="../javascripts/main.js"></script>
+    <script src="../javascripts/Utils.js"></script>
+    <script src="../javascripts/score.js"></script>
 
-      <dt>Space:</dt>
-      <dd>Pause</dd>
+    <div class="controls">
+      <dl>
+        <dt>a:</dt>
+        <dd>Rotates vitamin capsules to the right (clockwise).</dd>
 
-      <dt>?:</dt>
-      <dd>Instructions</dd>
-    </dl>
+        <dt>s:</dt>
+        <dd>Rotates vitamin capsules to the left (counter clockwise).</dd>
+
+        <dt>Left & Right:</dt>
+        <dd>Moves vitamin capsules left and right.</dd>
+
+        <dt>Down Arrow:</dt>
+        <dd>Drops vitamin capsule down quickly.</dd>
+
+        <dt>Space:</dt>
+        <dd>Pause</dd>
+
+        <dt>?:</dt>
+        <dd>Instructions</dd>
+      </dl>
+    </div>
+
     <div id="instructions">
       <p>Goal Of The Game</p>
 
@@ -47,15 +78,5 @@
 
       <p>As the vitamin capsules drop use the Z or X keys to rotate them. Try to match up four of the same color in a vertical or horizontal row. If you do this, all four will disappear. With a little practice you'll be able to get rid of all the viruses!"</p>
     </div>
-  </div>
-  <script src="../javascripts/PieceDrawer.js"></script>
-  <script src="../javascripts/board.js"></script>
-  <script src="../javascripts/collisionDetector.js"></script>
-  <script src="../javascripts/pill.js"></script>
-  <script src="../javascripts/virus.js"></script>
-  <script src="../javascripts/game.js"></script>
-  <script src="../javascripts/level.js"></script>
-  <script src="../javascripts/main.js"></script>
-  <script src="../javascripts/Utils.js"></script>
-  <script src="../javascripts/score.js"></script>
+  </body>
 </html>
