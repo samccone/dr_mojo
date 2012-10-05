@@ -7,34 +7,94 @@
     <script src="../javascripts/lib/backbone-min.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.1.1.min.js"></script>
   </head>
-  <body class="grid-game">
-    <div class="scores">
-      <div id="highScore">
-        <div class="text"> TOP </div>
-        <div class="score"></div>
-      </div>
-      <div id="score">
-        <div class="text"> SCORE </div>
-        <div class="score"></div>
-      </div>
+  <body>
+<div id="columnOne"> <!--Begin Column One-->
+    <div id="clipboardLeft">
+        <p class="clipboardTop">
+            <img src="../images/clipboard_top.png">
+        </p>
+        <div id="highScore">
+          <div class="text"> TOP </div>
+          <div class="score"></div>
+        </div>
+        <div id="score">
+          <div class="text"> SCORE </div>
+          <div class="score"></div>
+        </div>
     </div>
+    <div class="clipboardBottom"></div>
+    <div id="dancingViruses">
+      <img src="../images/magnifying_glass.png">
+      <div id="magnifyingGlass">
+          <img id="animatedViruses" src="../images/animated_viruses.gif">
+        </div>
+    </div>
+</div>
 
-    <div id="hold">
+<div id="columnTwo"> <!--Begin Column Two-->
+  <div id="hold">
+      <div id="gameTop"></div>
       <canvas id="game"></canvas>
     </div>
+</div>
 
-    <div class="info">
-      <div class="level">LEVEL</div>
-      <div id="level_count"></div>
-      <div class="speed">SPEED</div>
-      <div id="speed_count"></div>
-      <div class="virus">VIRUS</div>
-      <div id="viruses"></div>
-    </div>
+<div id="columnThree"> <!--Begin Column Three-->
+  <div id="HUD">
+      <p>
+        <img src="../images/mojo_logo.png">
+        </p>
+  </div>
+  <div id="clipboardRight">
+        <p class="clipboardTop">
+            <img src="../images/clipboard_top.png">
+        </p>
 
-    <div class="helps">
-      h - help
-    </div>
+        <div class="info">   
+          <div class="level">LEVEL</div>
+          <div id="level_count"></div>
+          <div class="speed">SPEED</div>
+          <div id="speed_count"></div>
+          <div class="virus">VIRUS</div>
+          <div id="viruses"></div>
+        </div>
+  </div>
+  <div class="clipboardBottom"></div>
+</div>
+
+<div class="controls"> 
+  <dl>
+    <dt>a:</dt>
+    <dd>Rotates vitamin capsules to the right (clockwise).</dd>
+
+    <dt>s:</dt>
+    <dd>Rotates vitamin capsules to the left (counter clockwise).</dd>
+
+    <dt>Left & Right:</dt>
+    <dd>Moves vitamin capsules left and right.</dd>
+
+    <dt>Down Arrow:</dt>
+    <dd>Drops vitamin capsule down quickly.</dd>
+
+    <dt>Space:</dt>
+    <dd>Pauses the Game.</dd>
+
+    <dt>?:</dt>
+    <dd>Display gameplay instructions.</dd>
+  </dl>
+</div>
+<div id="instructions">
+  <p>Goal Of The Game</p>
+
+  <p>Destroy the viruses by using the right vitamin capsules. When all of the viruses in the bottle are destroyed, you progress to the next stage. If the bottle gets filled all the way to the top, the game is over.</p>
+
+  <p>How To Eliminate Viruses</p>
+
+  <p>As the vitamin capsules drop use the Z or X keys to rotate them. Try to match up four of the same color in a vertical or horizontal row. If you do this, all four will disappear. With a little practice you'll be able to get rid of all the viruses!"</p>
+</div>
+
+  <div class="helps">
+    h - help
+  </div>
 
     <script src="../javascripts/PieceDrawer.js"></script>
     <script src="../javascripts/board.js"></script>
@@ -46,37 +106,5 @@
     <script src="../javascripts/main.js"></script>
     <script src="../javascripts/Utils.js"></script>
     <script src="../javascripts/score.js"></script>
-
-    <div class="controls">
-      <dl>
-        <dt>a:</dt>
-        <dd>Rotates vitamin capsules to the right (clockwise).</dd>
-
-        <dt>s:</dt>
-        <dd>Rotates vitamin capsules to the left (counter clockwise).</dd>
-
-        <dt>Left & Right:</dt>
-        <dd>Moves vitamin capsules left and right.</dd>
-
-        <dt>Down Arrow:</dt>
-        <dd>Drops vitamin capsule down quickly.</dd>
-
-        <dt>Space:</dt>
-        <dd>Pause</dd>
-
-        <dt>?:</dt>
-        <dd>Instructions</dd>
-      </dl>
-    </div>
-
-    <div id="instructions">
-      <p>Goal Of The Game</p>
-
-      <p>Destroy the viruses by using the right vitamin capsules. When all of the viruses in the bottle are destroyed, you progress to the next stage. If the bottle gets filled all the way to the top, the game is over.</p>
-
-      <p>How To Eliminate Viruses</p>
-
-      <p>As the vitamin capsules drop use the Z or X keys to rotate them. Try to match up four of the same color in a vertical or horizontal row. If you do this, all four will disappear. With a little practice you'll be able to get rid of all the viruses!"</p>
-    </div>
   </body>
 </html>

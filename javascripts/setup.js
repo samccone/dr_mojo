@@ -21,6 +21,9 @@ $(function(){
     step: 1,
     slide: function( event, ui ) {
       $( "#level_amount" ).html( ui.value );
+      $( "#level_title").addClass('border');
+      $( "#music_title").removeClass('border');
+      $( "#speed_title").removeClass('border');
     }
   });
   
@@ -29,7 +32,9 @@ $(function(){
     max: speeds.length - 1,
     step: 1,
     slide: function( event, ui ) {
-      $( "#speed_amount" ).html( speeds[ui.value] );
+      $( "#speed_title").addClass('border');
+      $( "#level_title").removeClass('border');
+      $( "#music_title").removeClass('border');
     }
   });
 
@@ -38,7 +43,9 @@ $(function(){
     max: musics.length - 1,
     step: 1,
     slide: function( event, ui ) {
-      $( "#music_amount" ).html( musics[ui.value] );
+      $( "#music_title").addClass('border');
+      $( "#level_title").removeClass('border');
+      $( "#speed_title").removeClass('border');
     }
   });
 
