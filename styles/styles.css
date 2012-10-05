@@ -17,21 +17,14 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline; }
-html {	
-  background-color: #4229bd;
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 30px;
-  background-image: -webkit-linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, black 75%, black), -webkit-linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, black 75%, black);
-  background-image: -moz-linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0)), -moz-linear-gradient(-45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0));
-  background-image: linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0)), linear-gradient(-45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0)), -o-linear-gradient(-45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0)), -ms-linear-gradient(-45deg, black 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0));
-}
+
+html {
+  background-image: url("../images/bg.png"); }
+
 body {
   line-height: 1;
   max-width: 100%;
-  overflow: hidden;
-  }
+  overflow: hidden; }
 
 ol, ul {
   list-style: none; }
@@ -47,9 +40,10 @@ caption, th, td {
 
 q, blockquote {
   quotes: none; }
-  q:before, q:after, blockquote:before, blockquote:after {
-    content: "";
-    content: none; }
+
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
 
 a img {
   border: none; }
@@ -74,223 +68,216 @@ html {
   z-index: 2000; }
 
 #shadingText {
-color: white;
-text-align: center;
-margin-top: 200px;
-width: 100%;
-}
+  color: white;
+  text-align: center;
+  margin-top: 200px;
+  width: 100%; }
+
+#shadingText {
+  width: 640px;
+  height: 300px;
+  margin: 150px auto;
+  font-size: 16px; }
   #shadingText p {
     margin: 30px; }
+  #shadingText dt {
+    float: left;
+    text-align: right;
+    width: 100px;
+    margin: 15px auto;
+    clear: both; }
+  #shadingText dd {
+    float: right;
+    text-align: left;
+    width: 450px;
+    margin: 15px auto; }
 
 #instructions {
   display: none; }
 
-/**//**//**//**//**//**//**//**/
-/*  Begin Eli's New Styling   */
-/**//**//**//**//**//**//**//**/
+.controls {
+  display: none;
+  width: 640px;
+  height: 300px;
+  margin: 150px 0px;
+  font-size: 12px; }
 
+.helps {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  background: #eee;
+  border: 1px solid #ddd; }
+
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/*  Begin Eli's New Styling   */
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
 #columnOne, #columnTwo, #columnThree {
-width: 33.3%;
-display: inline;
-height: 100%;
-float: left;
-}
+  width: 33.3%;
+  display: inline;
+  height: 100%;
+  float: left; }
 
 .clipboardTop {
-height: 80px;
-margin: -40px auto 0 auto;
-text-align: center;
-}
+  height: 80px;
+  margin: -45px auto 0 auto;
+  text-align: center; }
 
 .clipboardTop img {
-width: 50%;
-max-width: 256px;
-}
+  width: 50%;
+  max-width: 256px; }
 
-#clipboardLeft {	
-background-color: #BDBDFF;
-width: 80%;
-border-top: solid 10px #FFBD00;
-border-bottom: solid 10px #FFBD00;
-border-left: solid 20px #FFBD00;
-border-right: solid 20px #FFBD00;
-margin: 45px auto 0 auto;
-border-radius: 20px;
-font-size: 1.5em;
-box-shadow: 0 0 0 3px black;
-}
+#clipboardLeft {
+  background-color: #BDBDFF;
+  width: 80%;
+  border-top: solid 10px #FFBD00;
+  border-bottom: solid 10px #FFBD00;
+  border-left: solid 20px #FFBD00;
+  border-right: solid 20px #FFBD00;
+  margin: 60px auto 0 auto;
+  border-radius: 20px;
+  font-size: 1.5em;
+  box-shadow: 0 0 0 3px black; }
 
 #highscore {
-border: 2px solid black;
-border-bottom: none;
-padding: 30px 15px 10px 15px;
-margin-top: -40px;
-}
+  border: 2px solid black;
+  border-bottom: none;
+  padding: 30px 15px 10px 15px;
+  margin-top: -35px; }
 
 #score {
-border: 2px solid black;
-border-top: none;
-padding: 10px 15px 20px 15px;
-}
+  border: 2px solid black;
+  border-top: none;
+  padding: 10px 15px 20px 15px; }
 
 .score {
-padding-top: 5px;
-text-align: right;
-}
+  padding-top: 5px;
+  text-align: right; }
 
 .clipboardBottom {
-background-color: #FFBD00;
-box-shadow: 0 0 0 3px black;
-border-radius: 20px;
-height: 50px;
-width: 89%;
-margin: -45px auto 0 auto;
-z-index: -10;
-position: relative;
-}
+  background-color: #FFBD00;
+  box-shadow: 0 0 0 3px black;
+  border-radius: 20px;
+  height: 50px;
+  width: 89%;
+  margin: -45px auto 0 auto;
+  z-index: -10;
+  position: relative; }
 
 #dancingViruses {
-width: 92%;
-margin: 85px auto;
-}
+  width: 86%;
+  margin: 50px auto; }
 
 #dancingViruses img {
-height: auto;
-position: absolute;
-width: 30.6%;
-z-index: -1;
-}
+  height: auto;
+  position: absolute;
+  width: 26.5%;
+  z-index: -1; }
 
 #magnifyingGlass {
-padding-left: 11.5%;
-padding-top: 5.3%;
-}
+  padding-left: 8.3%;
+  padding-top: 2.4%; }
 
 @-webkit-keyframes rotate {
   from {
-	transform:rotate(0deg);
-	-ms-transform:rotate(0deg);
-	-moz-transform:rotate(0deg);
-	-webkit-transform:rotate(0deg);
-	-o-transform:rotate(0deg);
-  }
-  to { 
-	transform:rotate(360deg);
-	-ms-transform:rotate(360deg);
-	-moz-transform:rotate(360deg);
-	-webkit-transform:rotate(360deg);
-	-o-transform:rotate(360deg);
-  }
-}
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg); } }
 
 #animatedViruses {
-width: 25.4% !important;
-animation-name: rotate;
-animation-duration: 60s;
-animation-iteration-count: infinite;
-animation-timing-function: linear;
--webkit-animation-name: rotate;
--webkit-animation-duration: 60s;
--webkit-animation-iteration-count: infinite;
--webkit-animation-timing-function: linear;
-}
+  width: 23.5% !important;
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 60s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear; }
 
 #game {
-margin: 0 auto;
-width: 70%;
-border: 20px solid #00efde;
-border-radius: 20px;
-background-color: black;
-border-image: url(../images/game_border.png) 20 20 20 20 round round;
--moz-border-image: url(../images/game_border.png) 20 20 20 20 round round;
--webkit-border-image: url(../images/game_border.png) 20 20 20 20 round round;
--o-border-image: url(../images/game_border.png) 20 20 20 20 round round;
--ms-border-image: url(../images/game_border.png) 20 20 20 20 round round;
-
-/* Safari Game Canvas Bug Fix */
-	background-image: url('../images/game_border.png');
-	background-size: 99999999999999999px;
-	background-position: center;
-}
+  margin: 0 auto;
+  width: 60%;
+  border: 20px solid #00efde;
+  border-radius: 20px;
+  background-color: black;
+  border-image: url(../images/game_border.png) 20 20 20 20 round round;
+  /* Safari Game Canvas Bug Fix */
+  background-image: url("../images/game_border.png");
+  background-size: 99999999999999999px;
+  background-position: center; }
 
 #gameTop {
-background-image: url('../images/game_top.png');
-background-position: center;
-background-repeat: no-repeat;
-height: 100px;
-width: 100%;
-margin: 60px auto -22px auto;
-position: relative;
-}
+  background-image: url("../images/game_top.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 100%;
+  margin: 60px auto -22px auto;
+  position: relative; }
 
 #clipboardRight {
-background-color: #BDBDFF;
-width: 80%;
-border-top: solid 10px #FFBD00;
-border-bottom: solid 10px #FFBD00;
-border-left: solid 20px #FFBD00;
-border-right: solid 20px #FFBD00;
-margin: 0 auto;
-border-radius: 20px;
-font-size: 0.5em;
-box-shadow: 0 0 0 3px black;
-}
-
-.controls {
-padding: 10px;
-border: 2px solid black;
-margin-top: -40px;
-}
-
-.controls dt {
-padding-top: 15px;
-font-weight: bold;
-}
-
-.controls dd {
-padding-top: 5px;
-line-height: 1.5em;
-}
+  background-color: #BDBDFF;
+  width: 80%;
+  border-top: solid 10px #FFBD00;
+  border-bottom: solid 10px #FFBD00;
+  border-left: solid 20px #FFBD00;
+  border-right: solid 20px #FFBD00;
+  margin: 0 auto;
+  border-radius: 20px;
+  font-size: 0.5em;
+  box-shadow: 0 0 0 3px black; }
+  #clipboardRight .info {
+    font-size: 2.5em; }
+  #clipboardRight #level_count {
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right; }
+  #clipboardRight #speed_count {
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right; }
+  #clipboardRight #viruses {
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right; }
 
 #HUD {
-border-radius: 20px;
-background-color: black;
-border: 2px solid #FFBD00;
-width: 90%;
-margin: 20px auto 75px auto;
-min-height: 160px;
-}
+  border-radius: 20px;
+  background-color: black;
+  border: 2px solid #FFBD00;
+  width: 90%;
+  margin: 40px auto 75px auto;
+  min-height: 175px; }
 
 #HUD p {
-text-align: center;
-padding: 15px 0 12px 0;
-border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-#viruses {
-position: fixed;
-top: 110px;
-right: 4%;
-font-size: 1.5em;
-text-align: right;
-color: white;
-}
-
-#viruses:before {
-content: 'Viruses:';
-color: white;
-text-align: left;
-}
+  text-align: center;
+  padding: 15px 0 12px 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
 
 #oracle {
-position: fixed;
-right: 4%;
-margin: -5px -125px 0 0;
-}
+  position: fixed;
+  right: 4%;
+  margin: 25px -125px 0 0; }
 
+/* 
 #viruses:after {
 content: 'Up Next:';
 color: white;
 text-align: right;
 padding-left: 40px;
 }
+*/

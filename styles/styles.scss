@@ -72,11 +72,49 @@ text-align: center;
 margin-top: 200px;
 width: 100%;
 }
-  #shadingText p {
-    margin: 30px; }
+
+#shadingText{
+  width: 640px;
+  height: 300px;
+  margin: 150px auto;
+  font-size: 16px;
+  p{ margin: 30px; }
+  dt{
+    float:left;
+    text-align:right;
+    width: 100px;
+    margin: 15px auto;
+    clear: both;
+  }
+  dd{
+    float:right;
+    text-align:left;
+    width: 450px;
+    margin: 15px auto;
+  } 
+}
 
 #instructions {
-  display: none; }
+  display: none;
+}
+
+.controls{
+  display: none;
+  width: 640px;
+  height: 300px;
+  margin: 150px 0px;
+  font-size: 12px;
+}
+
+.helps{
+  display:block;
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:150px;
+  background:#eee;
+  border:1px solid #ddd;
+}
 
 /**//**//**//**//**//**//**//**/
 /*  Begin Eli's New Styling   */
@@ -201,33 +239,36 @@ position: relative;
 }
 
 #clipboardRight {
-background-color: #BDBDFF;
-width: 80%;
-border-top: solid 10px #FFBD00;
-border-bottom: solid 10px #FFBD00;
-border-left: solid 20px #FFBD00;
-border-right: solid 20px #FFBD00;
-margin: 0 auto;
-border-radius: 20px;
-font-size: 0.5em;
-box-shadow: 0 0 0 3px black;
+  background-color: #BDBDFF;
+  width: 80%;
+  border-top: solid 10px #FFBD00;
+  border-bottom: solid 10px #FFBD00;
+  border-left: solid 20px #FFBD00;
+  border-right: solid 20px #FFBD00;
+  margin: 0 auto;
+  border-radius: 20px;
+  font-size: 0.5em;
+  box-shadow: 0 0 0 3px black;
+  .info{
+    font-size: 2.5em;
+  }
+  #level_count{
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right;
+  }
+  #speed_count{
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right;
+  }
+  #viruses{
+    margin-top: 10px;
+    padding-right: 15px 50px;
+    text-align: right;
+  }
 }
 
-.controls {
-padding: 20px 10px;
-border: 2px solid black;
-margin-top: -35px;
-}
-
-.controls dt {
-padding-top: 15px;
-font-weight: bold;
-}
-
-.controls dd {
-padding-top: 5px;
-line-height: 1.5em;
-}
 
 #HUD {
 border-radius: 20px;
@@ -244,30 +285,17 @@ padding: 15px 0 12px 0;
 border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-#viruses {
-position: fixed;
-top: 130px;
-right: 4%;
-font-size: 2em;
-text-align: right;
-color: white;
-}
-
-#viruses:before {
-content: 'Viruses:';
-color: white;
-text-align: left;
-}
-
 #oracle {
 position: fixed;
 right: 4%;
 margin: 25px -125px 0 0;
 }
 
+/* 
 #viruses:after {
 content: 'Up Next:';
 color: white;
 text-align: right;
 padding-left: 40px;
 }
+*/
