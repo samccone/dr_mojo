@@ -4,14 +4,14 @@ var PieceDrawer = (function() {
   ['red', 'green', 'blue'].map(function(color) {
     ['left', 'top', 'right', 'bottom'].map(function(dir, index) {
       pill_images[color+'_'+index] = new Image();
-      pill_images[color+'_'+index].src = '../images/'+color+'_'+dir+'.png';
+      pill_images[color+'_'+index].src = 'images/'+color+'_'+dir+'.png';
     });
   });
 
   virus_images = {};
   ['red', 'green', 'blue'].map(function(color) {
     virus_images[color] = new Image();
-    virus_images[color].src = '../images/virus_'+color+'.png'
+    virus_images[color].src = 'images/virus_'+color+'.png'
   });
 
   return {
