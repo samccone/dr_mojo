@@ -1,7 +1,8 @@
+var jh = 0;
 function Virus(game, level, virusNum) {
   this.type       = 'Virus';
   this.virusNum   = virusNum;
-  this.game		  = game;
+  this.game		    = game;
   this.board      = game.board;
   this.detector   = game.detector;
   this.level      = level;
@@ -38,16 +39,16 @@ Virus.prototype.setPosition = function() {
   var randX = Math.floor(Math.random() * this.board.width);
   var randY = Math.floor(Math.random() * 13) + this.maxY;  // we dont ever put anything in the first X rows based on level
 
-  if (this.board.occupied(randX, randY) === undefined) {
+  if (this.board.occupied(randX, randY) === undefined && this.board.inBounds(randX, randY)) {
   	this.position.x = randX;
   	this.position.y = randY;
     this.board.addPiece(this, 0);
-	this.draw();
   } else {
     this.setPosition();
   }
+  this.draw();
 }
 
 Virus.prototype.draw = function() {
-  PieceDrawer.drawVirus(this.position, this.color);
+  PieceDrawer.drawVirus(this.position, this.color, ctx);
 }
