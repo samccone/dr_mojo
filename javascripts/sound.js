@@ -28,11 +28,13 @@ window.Sound = (function () {
     _.each(args, function(freq, index) {
       buffers[freq] = buffers[freq] || prepareBuffer(freq);
       node = ac.createBufferSource(0);
+      var start = node.start ? 'start' : 'noteOn';
+      var stop  = node.stop  ? 'stop'  : 'noteOff';
       node.buffer = buffers[freq];
       node.loop = true;
       node.connect(ac.destination);
-      node.start(now + length * index);
-      node.stop(now + length * (index + 1));
+      node[start](now + length * index);
+      node[stop](now + length * (index + 1));
     })
   }
 
