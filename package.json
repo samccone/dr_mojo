@@ -9,6 +9,7 @@
     "node": "0.8.x"
   },
   "dependencies": {
-    "connect": "*"
+    "connect": "*",
+    "express": "2.5.8"
   }
 }
