@@ -40,8 +40,8 @@ Virus.prototype.setPosition = function() {
   var randY = Math.floor(Math.random() * 13) + this.maxY;  // we dont ever put anything in the first X rows based on level
 
   if (this.board.occupied(randX, randY) === undefined && this.board.inBounds(randX, randY)) {
-  	this.position.x = randX;
-  	this.position.y = randY;
+	this.position.x = randX;
+	this.position.y = randY;
     this.board.addPiece(this, 0);
   } else {
     this.setPosition();

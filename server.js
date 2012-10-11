@@ -3,7 +3,8 @@ var express = require('express'),
 
 var webServer = express.createServer();
 
-webServer.use(express.static(__dirname));
+webServer.use(express.static(__dirname + '/public'));
+webServer.use(express.static(__dirname + '/src'));
 
 webServer.set('views', __dirname);
 
