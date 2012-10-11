@@ -9,7 +9,8 @@
     "node": "0.8.x"
   },
   "dependencies": {
-    "connect": "*",
-    "express": "2.5.8"
+    "connect": "latest",
+    "express": "2.5.8",
+    "jade": "latest" 
   }
 }

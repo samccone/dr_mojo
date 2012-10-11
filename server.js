@@ -4,9 +4,13 @@ var express = require('express'),
 var webServer = express.createServer();
 
 webServer.use(express.static(__dirname + '/public'));
-webServer.use(express.static(__dirname + '/src'));
 
-webServer.set('views', __dirname);
+webServer.set("view engine", "jade");
+webServer.set('view options', { layout: false });
+
+webServer.get('/play', function(req, res){
+  res.render('play_game');
+});
 
 webServer.get('/', function(req, res){
   res.render('index');
