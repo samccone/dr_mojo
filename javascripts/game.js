@@ -82,15 +82,17 @@ Game.prototype.pillAction = function(action) {
     switch (action) {
     case 'rotate-left':
       this.active_pill.rotateLeft();
+      window.Sound.rotate();
       break;
     case 'rotate-right':
       this.active_pill.rotateRight();
+      window.Sound.rotate();
       break;
     case 'left':
-      this.active_pill.moveLeft();
+      this.active_pill.moveLeft() && window.Sound.move();
       break;
     case 'right':
-      this.active_pill.moveRight();
+      this.active_pill.moveRight() && window.Sound.move();
       break;
     case 'down':
       this.active_pill.moveDown();
