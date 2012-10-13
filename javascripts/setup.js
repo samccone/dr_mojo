@@ -1,5 +1,7 @@
 var speeds = ["LOW", "MED", "HI"];
 var musics = ["FEVER", "CHILD", "OFF"];
+var midiFiles = { 'FEVER' : 'master01.mid', 'CHILD' : 'master02.mid' };
+
 drawingConfig = {
   level_count:      20,
   level_line_size:  340,
@@ -62,7 +64,7 @@ $(function(){
       $( "#level_amount" ).html( ui.value );
     }
   });
-  
+
   $( "#speed_slider" ).slider({
     min: 0,
     max: speeds.length - 1,
@@ -72,7 +74,8 @@ $(function(){
   $( "#music_slider" ).slider({
     min: 0,
     max: musics.length - 1,
-    step: 1
+    step: 1,
+    change: setMusic
   });
 
   $("#play").bind('click', function(){
@@ -99,7 +102,25 @@ $(function(){
     $("#speed_title").removeClass('border');
     $("#level_title").removeClass('border');
   });
+
+  setMusic();
 });
+
+var player;
+var setMusic = function () {
+  var music = musics[ $( "#music_slider" ).slider( "value" ) ];
+  var midiFile = midiFiles[music];
+
+  player = player || new MIDIPlayer();
+
+  if (midiFile) {
+    player.stop();
+    player.load('/midi/' + midiFile);
+    player.play();
+  } else {
+    player.stop();
+  }
+}
 
 window.addEventListener('keydown', function(e) {
   var code = (e.keyCode ? e.keyCode : e.which);
