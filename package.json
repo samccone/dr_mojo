@@ -1,0 +1,16 @@
+{
+  "name": "dr_mojo",
+  "subdomain": "fbrusatti.dr_mojo",
+  "scripts": {
+    "start": "src/server.js"
+  },
+  "version": "0.0.0",
+  "engines": {
+    "node": "0.8.x"
+  },
+  "dependencies": {
+    "connect": "latest",
+    "express": "2.5.8",
+    "jade": "latest" 
+  }
+}
