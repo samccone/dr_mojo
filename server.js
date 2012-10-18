@@ -1,10 +1,11 @@
 var express = require('express'),
     port    = 8888;
 
+var oneYear = 31557600000;
+
 var webServer = express.createServer();
 
-webServer.use(express.static(__dirname + '/public'));
-
+webServer.use(express.static(__dirname + '/public', { maxAge: oneYear }));
 webServer.set("view engine", "jade");
 webServer.set('view options', { layout: false });
 
