@@ -13,11 +13,15 @@ webServer.get('/play', function(req, res){
   res.render('play_game');
 });
 
+webServer.get('/restart', function(req, res) {
+  res.render('play_game');
+});
+
 webServer.get('/', function(req, res){
   res.render('index');
 });
 
 webServer.listen(port);
 
-console.log('Listening on ' + port + '...');
+console.log('Listening on ' + port + ' in ' + webServer.settings.env + ' mode ...');
 console.log('Press Ctrl + C to stop.');
