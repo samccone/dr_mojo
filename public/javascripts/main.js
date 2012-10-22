@@ -32,6 +32,11 @@ if (canvas) {
   window.onload = function() {
     the_game = new Game(level, speed);
     the_game.start();
+
+    $('.next-level-button').bind('click', function () {
+      $('#nextLevelModal').trigger('reveal:close');
+      the_game.paused = false;
+    });
   }
 }
 
