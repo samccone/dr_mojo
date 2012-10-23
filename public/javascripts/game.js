@@ -11,6 +11,7 @@ function Game(lvl, speed) {
   this.level = new Level(lvl, speed);
   this.score = 0;
   this.setScore();
+  this.setHighScore();
   this.setInfo();
   this.setListeners();
   this.populateViruses(this.level.number);
@@ -245,18 +246,12 @@ Game.prototype.saveScore = function() {
 }
 
 Game.prototype.setScore = function() {
-  var query = new Parse.Query(app.models.Score);
-
   $("#score .score").html(this.score);
+}
 
-  query.descending("score").limit(1);
-  query.first({
-    success: function(object) {
-      $("#highScore .score").html(object.attributes.score);
-    },
-    error: function(error) {
-      $("#highScore .score").html('0000000');
-    }
+Game.prototype.setHighScore = function(){
+  var leaderBoard = new LeaderBoard(function(){
+    $("#highScore .score").html(leaderBoard.highScore());
   });
 }
 
