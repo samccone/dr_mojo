@@ -55,6 +55,8 @@ Game.prototype.setListeners = function() {
         _this.pillAction('rotate-right');
         break;
       case 32:
+        $("#gameOverModal").trigger('reveal:close');
+        $("#nextLevelModal").trigger('reveal:close');
         _this.togglePause();
         break;
       case 37:
@@ -128,7 +130,7 @@ Game.prototype.tick = function() {
       }
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
-        alert("game over");
+        $('#gameOverModal').reveal()
         this.saveScore();
         this.gameOver();
       } else if (this.virusCount == 0) {
@@ -146,7 +148,9 @@ Game.prototype.nextLevel = function() {
   the_game.level.number++;
   this.setLevel();
   the_game.populateViruses(the_game.level.number);
-  alert("Level " + (parseInt(level, 10) + 1));
+  $(".nextLevelNumber").html(the_game.level.number);
+  $("#nextLevelModal").reveal();
+  this.paused = true;
   the_game.start(this.level.velocity());
 }
 

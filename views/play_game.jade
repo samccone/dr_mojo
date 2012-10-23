@@ -2,17 +2,28 @@ html
   head
     link(href='http://fonts.googleapis.com/css?family=Press+Start+2P', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='/styles/styles.css')
+    link(rel='stylesheet', href='/styles/reveal.css')
     script(src='/javascripts/lib/jquery-1.8.2.min.js')
     script(src='/javascripts/lib/underscore.js')
     script(src='/javascripts/lib/backbone-min.js')
     script(src='http://www.parsecdn.com/js/parse-1.1.1.min.js')
   body
+    #gameOverModal.reveal-modal.modal
+      p Game Over
+      .button-link.restart-button
+        a(href='restart') Restart
+
+    #nextLevelModal.reveal-modal.modal
+      .nextLevel Next Level
+      .nextLevelNumber
+      .button-link.next-level-button
+        a(href="#") Ok
     #columnOne
       //
         Begin Column One
       #clipboardLeft
         p.clipboardTop
-          img(src='../images/clipboard_top.png')
+          img(src='/images/clipboard_top.png')
         #highScore
           .text  TOP
           .score
@@ -81,3 +92,4 @@ html
     script(src='/javascripts/Utils.js')
     script(src='/javascripts/score.js')
     script(src='/javascripts/sound.js')
+    script(src='/javascripts/reveal.js')
