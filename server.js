@@ -6,6 +6,7 @@ var oneYear = 31557600000;
 var app = express.createServer();
 
 app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
+app.use(express.bodyParser());
 app.set("view engine", "jade");
 app.set('view options', { layout: false });
 
