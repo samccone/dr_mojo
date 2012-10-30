@@ -11,7 +11,6 @@ function Game(lvl, speed) {
   this.level = new Level(lvl, speed);
   this.score = 0;
   this.setScore();
-  this.setHighScore();
   this.setInfo();
   this.setListeners();
   this.populateViruses(this.level.number);
@@ -131,8 +130,8 @@ Game.prototype.tick = function() {
       }
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
-        $('#gameOverModal').reveal()
-        this.saveScore();
+        $('#gameOverModal').reveal();
+        this.setHighScore();
         this.gameOver();
       } else if (this.virusCount == 0) {
         this.nextLevel();
@@ -247,11 +246,31 @@ Game.prototype.saveScore = function() {
 
 Game.prototype.setScore = function() {
   $("#score .score").html(this.score);
+
+  $.get('/highscore', {}, function(res){
+    $("#highScore .score").html(res.data[0].score);
+  });
 }
 
 Game.prototype.setHighScore = function(){
-  var leaderBoard = new LeaderBoard(function(){
-    $("#highScore .score").html(leaderBoard.highScore());
+  var game = this;
+
+  $.get('/highscore', {}, function(res){
+    var currentHighScore = res.data[0].score;
+
+    if(currentHighScore < game.score){
+      $.ajax({
+        type: 'POST',
+        url: '/highscore',
+        data: {'score': game.score, 'name': 'yo'},
+        success: function(data, textStatus, jqXHR){
+          $('#highScoreModal').reveal()
+        },
+        error: function(data){
+          alert("Sorry your highscore wasn't saved..." + data);
+        }
+      });
+    }
   });
 }
 
