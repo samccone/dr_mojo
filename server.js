@@ -5,6 +5,13 @@ var oneYear = 31557600000;
 
 var app = express.createServer();
 
+var Parse      = require('node-parse-api').Parse;
+var APP_ID     = "8kJxzEB8G8Rx3mYk8kM8snrHryd4dtqTMgd7MKpD";
+var MASTER_KEY = "DSgulGiahlyXFJ1s9qvSPRW4hdeKrgiozv7U12NS";
+var parse_app  = new Parse(APP_ID, MASTER_KEY);
+
+var score = require('./public/javascripts/score.js')(parse_app);
+
 app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
 app.use(express.bodyParser());
 app.set("view engine", "jade");
@@ -20,6 +27,18 @@ app.get('/restart', function(req, res) {
 
 app.get('/', function(req, res){
   res.render('index');
+});
+
+app.get('/highscore', function(req, res){
+  score.getHighScore(function(err, response) {
+    res.json({"error": err, "data": response});
+  });
+});
+
+app.post('/highscore', function(req, res) {
+  score.addHighScore(req.body.name, req.body.score, function(err, data) {
+    res.json({"error": err, "data": data});
+  })
 });
 
 app.listen(port);
