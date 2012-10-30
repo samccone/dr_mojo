@@ -11,6 +11,7 @@
   "dependencies": {
     "connect": "latest",
     "express": "2.5.8",
-    "jade": "latest" 
+    "jade": "latest",
+    "node-parse-api": "latest"
   }
 }
