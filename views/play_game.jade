@@ -14,14 +14,18 @@ html
       .button-link.restart-button
         a(href='restart') Restart
 
+    #gameOverHighScoreModal.reveal-modal.modal
+      p Congratulations, you have the new highscore! Enter your initials below to become even more famous than you already are.
+      br
+      input(name="player-name", value="", type="text", maxlength="3", id="player-name")
+      .button-link.submit-button
+        a#submit(href="#") Submit
+
     #nextLevelModal.reveal-modal.modal
       .nextLevel Next Level
       .nextLevelNumber
       .button-link.next-level-button
         a(href="#") Ok
-
-    #highScoreModal.reveal-modal.modal
-      p Congratulations you have the new highscore
 
     #columnOne
       //

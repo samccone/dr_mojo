@@ -1,3 +1,4 @@
+!!! 5
 html
 head
     link(href='http://fonts.googleapis.com/css?family=Press+Start+2P', rel='stylesheet', type='text/css')
@@ -7,41 +8,48 @@ head
     script(type='text/javascript', src='javascripts/lib/jquery-ui-1.8.23.custom.min.js')
     script(type='text/javascript', src='javascripts/setup.js')
 
-    script(type="text/javascript", src="javascripts/midiplayer.js") 
-    script(type="text/javascript", src="javascripts/lib/jasmid/replayer.js") 
-    script(type="text/javascript", src="javascripts/lib/jasmid/midifile.js") 
-    script(type="text/javascript", src="javascripts/lib/jasmid/stream.js") 
-    script(type="text/javascript", src="javascripts/lib/jasmid/synth.js") 
-    script(type="text/javascript", src="javascripts/lib/jasmid/audio.js") 
+    script(type="text/javascript", src="javascripts/midiplayer.js")
+    script(type="text/javascript", src="javascripts/lib/jasmid/replayer.js")
+    script(type="text/javascript", src="javascripts/lib/jasmid/midifile.js")
+    script(type="text/javascript", src="javascripts/lib/jasmid/stream.js")
+    script(type="text/javascript", src="javascripts/lib/jasmid/synth.js")
+    script(type="text/javascript", src="javascripts/lib/jasmid/audio.js")
 
     link(type='text/css', href='styles/jquery-ui-1.8.23.custom.css', rel='stylesheet')
 
   body.grid
     .arrow-down
-    .top_section  1 PLAYER GAME
+    .top_section  DR. MOJO
     .pane
+      #leader_board
+        table
+          thead
+            tr
+              th
+              th SCORE
+              th LEVEL
+              th NAME
+          tbody
       .option
         #level_title.title  VIRUS LEVEL
-        .players  1P
+        #level_amount.levels.amount.level-number  0
         .sliders
           #level_slider
             canvas#level_canvas(width='400', height='100')
-        #level_amount.levels.amount.level-number  0
       .option
         #speed_title.title  SPEED
-        .players  1P
         .sliders
           #speed_slider
+          .options
             p.left LOW
             p.center MED
             p.right HI
       .option
         #music_title.title  MUSIC TYPE
-        .players  
         .sliders
           #music_slider
+          .options
             p.left FEVER
             p.center CHILL
             p.right OFF
-      .option
-        a#play(href='#') Play
+      #play (HIT ENTER TO PLAY)

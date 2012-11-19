@@ -23,6 +23,34 @@ function start(){
   window.location.href = "play?" + jQuery.param(settings);
 };
 
+function populateLeaderBoard(){
+
+  var board    = $("tbody","#leader_board"),
+      template = _.template([
+    "<% _.times(5, function(i) { %>",
+    "  <tr>",
+    "    <td><%= ['1st','2nd','3rd','4th','5th'][i] %></td>",
+    "    <td><%= leaders[i] && leaders[i].score || '***' %></td>",
+    "    <td><%= leaders[i] && leaders[i].level || '***' %></td>",
+    "    <td><%= leaders[i] && leaders[i].name || '***' %></td>",
+    "  </tr>",
+    "<% }); %>"
+  ].join(""));
+
+  board.html(template({
+    leaders: []
+  }));
+
+  $.get("/highscore", {}, function(response) {
+    board.html(template({
+      leaders: _.sortBy(response.data, function(leader){
+        return parseInt(leader.score);
+      }).reverse()
+    }));
+  });
+
+};
+
 function drawLevelLine(){
   var canvas = document.getElementById("level_canvas"),
       context = canvas.getContext("2d");
@@ -84,6 +112,8 @@ $(function(){
   });
 
   drawLevelLine();
+
+  populateLeaderBoard();
 
   $('#level_slider .ui-slider-handle').focus(function() {
     $("#level_title").addClass('border');
