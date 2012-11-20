@@ -13,7 +13,17 @@ var parse_app  = new Parse(APP_ID, MASTER_KEY);
 var score = require('./public/javascripts/score.js')(parse_app);
 
 app.use(express.static(__dirname + '/public', { maxAge: oneYear }));
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'secret' }));
 app.use(express.bodyParser());
+app.use(express.csrf());
+
+app.dynamicHelpers({
+  token: function(req, res) {
+    return req.session._csrf;
+  }
+});
+
 app.set("view engine", "jade");
 app.set('view options', { layout: false });
 

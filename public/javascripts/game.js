@@ -254,6 +254,7 @@ Game.prototype.setScore = function() {
 
 Game.prototype.setHighScore = function(){
   var game = this;
+  var csrf = $("#hidden-csrf").attr('value');
 
   $.get('/highscore', {}, function(res){
     var currentHighScore = res.data[0].score;
@@ -262,7 +263,7 @@ Game.prototype.setHighScore = function(){
       $.ajax({
         type: 'POST',
         url: '/highscore',
-        data: {'score': game.score, 'name': 'yo'},
+        data: {'score': game.score, '_csrf': csrf},
         success: function(data, textStatus, jqXHR){
           $('#highScoreModal').reveal()
         },
