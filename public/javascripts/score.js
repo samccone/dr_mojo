@@ -1,5 +1,17 @@
-Parse.initialize("8kJxzEB8G8Rx3mYk8kM8snrHryd4dtqTMgd7MKpD", "WRSVmPfF7bf8SFl3duTXMx48pTwLWsAZyda3gzFW");
+module.exports = function(parse_app) {
+  return {
+    addHighScore: function(name, score, callback) {
+      parse_app.insert('GameScore', { score: score }, function (err, response) {
+        if(callback)
+          callback(err, response);
+      });
+    },
 
-app.models.Score = Parse.Object.extend({
-  className: "GameScore"
-});
+    getHighScore: function(callback) {
+      parse_app.findMany('GameScore', '?order=-score&limit=1', function (err, response) {
+        if(callback)
+          callback(err, response.results);
+      });
+    }
+  }
+}

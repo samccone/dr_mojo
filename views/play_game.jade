@@ -8,6 +8,7 @@ html
     script(src='/javascripts/lib/backbone-min.js')
     script(src='http://www.parsecdn.com/js/parse-1.1.1.min.js')
   body
+    input(name='csrf', value=token, type='hidden', id="hidden-csrf")
     #gameOverModal.reveal-modal.modal
       p Game Over
       .button-link.restart-button
@@ -18,6 +19,10 @@ html
       .nextLevelNumber
       .button-link.next-level-button
         a(href="#") Ok
+
+    #highScoreModal.reveal-modal.modal
+      p Congratulations you have the new highscore
+
     #columnOne
       //
         Begin Column One
@@ -90,6 +95,5 @@ html
     script(src='/javascripts/level.js')
     script(src='/javascripts/main.js')
     script(src='/javascripts/Utils.js')
-    script(src='/javascripts/score.js')
     script(src='/javascripts/sound.js')
     script(src='/javascripts/reveal.js')

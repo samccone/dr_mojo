@@ -130,8 +130,8 @@ Game.prototype.tick = function() {
       }
       //Change this to where the pills are created
       if (this.board.occupied(Math.floor(this.board.width / 2) - 1, 0)) {
-        $('#gameOverModal').reveal()
-        this.saveScore();
+        $('#gameOverModal').reveal();
+        this.setHighScore();
         this.gameOver();
       } else if (this.virusCount == 0) {
         this.nextLevel();
@@ -245,17 +245,32 @@ Game.prototype.saveScore = function() {
 }
 
 Game.prototype.setScore = function() {
-  var query = new Parse.Query(app.models.Score);
-
   $("#score .score").html(this.score);
 
-  query.descending("score").limit(1);
-  query.first({
-    success: function(object) {
-      $("#highScore .score").html(object.attributes.score);
-    },
-    error: function(error) {
-      $("#highScore .score").html('0000000');
+  $.get('/highscore', {}, function(res){
+    $("#highScore .score").html(res.data[0].score);
+  });
+}
+
+Game.prototype.setHighScore = function(){
+  var game = this;
+  var csrf = $("#hidden-csrf").attr('value');
+
+  $.get('/highscore', {}, function(res){
+    var currentHighScore = res.data[0].score;
+
+    if(currentHighScore < game.score){
+      $.ajax({
+        type: 'POST',
+        url: '/highscore',
+        data: {'score': game.score, '_csrf': csrf},
+        success: function(data, textStatus, jqXHR){
+          $('#highScoreModal').reveal()
+        },
+        error: function(data){
+          alert("Sorry your highscore wasn't saved..." + data);
+        }
+      });
     }
   });
 }
