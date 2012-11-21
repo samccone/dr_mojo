@@ -46,7 +46,7 @@ app.get('/highscore', function(req, res){
 });
 
 app.post('/highscore', function(req, res) {
-  score.addHighScore(req.body.name, req.body.score, function(err, data) {
+  score.addHighScore(req.body.name, req.body.score, req.body.level, function(err, data) {
     res.json({"error": err, "data": data});
   })
 });

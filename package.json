@@ -1,10 +1,13 @@
 {
   "name": "dr_mojo",
-  "subdomain": "fbrusatti.dr_mojo",
+  "domains": [
+    "dr.mojotech.com"
+  ],
+  "subdomain": "dr_mojo",
   "scripts": {
-    "start": "src/server.js"
+    "start": "node server.js"
   },
-  "version": "0.0.0",
+  "version": "0.0.0-3",
   "engines": {
     "node": "0.8.x"
   },
