@@ -15,21 +15,18 @@ html
     input(name='csrf', value=token, type='hidden', id="hidden-csrf")
     #gameOverModal.reveal-modal.modal
       p Game Over
-      .button-link.restart-button
-        a(href='#') Restart
+      .button-link.restart-button Restart
 
     #gameOverHighScoreModal.reveal-modal.modal
       p Congratulations, you have the new highscore! Enter your initials below to become even more famous than you already are.
       br
       input(name="player-name", value="", type="text", maxlength="3", id="player-name")
-      .button-link.submit-button
-        a#submit(href="#") Submit
+      .button-link.submit-button Submit
 
     #nextLevelModal.reveal-modal.modal
       .nextLevel Next Level
       .nextLevelNumber
-      .button-link.next-level-button
-        a(href="#") Ok
+      .button-link.next-level-button Ok
 
     #columnOne
       //

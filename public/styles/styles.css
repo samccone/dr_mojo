@@ -468,7 +468,9 @@ textarea:focus {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+  cursor: hand;
+  cursor: pointer; }
 
 .button-link:hover {
   background: #356094;

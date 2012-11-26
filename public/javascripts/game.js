@@ -91,7 +91,7 @@ Game.prototype.setListeners = function() {
       }
     }
   });
-  $("#submit").on("click", function(e) {
+  $(".submit-button").on("click", function(e) {
     _this.playerName = $("#player-name").val();
     _this.submitHighScore();
   });
