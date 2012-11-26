@@ -65,6 +65,9 @@ Game.prototype.setListeners = function() {
         //s
         _this.pillAction('rotate-right');
         break;
+      case 77:
+        _this.toggleMusic();
+        break;
       case 32:
         $("#gameOverModal").trigger('reveal:close');
         $("#nextLevelModal").trigger('reveal:close');
@@ -131,6 +134,10 @@ Game.prototype.toggleInstructions = function() {
 Game.prototype.toggleHelp = function() {
   this.paused = !this.paused;
   Utils.shading(this.paused, $('.controls').html());
+}
+
+Game.prototype.toggleMusic = function() {
+  window.Sound.toggleOnOff();
 }
 
 Game.prototype.tick = function() {
