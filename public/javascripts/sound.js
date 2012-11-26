@@ -12,6 +12,7 @@ window.Sound = (function() {
 
     song: false,
     canPlay: false,
+    operative: false,
 
     init: function() {
       var _this = this;
@@ -31,15 +32,21 @@ window.Sound = (function() {
     },
 
     rotate: function() {
-      soundManager.play("rotate");
+      if (this.operative) {
+        soundManager.play("rotate");
+      }
     },
 
     move: function() {
-      soundManager.play("move");
+      if (this.operative) {
+        soundManager.play("move");
+      }
     },
 
     explode: function() {
-      soundManager.play("explode");
+      if (this.operative) {
+        soundManager.play("explode");
+      }
     },
 
     musicSet: function(song) {
@@ -52,6 +59,7 @@ window.Sound = (function() {
 
     musicPlay: function() {
       if(this.song) {
+        this.operative = true;
         soundManager.play(this.song, {
           onfinish: this.musicPlay
         });
@@ -59,9 +67,17 @@ window.Sound = (function() {
     },
 
     musicStop: function() {
+      this.operative = false;
       soundManager.stopAll();
-    }
+    },
 
+    toggleOnOff: function(){
+      if (this.operative) {
+        this.musicStop();
+      } else {
+        this.musicPlay();
+      }
+    }
   };
 
 })();
