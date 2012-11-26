@@ -191,8 +191,10 @@ Game.prototype.findMatches = function(cb) {
           }
           var spot = deleting.pos;
           if (deleting.pill.position[spot]) {
+            Sound.explode();
             this.eraseSpot(deleting.pill.position[spot].x, deleting.pill.position[spot].y, 1);
           } else {
+            Sound.explode();
             this.eraseSpot(deleting.pill.position.x, deleting.pill.position.y, 1);
             _this.updateVirusCount(-1);
           }

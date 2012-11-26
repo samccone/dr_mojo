@@ -1,6 +1,5 @@
 var speeds = ["LOW", "MED", "HI"];
-var musics = ["FEVER", "CHILD", "OFF"];
-var midiFiles = { 'FEVER' : 'master01.mid', 'CHILD' : 'master02.mid' };
+var musics = ["fever", "chill", "OFF"];
 
 drawingConfig = {
   level_count:      20,
@@ -133,22 +132,17 @@ $(function(){
     $("#level_title").removeClass('border');
   });
 
-  setMusic();
+  Sound.init()
+  setMusic()
+
 });
 
-var player;
 var setMusic = function () {
   var music = musics[ $( "#music_slider" ).slider( "value" ) ];
-  var midiFile = midiFiles[music];
-
-  player = player || new MIDIPlayer();
-
-  if (midiFile) {
-    player.stop();
-    player.load('/midi/' + midiFile);
-    player.play();
+  if ( music != "OFF" ) {
+    Sound.musicSet(music);
   } else {
-    player.stop();
+    Sound.musicStop();
   }
 }
 

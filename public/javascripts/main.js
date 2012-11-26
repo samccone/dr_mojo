@@ -18,6 +18,7 @@ var the_game;
 var board_size = [8, 16];
 var level = params['level'] || 0;
 var speed = params['speed'] || 'Low';
+var song = params['music'] || 'fever';
 
 if (canvas) {
   canvas.setAttribute('width', board_size[0] * block_size + "px");
@@ -30,6 +31,8 @@ if (canvas) {
   var oracle_ctx = oracle.getContext('2d');
 
   window.onload = function() {
+    Sound.init();
+    Sound.musicSet(song);
     the_game = new Game(level, speed);
     the_game.start();
 
