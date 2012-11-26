@@ -31,10 +31,6 @@ app.get('/play', function(req, res){
   res.render('play_game');
 });
 
-app.get('/restart', function(req, res) {
-  res.render('play_game');
-});
-
 app.get('/', function(req, res){
   res.render('index');
 });

@@ -33,12 +33,17 @@ if (canvas) {
   window.onload = function() {
     Sound.init();
     Sound.musicSet(song);
-    the_game = new Game(level, speed);
+    the_game = new Game(level, speed, song);
     the_game.start();
 
     $('.next-level-button').bind('click', function () {
       $('#nextLevelModal').trigger('reveal:close');
       the_game.paused = false;
+    });
+
+    $('.restart-button').on('click', function (e) {
+      e.preventDefault();
+      the_game.restart();
     });
   }
 }

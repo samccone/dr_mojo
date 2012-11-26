@@ -1,4 +1,10 @@
-function Game(lvl, speed) {
+function Game(lvl, speed, music) {
+  this.initial = {
+    level: lvl,
+    speed: speed,
+    music: music
+  };
+
   this.board = new Board(board_size[0], board_size[1]);
   this.detector = new CollisionDetector(this.board);
   this.paused = false;
@@ -17,6 +23,8 @@ function Game(lvl, speed) {
   this.setInfo();
   this.setListeners();
   this.populateViruses(this.level.number);
+
+  this.restart = _.bind(this.restart, this);
 }
 
 Game.prototype.newPill = function() {
@@ -293,12 +301,8 @@ Game.prototype.submitHighScore = function() {
       'name': game.playerName,
       '_csrf': csrf
     },
-    success: function(data, textStatus, jqXHR) {
-      window.location.href = "restart";
-    },
-    error: function(data) {
-      window.location.href = "restart";
-    }
+    success: game.restart,
+    error: game.restart
   });
 
 }
@@ -307,6 +311,13 @@ Game.prototype.setInfo = function() {
   $("#speed_count").html(this.level.speed);
   this.setLevel();
   this.setVirusCount();
+}
+
+Game.prototype.restart = function() {
+  url = "play?level=" + this.initial.level +
+    "&speed=" + this.initial.speed +
+    "&music=" + this.initial.music;
+  window.location.href = url;
 }
 
 // ----------------------------------------------------------------------------
