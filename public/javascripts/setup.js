@@ -1,5 +1,5 @@
 var speeds = ["LOW", "MED", "HI"];
-var musics = ["fever", "chill", "OFF"];
+var musics = ["fever", "chill", "off"];
 
 drawingConfig = {
   level_count:      20,
@@ -82,28 +82,32 @@ function drawLevelLine(){
 }
 
 $(function(){
-  $( "#level_slider" ).slider({
+
+  $("#level_slider").slider({
     value:0,
     min: 0,
     max: 20,
     step: 1,
-    slide: function( event, ui ) {
-      $( "#level_amount" ).html( ui.value );
+    change: function( event, ui ) {
+      $("#level_amount").html( ui.value );
     }
   });
+  $("#level_slider .ui-slider-handle").unbind("keydown");
 
-  $( "#speed_slider" ).slider({
+  $("#speed_slider").slider({
     min: 0,
     max: speeds.length - 1,
     step: 1
   });
+  $("#speed_slider .ui-slider-handle").unbind("keydown");
 
-  $( "#music_slider" ).slider({
+  $("#music_slider").slider({
     min: 0,
     max: musics.length - 1,
     step: 1,
     change: setMusic
   });
+  $("#music_slider .ui-slider-handle").unbind("keydown");
 
   $("#play").bind('click', function(){
     start();
@@ -132,32 +136,103 @@ $(function(){
     $("#level_title").removeClass('border');
   });
 
+  $("#level_canvas").on("click", function(e) {
+    var value = Math.round(Math.min(Math.max((e.offsetX - 20) / 320 * 20, 0), 20));
+    $("#level_amount").html(value);
+    $("#level_slider").slider("value", value);
+    setFocus("level");
+  });
+
+   $("p",".options").each(function(i,element) {
+    $(element).on("click", function() {
+      if(i < 3) {
+        $("#speed_slider").slider("value", i % 3);
+        setFocus("speed");
+      } else {
+        $("#music_slider").slider("value", i % 3);
+        setFocus("music");
+      }
+    });
+  });
+
+  setFocus();
+
   Sound.init()
   setMusic()
 
 });
 
+var focused = 0;
+var focus_order = ["level", "speed", "music"];
+var focus_handles = {
+  level: "#level_slider .ui-slider-handle",
+  speed: "#speed_slider .ui-slider-handle",
+  music: "#music_slider .ui-slider-handle"
+};
+var focus_values = {
+  level: "#level_slider",
+  speed: "#speed_slider",
+  music: "#music_slider"
+};
+
+var setFocus = function(option) {
+
+  if(!option) {
+    $(focus_handles[focus_order[focused]]).focus();
+  } else {
+    $(focus_handles[option]).focus();
+    focused = focus_order.indexOf(option);
+  }
+
+}
+
+var setFocusNext = function() {
+  focused = (focused + 1) % focus_order.length;
+  $(focus_handles[focus_order[focused]]).focus();
+}
+
+var setFocusPrev = function() {
+  focused = focused === 0 ? focus_order.length - 1 : focused - 1;
+  $(focus_handles[focus_order[focused]]).focus();
+}
+
+var goLeft = function() {
+  var new_value = $(focus_values[focus_order[focused]]).slider("value") - 1;
+  $(focus_values[focus_order[focused]]).slider("value", new_value);
+}
+
+var goRight = function() {
+  var new_value = $(focus_values[focus_order[focused]]).slider("value") + 1;
+  $(focus_values[focus_order[focused]]).slider("value", new_value);
+}
+
 var setMusic = function () {
-  var music = musics[ $( "#music_slider" ).slider( "value" ) ];
-  if ( music != "OFF" ) {
+  var music = musics[$("#music_slider").slider("value")];
+  if (music != "off") {
     Sound.musicSet(music);
   } else {
     Sound.musicStop();
   }
 }
 
-window.addEventListener('keydown', function(e) {
+$(window).on('keydown', function(e) {
   var code = (e.keyCode ? e.keyCode : e.which);
 
   switch (code) {
   case 13:
     start();
     break;
+  case 37:
+    goLeft();
+    break;
   case 38:
-    console.log('up');
+    setFocusPrev();
+    break;
+  case 39:
+    goRight();
     break;
   case 40:
-    console.log('down');
+    setFocusNext();
     break;
   }
 });
