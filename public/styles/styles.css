@@ -394,8 +394,18 @@ textarea:focus {
   text-align: center;
   line-height: 1.3em; }
 
+#level_canvas_wrap {
+  height: 20px; }
+
+#level_canvas {
+  display: block;
+  height: 20px;
+  position: relative;
+  top: -18px; }
+
 .ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all {
-  width: 320px; }
+  width: 320px;
+  height: 0px; }
 
 .ui-slider-handle.ui-state-default.ui-corner-all {
   background: black;
