@@ -1,0 +1,52 @@
+!!! 5
+html
+head
+
+    link(type='text/css', rel='stylesheet', href='http://fonts.googleapis.com/css?family=Press+Start+2P')
+    link(type='text/css', rel='stylesheet', href='styles/styles.css')
+    link(type='text/css', rel='stylesheet', href='styles/jquery-ui-1.8.23.custom.css')
+
+    script(type='text/javascript', src='javascripts/lib/jquery-1.8.2.min.js')
+    script(type='text/javascript', src='javascripts/lib/underscore.js')
+    script(type='text/javascript', src='javascripts/lib/jquery-ui-1.8.23.custom.min.js')
+    script(type="text/javascript", src="javascripts/lib/soundmanager2-jsmin.js")
+    script(type='text/javascript', src='javascripts/setup.js')
+    script(type='text/javascript', src='javascripts/sound.js')
+
+  body.grid
+    .arrow-down
+    .top_section  DR. MOJO
+    .pane
+      #leader_board
+        table
+          thead
+            tr
+              th
+              th SCORE
+              th LEVEL
+              th NAME
+          tbody
+      .option
+        #level_title.title  VIRUS LEVEL
+        #level_amount.levels.amount.level-number  0
+        .sliders
+          #level_slider
+          #level_canvas_wrap
+            canvas#level_canvas(width='360', height='20')
+      .option
+        #speed_title.title  SPEED
+        .sliders
+          #speed_slider
+          .options
+            p.left LOW
+            p.center MED
+            p.right HI
+      .option
+        #music_title.title  MUSIC TYPE
+        .sliders
+          #music_slider
+          .options
+            p.left FEVER
+            p.center CHILL
+            p.right OFF
+      #play (HIT ENTER TO PLAY)
