@@ -50,6 +50,12 @@ Game.prototype.newVirus = function(level, num) {
 Game.prototype.gameOver = function() {
   this.done = true;
   this.clock = window.clearInterval(this.clock);
+  var restart = this.restart;
+  window.addEventListener('keydown', function (e) {
+    if (e.keyCode == 13) {
+      restart();
+    }
+  })
 }
 
 Game.prototype.setListeners = function() {
