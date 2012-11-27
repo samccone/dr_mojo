@@ -52,7 +52,9 @@ Game.prototype.gameOver = function() {
   this.clock = window.clearInterval(this.clock);
   var restart = this.restart;
   window.addEventListener('keydown', function (e) {
-    if (e.keyCode == 13) {
+    var gameOverModalVisible = typeof( $("#gameOverModal").attr('style') ) != 'undefined';
+
+    if (gameOverModalVisible && e.keyCode == 13) {
       restart();
     }
   })
