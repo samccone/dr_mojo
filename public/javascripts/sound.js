@@ -18,6 +18,7 @@ window.Sound = (function() {
       var _this = this;
       soundManager.setup({
         url: '/flash/',
+        flashLoadTimeout: 5000,
         onready: function() {
           _.each(sounds, function(url, id) {
             soundManager.createSound({
@@ -27,6 +28,10 @@ window.Sound = (function() {
           });
           _this.canPlay = true;
           _this.musicPlay();
+        },
+        ontimeout: function(status) {
+          console.log('SM2 failed to start. Flash missing, blocked or security error?');
+          console.log('The status is ' + status.success + ', the error type is ' + status.error.type);
         }
       });
     },
