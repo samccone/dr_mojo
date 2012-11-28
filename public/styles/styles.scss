@@ -401,11 +401,11 @@ textarea:focus {
         width: 360px;
         p{
           display: inline-block;
-          width: 33.33%;
+          float: left;
+          width: 50px;
         }
-        p.left{ text-align: left; }
-        p.center{ text-align: center; }
-        p.right{ text-align: right; }
+        p.center{  padding-left: 29%; }
+        p.right{  padding-left: 29%; }
       }
     }
     .levels{

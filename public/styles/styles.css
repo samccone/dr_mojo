@@ -359,13 +359,12 @@ textarea:focus {
       width: 360px; }
       .pane .option .sliders .options p {
         display: inline-block;
-        width: 33.33%; }
-      .pane .option .sliders .options p.left {
-        text-align: left; }
+        float: left;
+        width: 50px; }
       .pane .option .sliders .options p.center {
-        text-align: center; }
+        padding-left: 29%; }
       .pane .option .sliders .options p.right {
-        text-align: right; }
+        padding-left: 29%; }
     .pane .option .levels {
       position: relative;
       top: -62px;
